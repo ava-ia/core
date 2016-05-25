@@ -1,5 +1,5 @@
 {
-  "name": "ava-ia/core",
+  "name": "ava-ia-core",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "cld": "^2.4.5",
+    "colors": "^1.1.2",
     "hope": "^1.0.3",
     "prompt": "^1.0.0",
     "salient": "^0.2.1"
