@@ -7,20 +7,22 @@ import Hope from 'hope';
 import Language from '../adaptors/language'
 import NLPSalient from '../adaptors/nlp.salient'
 import NLPAlchemy from '../adaptors/nlp.alchemy'
+import TranslatorYandex from '../adaptors/translator.yandex'
 // -- Modules
 import Ava from './ava'
 
 const listen = (text) => {
-  console.log(text);
-
   let request = {
     input: text,
     sentence: text,
     language: null,
-    nlp: {}
+    nlp: {},
+    translator: {}
   };
   Hope.chain([
     () => Language(request)
+  ,
+    (error, request) => TranslatorYandex(request)
   ,
     (error, request) => NLPSalient(request)
   ,
