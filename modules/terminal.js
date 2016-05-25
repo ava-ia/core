@@ -3,6 +3,7 @@ import Hope from 'hope';
 // -- Adaptors
 import Language from '../adaptors/language'
 import NLPSalient from '../adaptors/nlp.salient'
+import NLPAlchemyLanguage from '../adaptors/nlp.alchemylanguage'
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
@@ -12,6 +13,8 @@ process.stdin.on('data', function (text) {
     () => Language(text)
   ,
     (error, value) => NLPSalient(text)
+  ,
+    (error, value) => NLPAlchemyLanguage(text)
   ]).then((errors, values) => {
     console.log('\n');
   });
