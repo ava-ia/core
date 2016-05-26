@@ -16,6 +16,7 @@
     "babel-register": "^6.9.0",
     "cld": "^2.4.5",
     "colors": "^1.1.2",
+    "google-translate-api": "^2.0.3",
     "hope": "^1.0.3",
     "linguist": "^0.1.7",
     "salient": "^0.2.1"
