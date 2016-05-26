@@ -1,3 +1,4 @@
+// -- More info: https://github.com/framingeinstein/node-alchemy
 'use strict';
 
 import AlchemyAPI from 'alchemy-api';
@@ -24,6 +25,10 @@ const Adaptor = (request) => {
     () => _promisedAlchemy('concepts', request, ['concepts'])
   ,
     () => _promisedAlchemy('keywords', request, ['keywords'])
+  ,
+    () => _promisedAlchemy('taxonomies', request, ['taxonomy'])
+  ,
+    () => _promisedAlchemy('category', request, ['category'])
   ]).then(() => {
     request.nlp.alchemy.ms = (new Date() - time);
     promise.done(null, request);
