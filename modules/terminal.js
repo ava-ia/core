@@ -1,19 +1,23 @@
 'use strict';
+process.stdout.write('\x1Bc');
 
 import Ava from './ava'
+const ava = new Ava({
+  output: true,
+  query: 'world'
+});
 
-process.stdout.write('\x1Bc');
 if (process.argv[2]) {
-  Ava.listen(process.argv.slice(2).join(' '));
+  ava.listen(process.argv.slice(2).join(' '));
 } else {
-  Ava.says('Hi! How can I help you?');
+  ava.says('Hi! How can I help you?');
 }
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', (text) => {
   if (text === 'bye\n') {
-    Ava.says('Bye!')
+    ava.output('Bye! See you soon!')
     process.exit();
   }
-  Ava.listen(text);
+  ava.listen(text);
 });

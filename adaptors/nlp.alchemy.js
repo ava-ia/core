@@ -4,31 +4,30 @@
 import AlchemyAPI from 'alchemy-api';
 import Hope from 'hope';
 // -- Internal
-import Ava from '../modules/ava';
 const CREDENTIALS = require('./credentials/AlchemyAPI.json');
 var alchemy = new AlchemyAPI(CREDENTIALS.apikey);
 
-const Adaptor = (request) => {
+const Adaptor = (request, ava) => {
   let promise = new Hope.Promise();
 
   const time = new Date();
   request.nlp.alchemy = {};
   Hope.join([
-    () => _promisedAlchemy('sentiment', request, ['docSentiment'])
+    () => _promisedAlchemy('sentiment', request, ['docSentiment'], ava)
   ,
-    () => _promisedAlchemy('entities', request, ['entities'])
+    () => _promisedAlchemy('entities', request, ['entities'], ava)
   ,
-    () => _promisedAlchemy('emotions', request, ['docEmotions'])
+    () => _promisedAlchemy('emotions', request, ['docEmotions'], ava)
   ,
-    () => _promisedAlchemy('relations', request, ['relations'])
+    () => _promisedAlchemy('relations', request, ['relations'], ava)
   ,
-    () => _promisedAlchemy('concepts', request, ['concepts'])
+    () => _promisedAlchemy('concepts', request, ['concepts'], ava)
   ,
-    () => _promisedAlchemy('keywords', request, ['keywords'])
+    () => _promisedAlchemy('keywords', request, ['keywords'], ava)
   ,
-    () => _promisedAlchemy('taxonomies', request, ['taxonomy'])
+    () => _promisedAlchemy('taxonomies', request, ['taxonomy'], ava)
   ,
-    () => _promisedAlchemy('category', request, ['category'])
+    () => _promisedAlchemy('category', request, ['category'], ava)
   ]).then(() => {
     request.nlp.alchemy.ms = (new Date() - time);
     promise.done(null, request);
@@ -39,9 +38,9 @@ const Adaptor = (request) => {
 
 export default Adaptor;
 
-const _promisedAlchemy = (method, request, properties) => {
+const _promisedAlchemy = (method, request, properties, ava) => {
   let promise = new Hope.Promise();
-  Ava.searching();
+  ava.step();
 
   const time = new Date();
   alchemy[method](request.sentence, {}, (error, response) => {

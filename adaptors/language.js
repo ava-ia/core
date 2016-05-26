@@ -3,12 +3,11 @@
 import Hope from 'hope';
 import cld from 'cld';
 // -- Internal
-import Ava from '../modules/ava';
 const DEFAULT_VALUE = { name: 'ENGLISH', code: 'en', percent: 0, score: 0 };
 
-export default (request) => {
+export default (request, ava) => {
   let promise = new Hope.Promise();
-  Ava.searching();
+  ava.step();
 
   const time = new Date();
   cld.detect(request.sentence, (error, value) => {

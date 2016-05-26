@@ -4,7 +4,7 @@
 import Hope from 'hope';
 import Compromise from 'nlp_compromise';
 
-export default (request) => {
+export default (request, ava) => {
   let promise = new Hope.Promise();
 
   promise.done(null, request);

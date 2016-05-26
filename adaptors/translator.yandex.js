@@ -3,12 +3,11 @@
 import Hope from 'hope';
 import Linguist from 'linguist';
 // -- Internal
-import Ava from '../modules/ava';
 const LANGUAGE = 'en';
 
-export default (request) => {
+export default (request, ava) => {
   let promise = new Hope.Promise();
-  Ava.searching();
+  ava.step();
 
   if (request.language.code === LANGUAGE) {
     promise.done(null, request);

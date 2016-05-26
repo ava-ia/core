@@ -3,12 +3,11 @@
 import Hope from 'hope';
 import GoogleTranslate from 'google-translate-api';
 // -- Internal
-import Ava from '../modules/ava';
 const LANGUAGE = 'en';
 
-export default (request) => {
+export default (request, ava) => {
   let promise = new Hope.Promise();
-  Ava.searching();
+  ava.step();
 
   if (request.language.code === LANGUAGE) {
     promise.done(null, request);

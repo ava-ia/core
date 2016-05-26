@@ -3,14 +3,12 @@
 import Hope from 'hope';
 import Salient from 'salient';
 // -- Internal
-import Ava from '../modules/ava';
 const tokenizer = new Salient.tokenizers.RegExpTokenizer({ pattern: /\W+/ });
 // const glossary = new Salient.glossary.Glossary();
 const analyser = new Salient.sentiment.BayesSentimentAnalyser();
 
-export default (request) => {
+export default (request, ava) => {
   let promise = new Hope.Promise();
-  Ava.searching();
 
   const time = new Date();
   request.nlp.salient = {
