@@ -4,10 +4,8 @@ import Hope from 'hope';
 import pkg from 'package.json';
 // -- Adaptors
 import Language from 'adaptors/language'
-import NLPSalient from 'adaptors/nlp.salient'
-import NLPAlchemy from 'adaptors/nlp.alchemy'
-import TranslatorYandex from 'adaptors/translator.yandex'
-import TranslatorGoogle from 'adaptors/translator.google'
+import {NLPSalient, NLPAlchemy} from 'adaptors/nlp'
+import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
 // -- Core
 import metadata from './metadata'
 import output from './output'

@@ -4,7 +4,7 @@
 import AlchemyAPI from 'alchemy-api';
 import Hope from 'hope';
 // -- Internal
-const CREDENTIALS = require('./credentials/AlchemyAPI.json');
+const CREDENTIALS = require('credentials/nlp.alchemy.json');
 var alchemy = new AlchemyAPI(CREDENTIALS.apikey);
 
 const Adaptor = (request, ava) => {
