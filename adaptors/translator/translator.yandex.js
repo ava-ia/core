@@ -13,9 +13,9 @@ export default (request, ava) => {
     promise.done(null, request);
   } else {
     const time = new Date();
-    Linguist.translate(request.sentence, request.language.code, LANGUAGE, (response) => {
+    Linguist.translate(request.sentence, request.language.code || LANGUAGE, LANGUAGE, (response) => {
       request.sentence = response.text[0];
-      request.translator.yandex = {lang: response.lang, sentence: response.text[0], ms: (new Date() - time)};
+      request.translator.yandex = {language: response.lang, sentence: response.text[0], ms: (new Date() - time)};
       promise.done(null, request);
     });
   }

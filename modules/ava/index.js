@@ -28,7 +28,7 @@ export default class Ava {
     let request = {
       input: text,
       sentence: text,
-      language: null,
+      language: {},
       nlp: {},
       translator: {}
     };
@@ -36,7 +36,7 @@ export default class Ava {
     Hope.chain([
       () => Language(request, this)
     // ,
-    //   (error, request) => TranslatorYandex(request)
+    //   (error, request) => TranslatorYandex(request, this)
     ,
       (error, request) => TranslatorGoogle(request, this)
     ,
