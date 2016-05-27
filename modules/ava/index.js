@@ -1,11 +1,12 @@
 'use strict';
+
 import Hope from 'hope';
 // -- Configuration
 import pkg from 'package.json';
 // -- Adaptors
 import Language from 'adaptors/language'
-import {NLPSalient, NLPAlchemy} from 'adaptors/nlp'
-import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
+import NLPAlchemy from 'adaptors/nlp'
+import TranslatorGoogle from 'adaptors/translator'
 // -- Core
 import metadata from './metadata'
 import output from './output'
@@ -17,8 +18,10 @@ export default class Ava {
   metadata = metadata;
   output = output;
 
-  constructor(props) {
+  constructor(props = {}) {
     this.props = props;
+    if (!this.props.translator) this.props.translator = TranslatorGoogle;
+    if (!this.props.nlp) this.props.nlp = NLPAlchemy;
     this.output(`Welcome to Ava ${Ava.version}`);
     if (props.query) this.analize(props.query);
   }
@@ -33,17 +36,11 @@ export default class Ava {
       translator: {}
     };
 
-    Hope.chain([
-      () => Language(request, this)
-    // ,
-    //   (error, request) => TranslatorYandex(request, this)
-    ,
-      (error, request) => TranslatorGoogle(request, this)
-    ,
-      (error, request) => NLPSalient(request, this)
-    ,
-      (error, request) => NLPAlchemy(request, this)
-    ]).then((error, request) => {
+    let tasks = [];
+    tasks.push(() => Language(request, this));
+    tasks.push((error, request) => this.props.translator(request, this));
+    tasks.push((error, request) => this.props.nlp(request, this));
+    Hope.chain(tasks).then((error, request) => {
       this.metadata(request);
     });
   }
