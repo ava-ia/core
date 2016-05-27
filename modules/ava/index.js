@@ -1,16 +1,16 @@
 'use strict';
 import Hope from 'hope';
 // -- Configuration
-import pkg from '../package.json';
+import pkg from '../../package.json';
 // -- Adaptors
-import Language from '../adaptors/language'
-import NLPSalient from '../adaptors/nlp.salient'
-import NLPAlchemy from '../adaptors/nlp.alchemy'
-import TranslatorYandex from '../adaptors/translator.yandex'
-import TranslatorGoogle from '../adaptors/translator.google'
+import Language from '../../adaptors/language'
+import NLPSalient from '../../adaptors/nlp.salient'
+import NLPAlchemy from '../../adaptors/nlp.alchemy'
+import TranslatorYandex from '../../adaptors/translator.yandex'
+import TranslatorGoogle from '../../adaptors/translator.google'
 // -- Core
-import metadata from './ava/metadata'
-import output from './ava/output'
+import metadata from './metadata'
+import output from './output'
 
 export default class Ava {
   static version = pkg.version;
@@ -22,9 +22,10 @@ export default class Ava {
   constructor(props) {
     this.props = props;
     this.output(`Welcome to Ava ${Ava.version}`);
+    if (props.query) this.analize(props.query);
   }
 
-  listen(text, profile) {
+  analize(text) {
     this.output('Analyzing');
     let request = {
       input: text,
