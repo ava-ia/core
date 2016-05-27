@@ -3,7 +3,6 @@ process.stdout.write('\x1Bc');
 
 import Ava from './ava'
 const ava = new Ava({
-  output: true,
   query: process.argv.slice(2).join(' ')
 });
 

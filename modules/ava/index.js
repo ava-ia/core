@@ -1,13 +1,13 @@
 'use strict';
 import Hope from 'hope';
 // -- Configuration
-import pkg from '../../package.json';
+import pkg from 'package.json';
 // -- Adaptors
-import Language from '../../adaptors/language'
-import NLPSalient from '../../adaptors/nlp.salient'
-import NLPAlchemy from '../../adaptors/nlp.alchemy'
-import TranslatorYandex from '../../adaptors/translator.yandex'
-import TranslatorGoogle from '../../adaptors/translator.google'
+import Language from 'adaptors/language'
+import NLPSalient from 'adaptors/nlp.salient'
+import NLPAlchemy from 'adaptors/nlp.alchemy'
+import TranslatorYandex from 'adaptors/translator.yandex'
+import TranslatorGoogle from 'adaptors/translator.google'
 // -- Core
 import metadata from './metadata'
 import output from './output'
