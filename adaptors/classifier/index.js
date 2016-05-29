@@ -1,4 +1,3 @@
-import ClassifierNaturalSynaptic from './classifier.naturalsynaptic';
-export default ClassifierNaturalSynaptic;
-export { ClassifierNaturalSynaptic };
-export ClassifierBayes from './classifier.bayes';
+import ClassifierBayes from './classifier.bayes';
+export default ClassifierBayes;
+export { ClassifierBayes };
