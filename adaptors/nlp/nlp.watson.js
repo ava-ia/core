@@ -6,46 +6,46 @@ import Watson from 'watson-developer-cloud';
 const CREDENTIALS = require('credentials/nlp.alchemy.json');
 var AlchemyLanguage = Watson.alchemy_language({ api_key: CREDENTIALS.apikey });
 
-const Adaptor = (request, ava) => {
+const Adaptor = (phrase, ava) => {
   return new Promise((resolve, reject) => {
-    request.nlp = {};
-    alchemy(request, ava).then(response => resolve(response))
+    alchemy(phrase, ava).then(response => resolve(response))
   });
 }
 
 export default Adaptor;
 
-const alchemy = async (request, ava) => {
+const alchemy = async (phrase, ava) => {
   const time = new Date();
-
   let [entities, keywords, taxonomy, concepts, sentiment, relations] = await Promise.all([
-    alchemyService('entities', request, 'entities', ava)
+    alchemyService('entities', phrase, 'entities', ava)
   ,
-    alchemyService('keywords', request, 'keywords', ava)
+    alchemyService('keywords', phrase, 'keywords', ava)
   ,
-    alchemyService('taxonomy', request, 'taxonomy', ava)
+    alchemyService('taxonomy', phrase, 'taxonomy', ava)
   ,
-    alchemyService('concepts', request, 'concepts', ava)
+    alchemyService('concepts', phrase, 'concepts', ava)
   ,
-    alchemyService('sentiment', request, 'docSentiment', ava)
+    alchemyService('sentiment', phrase, 'docSentiment', ava)
   ,
-    alchemyService('relations', request, 'relations', ava)
+    alchemyService('relations', phrase, 'relations', ava)
   ,
   ]);
-  request.nlp.ms = (new Date() - time);
-  request.nlp.entities = entities;
-  request.nlp.keywords = keywords;
-  request.nlp.taxonomy = taxonomy;
-  request.nlp.concepts = concepts;
-  request.nlp.sentiment = sentiment;
-  request.nlp.relations = relations;
-  return request;
+
+  return {
+    ms: (new Date() - time),
+    entities: entities,
+    keywords: keywords,
+    taxonomy: taxonomy.length > 0 ? taxonomy[0] : undefined,
+    concepts: concepts,
+    sentiment: sentiment,
+    relations: relations
+  };
 }
 
-const alchemyService = (name, request, property, ava) => {
+const alchemyService = (name, phrase, property, ava) => {
   return new Promise((resolve, reject) => {
     ava.step();
-    AlchemyLanguage[name]({text: request.sentence}, (error, response) => {
+    AlchemyLanguage[name]({text: phrase}, (error, response) => {
       if (error) {
         reject(error);
       } else {

@@ -6,16 +6,15 @@ const tokenizer = new Salient.tokenizers.RegExpTokenizer({ pattern: /\W+/ });
 // const glossary = new Salient.glossary.Glossary();
 const analyser = new Salient.sentiment.BayesSentimentAnalyser();
 
-export default (request, ava) => {
+export default (phrase, ava) => {
+  const time = new Date();
   return new Promise((resolve, reject) => {
-    const time = new Date();
-    request.nlp = {
+    resolve({
       engine: 'salient',
-      tokens: tokenizer.tokenize(request.sentence),
-      // glossary: glossary.parse(request.sentence),
-      sentiment: analyser.classify(request.sentence),
+      tokens: tokenizer.tokenize(phrase),
+      // glossary: glossary.parse(phrase),
+      sentiment: analyser.classify(phrase),
       ms: (new Date() - time)
-    };
-    resolve(request);
+    });
   });
 };

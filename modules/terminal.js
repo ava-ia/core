@@ -8,8 +8,8 @@ process.stdout.write('\x1Bc');
 import Ava from './ava'
 const ava = new Ava({
   query: process.argv.slice(2).join(' '),
-  translator: TranslatorGoogle,
-  // nlp: NLPWatson,
+  // translator: TranslatorYandex,
+  // nlp: NLPSalient,
   intents: ['weather'],
   action: ['url']
 });

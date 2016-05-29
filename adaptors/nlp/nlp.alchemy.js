@@ -6,45 +6,45 @@ import AlchemyAPI from 'alchemy-api';
 const CREDENTIALS = require('credentials/nlp.alchemy.json');
 var alchemy = new AlchemyAPI(CREDENTIALS.apikey);
 
-const Adaptor = (request, ava) => {
+const Adaptor = (phrase, ava) => {
   return new Promise((resolve, reject) => {
-    request.nlp = {};
-    all(request, ava).then(response => resolve(response))
+    all(phrase, ava).then(response => resolve(response))
   });
 }
 
 export default Adaptor;
 
-const all = async (request, ava) => {
+const all = async (phrase, ava) => {
   const time = new Date();
-
   let [entities, keywords, taxonomy, concepts, sentiment, relations] = await Promise.all([
-    service('entities', request, 'entities', ava)
+    service('entities', phrase, 'entities', ava)
   ,
-    service('keywords', request, 'keywords', ava)
+    service('keywords', phrase, 'keywords', ava)
   ,
-    service('taxonomies', request, 'taxonomies', ava)
+    service('taxonomies', phrase, 'taxonomy', ava)
   ,
-    service('concepts', request, 'concepts', ava)
+    service('concepts', phrase, 'concepts', ava)
   ,
-    service('sentiment', request, 'docSentiment', ava)
+    service('sentiment', phrase, 'docSentiment', ava)
   ,
-    service('relations', request, 'relations', ava)
+    service('relations', phrase, 'relations', ava)
   ]);
-  request.nlp.ms = (new Date() - time);
-  request.nlp.entities = entities;
-  request.nlp.keywords = keywords;
-  request.nlp.taxonomy = taxonomy;
-  request.nlp.concepts = concepts;
-  request.nlp.sentiment = sentiment;
-  request.nlp.relations = relations;
-  return request;
+
+  return {
+    ms: (new Date() - time),
+    entities: entities,
+    keywords: keywords,
+    taxonomy: taxonomy.length > 0 ? taxonomy[0] : undefined,
+    concepts: concepts,
+    sentiment: sentiment,
+    relations: relations
+  };
 }
 
-const service = (name, request, property, ava) => {
+const service = (name, phrase, property, ava) => {
   return new Promise((resolve, reject) => {
     ava.step();
-    alchemy[name](request.sentence, {}, (error, response) => {
+    alchemy[name](phrase, {}, (error, response) => {
       if (error) {
         reject(error);
       } else {
