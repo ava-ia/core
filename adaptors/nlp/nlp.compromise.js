@@ -1,13 +1,10 @@
 // -- More Info: https://github.com/nlp-compromise/nlp_compromise
 'use strict';
 
-import Hope from 'hope';
 import Compromise from 'nlp_compromise';
 
 export default (request, ava) => {
-  let promise = new Hope.Promise();
-
-  promise.done(null, request);
-
-  return promise;
+  return new Promise((resolve, reject) => {
+    resolve(request);
+  });
 };

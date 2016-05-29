@@ -1,6 +1,5 @@
 'use strict';
 
-import Hope from 'hope';
 // -- Configuration
 import pkg from 'package.json';
 // -- Adaptors
@@ -26,23 +25,20 @@ export default class Ava {
     if (props.query) this.analize(props.query);
   }
 
-  analize(text) {
+  async analize(text) {
     this.output('Analyzing');
     let request = {
       input: text,
       sentence: text,
       language: {},
-      nlp: {},
-      translator: {}
+      nlp: {}
     };
 
-    let tasks = [];
-    tasks.push(() => Language(request, this));
-    tasks.push((error, request) => this.props.translator(request, this));
-    tasks.push((error, request) => this.props.nlp(request, this));
-    Hope.chain(tasks).then((error, request) => {
-      this.metadata(request);
-    });
+    let language = await Language(request, this);
+    let translation = await this.props.translator(request, this);
+    let nlp = await this.props.nlp(request, this);
+
+    this.metadata(request);
   }
 
   step() {

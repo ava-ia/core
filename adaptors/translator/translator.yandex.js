@@ -1,24 +1,27 @@
 'use strict';
 
-import Hope from 'hope';
 import Linguist from 'linguist';
 // -- Internal
 const LANGUAGE = 'en';
 
 export default (request, ava) => {
-  let promise = new Hope.Promise();
-  ava.step();
+  return new Promise((resolve, reject) => {
+    ava.step();
 
-  if (request.language.code === LANGUAGE) {
-    promise.done(null, request);
-  } else {
-    const time = new Date();
-    Linguist.translate(request.sentence, request.language.code || LANGUAGE, LANGUAGE, (response) => {
-      request.sentence = response.text[0];
-      request.translator.yandex = {language: response.lang, sentence: response.text[0], ms: (new Date() - time)};
-      promise.done(null, request);
-    });
-  }
-
-  return promise;
+    if (request.language.code === LANGUAGE) {
+      resolve(request);
+    } else {
+      const time = new Date();
+      Linguist.translate(request.sentence, request.language.code || LANGUAGE, LANGUAGE, (response) => {
+        request.sentence = response.text[0];
+        request.translator = {
+          engine: 'yandex',
+          language: response.lang,
+          sentence: request.sentence,
+          ms: (new Date() - time)
+        };
+        resolve(request);
+      });
+    }
+  })
 }

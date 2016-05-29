@@ -20,10 +20,12 @@
     "colors": "^1.1.2",
     "compromise": "^0.1.1",
     "google-translate-api": "^2.0.3",
-    "hope": "^1.0.3",
     "linguist": "^0.1.7",
     "natural-synaptic": "^1.0.1",
     "nlp_compromise": "^4.10.6",
     "salient": "^0.2.1"
+  },
+  "dependencies": {
+    "watson-developer-cloud": "^1.9.2"
   }
 }
