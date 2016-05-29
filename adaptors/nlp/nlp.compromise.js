@@ -2,6 +2,7 @@
 'use strict';
 
 import Compromise from 'nlp_compromise';
+import Chrono from 'chrono-node';
 // -- Internal
 
 export default (phrase, ava) => {
@@ -11,7 +12,8 @@ export default (phrase, ava) => {
   nlp.sentences[0].terms.map((term) => {
     let key = (term.pos.Verb ? 'verb' : term.tag).toLowerCase();
     relations[key] = {
-      text: term.text,
+      raw: term.text,
+      value: (key === 'date' ? Chrono.parseDate(term.text) : term.normal).toString(),
       info: term.pos,
       tag: term.tag
     }

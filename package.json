@@ -1,10 +1,10 @@
 {
   "name": "ava-ia-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js I need an appointment with the dentist tomorrow at 2pm"
   },
   "author": "Javi Jimenez (@soyjavi) <soyjavi@protonmail.com>",
   "license": "GPLv3",
@@ -16,6 +16,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "bayes": "0.0.6",
+    "chrono-node": "^1.2.3",
     "cld": "^2.4.5",
     "colors": "^1.1.2",
     "compromise": "^0.1.1",
