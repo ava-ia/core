@@ -30,18 +30,19 @@ export default class Ava {
 
   async analize(text) {
     this.output('Analyzing');
-    let request = { input: text, phrase: text };
+    let request = { raw: text, phrase: text };
 
     request.language = await Language(request.phrase, this);
     if (request.language.iso !== LANGUAGE) {
       request.language = await this.props.translator(request.phrase, request.language.iso, this);
       request.phrase = request.language.phrase;
+      delete request.language.phrase;
     }
-    request.classifier = this.props.classifier.categorize(request.phrase, request.language.iso, this);
+    request.classifier = await this.props.classifier.categorize(request.phrase, request.language.iso, this);
 
     request.nlp = await this.props.nlp(request.phrase, this);
     if (request.nlp.taxonomy && request.classifier !== request.nlp.taxonomy.label) {
-      this.props.classifier.learn(request.input, request.language.iso, request.nlp.taxonomy.label);
+      this.props.classifier.learn(request.raw, request.language.iso, request.nlp.taxonomy.label);
     }
     this.metadata(request);
   }
