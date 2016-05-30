@@ -9,7 +9,7 @@ import Ava from './ava'
 const ava = new Ava({
   query: process.argv.slice(2).join(' '),
   // translator: TranslatorYandex,
-  nlp: NLPNatural,
+  nlp: NLPCompromise,
   intents: ['weather'],
   action: ['url']
 });
