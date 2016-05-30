@@ -2,7 +2,7 @@
 'use strict';
 import NaturalSynaptic from 'natural-synaptic';
 let classifier = new NaturalSynaptic();
-const FILE = './store/classifier.natural-synaptic.json';
+const FILE = './store/classifier.natural-synaptic/file.json';
 
 export default {
   learn: (text, category) => {

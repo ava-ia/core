@@ -1,6 +1,6 @@
 'use strict';
 
-import {NLPSalient, NLPAlchemy, NLPWatson} from 'adaptors/nlp'
+import {NLPSalient, NLPAlchemy, NLPWatson, NLPCompromise, NLPNatural} from 'adaptors/nlp'
 import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
 
 process.stdout.write('\x1Bc');
@@ -9,7 +9,7 @@ import Ava from './ava'
 const ava = new Ava({
   query: process.argv.slice(2).join(' '),
   // translator: TranslatorYandex,
-  // nlp: NLPSalient,
+  nlp: NLPNatural,
   intents: ['weather'],
   action: ['url']
 });

@@ -20,7 +20,9 @@ export default (phrase, ava) => {
   });
   return new Promise((resolve, reject) => {
     resolve({
+      engine: 'compromise',
       ms: (new Date() - time),
+
       relations: relations
     });
   });

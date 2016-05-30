@@ -38,12 +38,11 @@ export default class Ava {
       request.phrase = request.language.phrase;
       delete request.language.phrase;
     }
-    request.classifier = await this.props.classifier.categorize(request.phrase, request.language.iso, this);
-
+    // request.classifier = await this.props.classifier.categorize(request.phrase, request.language.iso, this);
     request.nlp = await this.props.nlp(request.phrase, this);
-    if (request.nlp.taxonomy && request.classifier !== request.nlp.taxonomy.label) {
-      this.props.classifier.learn(request.raw, request.language.iso, request.nlp.taxonomy.label);
-    }
+    // if (request.nlp.taxonomy && request.classifier !== request.nlp.taxonomy.label) {
+    //   this.props.classifier.learn(request.raw, request.language.iso, request.nlp.taxonomy.label);
+    // }
     this.metadata(request);
   }
 
