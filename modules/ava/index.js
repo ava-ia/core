@@ -11,6 +11,7 @@ import ClassifierBayes from 'adaptors/classifier'
 import metadata from './metadata'
 import output from './output'
 const LANGUAGE = 'en';
+const isFunction = (value) => (typeof(value) === 'function')
 
 export default class Ava {
   static version = pkg.version;
@@ -18,14 +19,37 @@ export default class Ava {
   props = undefined;
   metadata = metadata;
   output = output;
+  intents = [];
 
   constructor(props = {}) {
     this.props = props;
+    this.intents = [];
     if (!this.props.translator) this.props.translator = TranslatorGoogle;
     if (!this.props.nlp) this.props.nlp = NLPAlchemy;
     if (!this.props.classifier) this.props.classifier = ClassifierBayes;
     this.output(`Welcome to Ava ${Ava.version}`);
     if (props.query) this.analize(props.query);
+
+    return this;
+  }
+
+  intent(scripts, actions) {
+    if (isFunction(scripts)) scripts = [scripts];
+    if (isFunction(actions)) actions = [actions];
+
+    if (Array.isArray(scripts) && Array.isArray(actions)) {
+      scripts.map((script) => {
+        if (isFunction(script)) {
+          actions.map((action) => isFunction(action) ? this.intents.push({script: script, action: action}) : null);
+        }
+      })
+    }
+
+    return this;
+  }
+
+  catch(error) {
+
   }
 
   async analize(text) {
