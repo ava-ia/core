@@ -4,10 +4,8 @@ import GoogleTranslate from 'google-translate-api';
 // -- Internal
 const LANGUAGE = 'en';
 
-export default (phrase, fromLanguage, ava) => {
+export default (phrase, fromLanguage) => {
   return new Promise((resolve, reject) => {
-    ava.step();
-
     const time = new Date();
     GoogleTranslate(phrase, {from: fromLanguage, to: LANGUAGE}).then(response => {
       resolve({

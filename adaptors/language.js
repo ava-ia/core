@@ -4,9 +4,8 @@ import cld from 'cld';
 // -- Internal
 const DEFAULT_VALUE = { name: 'ENGLISH', code: 'en', percent: 0, score: 0 };
 
-export default (phrase, ava) => {
+export default (phrase) => {
   return new Promise((resolve, reject) => {
-    ava.step();
 
     const time = new Date();
     cld.detect(phrase, (error, value) => {

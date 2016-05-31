@@ -25,5 +25,5 @@ process.stdin.on('data', (text) => {
     ava.output('Bye! See you soon!')
     process.exit();
   }
-  ava.analize(text);
+  ava.listen(text);
 });

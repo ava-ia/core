@@ -1,0 +1,76 @@
+# -- ALCHEMY
+nlp (879ms):
+  keywords:
+    0:
+      relevance: 0.915706
+      text: dentist
+    1:
+      relevance: 0.824471
+      text: appointment
+  taxonomy:
+    label: /health and fitness/dental care
+    score: 0.856682
+  concepts:
+    0:
+      text: The Dentist
+      relevance: 0.886784
+      dbpedia: http://dbpedia.org/resource/The_Dentist
+      freebase: http://rdf.freebase.com/ns/m.08c_pq
+      yago: http://yago-knowledge.org/resource/The_Dentist
+  sentiment:
+    score: -0.710618
+    type: negative
+  relations:
+    0:
+      sentence: I need an appointment with the dentist tomorrow at 2pm
+      subject:
+        text: I
+      action:
+        text: need
+        lemmatized: need
+        verb:
+          text: need
+          tense: present
+      object:
+        text: an appointment with the dentist
+
+
+# -- Compromise
+nlp (23ms):
+  engine: compromise
+  relations:
+    person:
+      raw: I
+      value: i
+      info:
+      tag: Person
+    verb:
+      raw: need
+      value: need
+      info:
+      tag: Infinitive
+    determiner:
+      raw: the
+      value: the
+      info:
+      tag: Determiner
+    noun:
+      raw: appointment
+      value: appointment
+      info:
+      tag: Noun
+    preposition:
+      raw: with
+      value: with
+      info:
+      tag: Preposition
+    adjective:
+      raw: dentist
+      value: dentist
+      info:
+      tag: Adjective
+    date:
+      raw: tomorrow at 2pm
+      value: Tue May 31 2016 14:00:00 GMT+0700 (ICT)
+      info:
+      tag: Date

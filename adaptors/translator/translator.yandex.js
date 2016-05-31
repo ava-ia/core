@@ -4,9 +4,8 @@ import Linguist from 'linguist';
 // -- Internal
 const LANGUAGE = 'en';
 
-export default (phrase, fromLanguage, ava) => {
+export default (phrase, fromLanguage) => {
   return new Promise((resolve, reject) => {
-    ava.step();
 
     const time = new Date();
     Linguist.translate(phrase, fromLanguage || LANGUAGE, LANGUAGE, (response) => {

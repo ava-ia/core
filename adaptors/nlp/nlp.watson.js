@@ -6,28 +6,28 @@ import Watson from 'watson-developer-cloud';
 const CREDENTIALS = require('credentials/nlp.alchemy.json');
 var AlchemyLanguage = Watson.alchemy_language({ api_key: CREDENTIALS.apikey });
 
-const Adaptor = (phrase, ava) => {
+const Adaptor = (phrase) => {
   return new Promise((resolve, reject) => {
-    alchemy(phrase, ava).then(response => resolve(response))
+    alchemy(phrase).then(response => resolve(response))
   });
 }
 
 export default Adaptor;
 
-const alchemy = async (phrase, ava) => {
+const alchemy = async (phrase) => {
   const time = new Date();
   let [entities, keywords, taxonomy, concepts, sentiment, relations] = await Promise.all([
-    alchemyService('entities', phrase, 'entities', ava)
+    alchemyService('entities', phrase, 'entities')
   ,
-    alchemyService('keywords', phrase, 'keywords', ava)
+    alchemyService('keywords', phrase, 'keywords')
   ,
-    alchemyService('taxonomy', phrase, 'taxonomy', ava)
+    alchemyService('taxonomy', phrase, 'taxonomy')
   ,
-    alchemyService('concepts', phrase, 'concepts', ava)
+    alchemyService('concepts', phrase, 'concepts')
   ,
-    alchemyService('sentiment', phrase, 'docSentiment', ava)
+    alchemyService('sentiment', phrase, 'docSentiment')
   ,
-    alchemyService('relations', phrase, 'relations', ava)
+    alchemyService('relations', phrase, 'relations')
   ,
   ]);
 
@@ -42,9 +42,8 @@ const alchemy = async (phrase, ava) => {
   };
 }
 
-const alchemyService = (name, phrase, property, ava) => {
+const alchemyService = (name, phrase, property) => {
   return new Promise((resolve, reject) => {
-    ava.step();
     AlchemyLanguage[name]({text: phrase}, (error, response) => {
       if (error) {
         reject(error);

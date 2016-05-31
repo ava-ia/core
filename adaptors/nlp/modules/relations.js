@@ -4,6 +4,7 @@
    - Don't use the same subject/object
    - Use `adverbs` like `here` (for example for create where relation)
    - Remove complement verbs
+   - When use `it's` crash
 ----------------------------------------------------------------------------- */
 
 import Compromise from 'nlp_compromise';
