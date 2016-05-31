@@ -1,5 +1,6 @@
 'use strict';
 
+import colors from 'colors';
 // -- Configuration
 import pkg from 'package.json';
 // -- Adaptors
@@ -48,26 +49,38 @@ export default class Ava {
     return this;
   }
 
-  catch(error) {
+  catch(callback) {
+    this.handleError = callback;
 
+    return this;
   }
 
   async analize(text) {
     this.output('Analyzing');
-    let request = { raw: text, phrase: text };
+    try {
+      let request = { raw: text, phrase: text };
 
-    request.language = await Language(request.phrase, this);
-    if (request.language.iso !== LANGUAGE) {
-      request.language = await this.props.translator(request.phrase, request.language.iso, this);
-      request.phrase = request.language.phrase;
-      delete request.language.phrase;
+      request.language = await Language(request.phrase, this);
+      if (request.language.iso !== LANGUAGE) {
+        request.language = await this.props.translator(request.phrase, request.language.iso, this);
+        request.phrase = request.language.phrase;
+        delete request.language.phrase;
+      }
+      request.classifier = await this.props.classifier.categorize(request.phrase, request.language.iso);
+      request.nlp = await this.props.nlp(request.phrase, this);
+      if (request.nlp.taxonomy && request.classifier !== request.nlp.taxonomy.label) {
+        this.props.classifier.learn(request.raw, request.language.iso, request.nlp.taxonomy.label);
+      }
+
+      this.metadata(request);
+
+    } catch (error) {
+      if (this.handleError) {
+        this.handleError.call(this, error);
+      } else {
+        this.output(`Oops! something wrong: ${error.toString().red}`);
+      }
     }
-    // request.classifier = await this.props.classifier.categorize(request.phrase, request.language.iso, this);
-    request.nlp = await this.props.nlp(request.phrase, this);
-    // if (request.nlp.taxonomy && request.classifier !== request.nlp.taxonomy.label) {
-    //   this.props.classifier.learn(request.raw, request.language.iso, request.nlp.taxonomy.label);
-    // }
-    this.metadata(request);
   }
 
   step() {

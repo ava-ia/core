@@ -2,17 +2,21 @@
 
 import {NLPSalient, NLPAlchemy, NLPWatson, NLPCompromise, NLPNatural} from 'adaptors/nlp'
 import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
+import {ClassifierBayes} from 'adaptors/classifier'
+import {IntentWeather} from 'intents'
+import Ava from './ava'
 
 process.stdout.write('\x1Bc');
 
-import Ava from './ava'
-const ava = new Ava({
-  query: process.argv.slice(2).join(' '),
-  // translator: TranslatorYandex,
-  nlp: NLPCompromise,
-  intents: ['weather'],
-  action: ['url']
-});
+let ava = new Ava({
+    query: process.argv.slice(2).join(' '),
+    // translator: TranslatorYandex,
+    // classifier: ClassifierBayes,
+    nlp: NLPCompromise,
+  })
+  .intent(IntentWeather, Date)
+  .intent([IntentWeather], [Number, 'Troll', String])
+  .catch(error => console.log('{ERROR}', error));
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
