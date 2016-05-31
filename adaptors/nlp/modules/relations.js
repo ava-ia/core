@@ -1,5 +1,11 @@
 'use strict';
 
+/* -- @TODO --------------------------------------------------------------------
+   - Don't use the same subject/object
+   - Use `adverbs` like `here` (for example for create where relation)
+   - Remove complement verbs
+----------------------------------------------------------------------------- */
+
 import Compromise from 'nlp_compromise';
 import Chrono from 'chrono-node';
 // -- Internal
@@ -9,8 +15,7 @@ const TERMS_RELATIONS = {
   noun: 'object',
   date: 'when',
   place: 'location',
-  value: 'value',
-  // @TODO: Get `adverbs` like `here`
+  value: 'value'
 };
 const COMPLEMENT_VERBS = ['can', 'must', 'should'];
 
