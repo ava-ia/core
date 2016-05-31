@@ -2,10 +2,8 @@
 'use strict';
 
 import Compromise from 'nlp_compromise';
-// -- Internals
-import relations from './modules/relations'
 
-export default (phrase, ava) => {
+export default (phrase) => {
   const time = new Date();
   // phrase = Compromise.text(phrase).contractions.expand();
   // console.log('phrase', phrase);
@@ -22,7 +20,7 @@ export default (phrase, ava) => {
       engine: 'compromise',
       ms: (new Date() - time),
 
-      relations: relations(nlp.sentences[0].terms),
+      sentences: nlp.sentences,
       type: Compromise.sentence(phrase).sentence_type(),
       topics: Compromise.text(phrase).topics()
     });

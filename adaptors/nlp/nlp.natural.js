@@ -5,7 +5,7 @@ import Natural from 'natural';
 // -- Internal
 const tokenizer = new Natural.WordTokenizer()
 
-export default (phrase, ava) => {
+export default (phrase) => {
   const time = new Date();
   return new Promise((resolve, reject) => {
     const tokens = tokenizer.tokenize(phrase);

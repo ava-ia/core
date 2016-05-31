@@ -1,6 +1,6 @@
 'use strict';
 
-import {NLPSalient, NLPAlchemy, NLPWatson, NLPCompromise, NLPNatural} from 'adaptors/nlp'
+import {NLPCore, NLPAlchemy, NLPCompromise} from 'adaptors/nlp'
 import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
 import {ClassifierBayes} from 'adaptors/classifier'
 import {IntentWeather} from 'intents'
@@ -12,11 +12,11 @@ let ava = new Ava({
     query: process.argv.slice(2).join(' '),
     // translator: TranslatorYandex,
     // classifier: ClassifierBayes,
-    nlp: NLPCompromise,
+    nlp: NLPCore,
   })
   .intent(IntentWeather, Date)
   .intent([IntentWeather], [Number, 'Troll', String])
-  .catch(error => console.log('{ERROR}', error));
+  // .catch(error => console.log('{ERROR}', error));
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
