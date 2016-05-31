@@ -3,29 +3,33 @@
 import LevelUp from 'levelup';
 import Bayes from 'bayes';
 // -- Internal
-let db = LevelUp('./store/classifier.bayes')
-let classifier = undefined;
-db.get('bayes', function (error, value) {
-  if (error) {
-    classifier = Bayes();
-  } else {
-    classifier = Bayes.fromJson(value)
-  }
-})
+let db = LevelUp('./store/classifier.bayes');
+const classifierForLanguage = (key) => {
+  return new Promise((resolve, reject) => {
+    db.get(key, (error, value) => {
+      if (error) {
+        resolve(Bayes());
+      } else {
+        resolve(Bayes.fromJson(value));
+      }
+    });
+  });
+};
 
 export default {
-  learn: (phrase, language, category) => {
+  learn: async (phrase, language, category) => {
+    let classifier = await classifierForLanguage(language);
     classifier.learn(phrase, category);
-    return new Promise((resolve, reject) => {
-      db.put('bayes', classifier.toJson(), (error) => {
-        error ? reject(error) : resolve(category);
-      });
-    });
+    db.put(language, classifier.toJson());
   },
 
-  categorize: (phrase, language) => {
-    return new Promise((resolve, reject) => {
-      resolve(classifier.categorize(phrase));
-    });
+  categorize: async (phrase, language) => {
+    const time = new Date();
+    let classifier = await classifierForLanguage(language);
+    return {
+      engine: 'bayes',
+      ms: (new Date() - time),
+      category: classifier.categorize(phrase)
+    };
   }
 };
