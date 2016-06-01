@@ -16,13 +16,14 @@ export default class Ava {
 
   props = undefined;
   intents = [];
+  handlerCatch = undefined;
 
   constructor(props = {}) {
     this.props = props;
-    this.intents = [];
     if (!this.props.translator) this.props.translator = TranslatorGoogle;
-    if (!this.props.nlp) this.props.nlp = NLPAlchemy;
     if (!this.props.classifier) this.props.classifier = ClassifierBayes;
+    if (!this.props.nlp) this.props.nlp = NLPAlchemy;
+
     this.output(`Welcome to Ava ${Ava.version}`);
     if (props.query) this.listen(props.query);
 
@@ -32,8 +33,19 @@ export default class Ava {
   async listen(text) {
     this.output(`... ${text}`);
 
-    let request = await analizer.call(null, this, text);
-    this.output(`analizer...OK`)
+    try {
+      let request = await analizer.call(null, this, text);
+
+      this.intents.map((intent) => {
+        intent.script.call(null, this, request, intent.action);
+      });
+    } catch (error) {
+      if (this.handlerCatch) {
+        this.handlerCatch.call(this, error);
+      } else {
+        this.output(`Oops! something wrong: ${error.toString().red}`);
+      }
+    }
   }
 
   intent(scripts, actions) {
@@ -52,7 +64,7 @@ export default class Ava {
   }
 
   catch(callback) {
-    this.handleError = callback;
+    this.handlerCatch = callback;
 
     return this;
   }

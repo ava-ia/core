@@ -1,10 +1,14 @@
 'use strict';
 
-import {NLPCore, NLPAlchemy, NLPCompromise} from 'adaptors/nlp'
+// -- Core
+import Ava from './ava'
+// -- Adaptors
 import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
 import {ClassifierBayes} from 'adaptors/classifier'
+import {NLPAlchemy, NLPCore, NLPCompromise, NLPNatural} from 'adaptors/nlp'
+// -- Intents & Actions
 import {IntentWeather} from 'intents'
-import Ava from './ava'
+import {ActionForecastIO} from 'actions'
 
 process.stdout.write('\x1Bc');
 
@@ -14,8 +18,8 @@ let ava = new Ava({
     // classifier: ClassifierBayes,
     nlp: NLPCore,
   })
-  .intent(IntentWeather, Date)
-  .intent([IntentWeather], [Number, 'Troll', String])
+  .intent(IntentWeather, ActionForecastIO)
+  // .intent([IntentWeather], [Number, 'Troll', String])
   // .catch(error => console.log('{ERROR}', error));
 
 process.stdin.resume();
