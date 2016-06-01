@@ -5,6 +5,7 @@
    - Use `adverbs` like `here` (for example for create where relation)
    - Remove complement verbs
    - When use `it's` crash
+   - remove symbols like `?` or `!`
 ----------------------------------------------------------------------------- */
 
 import Compromise from 'nlp_compromise';
@@ -41,7 +42,7 @@ const extractRelationInfo = (key, term) => {
   let tag;
   let verb;
   let value = term.normal && term.text;
-  if (key === 'date') value = Chrono.parseDate(term.text).toString();
+  if (key === 'date') value = (Chrono.parseDate(term.text) || '').toString();
   if (key === 'verb') {
     value = Compromise.verb(term.text).conjugate().infinitive;
     verb = {text: term.text, tense: term.tag.split('Tense')[0].toLowerCase()};

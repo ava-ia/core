@@ -1,9 +1,9 @@
 'use strict';
 
 // -- NLPs
-import {NLPCompromise, NLPSalient} from 'adaptors/nlp'
+import {NLPCompromise, NLPSalient} from 'composers/nlp'
 // -- Modules
-import relations from 'adaptors/nlp/modules/relations'
+import relations from 'composers/nlp/modules/relations'
 
 export default async (phrase) => {
   const time = new Date();

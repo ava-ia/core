@@ -1,7 +1,7 @@
 'use strict';
 
 // -- Adaptors
-import Language from 'adaptors/language'
+import Language from 'composers/language'
 // -- Internal
 import metadata from './metadata'
 const LANGUAGE = 'en';

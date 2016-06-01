@@ -3,9 +3,9 @@
 // -- Core
 import Ava from './ava'
 // -- Adaptors
-import {TranslatorGoogle, TranslatorYandex} from 'adaptors/translator'
-import {ClassifierBayes} from 'adaptors/classifier'
-import {NLPAlchemy, NLPCore, NLPCompromise, NLPNatural} from 'adaptors/nlp'
+import {TranslatorGoogle, TranslatorYandex} from 'composers/translator'
+import {ClassifierBayes} from 'composers/classifier'
+import {NLPAlchemy, NLPCore, NLPCompromise, NLPNatural} from 'composers/nlp'
 // -- Intents & Actions
 import {IntentWeather} from 'intents'
 import {ActionForecastIO} from 'actions'

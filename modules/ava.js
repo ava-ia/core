@@ -3,10 +3,10 @@
 import colors from 'colors';
 // -- Configuration
 import pkg from 'package.json';
-// -- Adaptors
-import NLPAlchemy from 'adaptors/nlp'
-import TranslatorGoogle from 'adaptors/translator'
-import ClassifierBayes from 'adaptors/classifier'
+// -- Composers
+import NLPAlchemy from 'composers/nlp'
+import TranslatorGoogle from 'composers/translator'
+import ClassifierBayes from 'composers/classifier'
 // -- Core
 import analizer from 'modules/analizer'
 const isFunction = (value) => (typeof(value) === 'function')
