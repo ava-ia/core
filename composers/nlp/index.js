@@ -1,8 +1,7 @@
-import NLPAlchemy from './nlp.alchemy';
-export default NLPAlchemy;
-export { NLPAlchemy };
+import NLPCore from './nlp.core';
+export default NLPCore;
+export { NLPCore };
+export NLPAlchemy from './nlp.alchemy';
 export NLPCompromise from './nlp.compromise';
-export NLPCore from './nlp.core';
-export NLPNatural from './nlp.natural';
 export NLPSalient from './nlp.salient';
 export NLPWatson from './nlp.watson';

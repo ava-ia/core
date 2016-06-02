@@ -15,6 +15,8 @@ export default async (phrase) => {
         engine: 'core',
         ms: (new Date() - time),
 
+        concepts: nlp.salient.concepts,
+        // glossary: nlp.salient.glossary,
         relations: relations(nlp.compromise.sentences[0].terms),
         sentiment: nlp.salient.sentiment,
         tokens: nlp.salient.tokens,
