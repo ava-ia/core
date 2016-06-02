@@ -3,9 +3,9 @@
 /* -- @TODO --------------------------------------------------------------------
    - Don't use the same subject/object
    - Use `adverbs` like `here` (for example for create where relation)
-   - Remove complement verbs
+   - Remove complement verbs or only get the first part of verb
+
    - When use `it's` crash
-   - remove symbols like `?` or `!`
 ----------------------------------------------------------------------------- */
 
 import Compromise from 'nlp_compromise';

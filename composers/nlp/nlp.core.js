@@ -7,6 +7,8 @@ import relations from 'composers/nlp/modules/relations'
 
 export default async (phrase) => {
   const time = new Date();
+  phrase = phrase.toLowerCase();
+
   return new Promise((resolve, reject) => {
     composer(phrase).then((nlp) => {
       resolve({
