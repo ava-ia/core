@@ -4,7 +4,7 @@ import colors from 'colors';
 // -- Configuration
 import pkg from 'package.json';
 // -- Composers
-import NLPAlchemy from 'composers/nlp'
+import NLPCore from 'composers/nlp'
 import TranslatorGoogle from 'composers/translator'
 import ClassifierBayes from 'composers/classifier'
 // -- Core
@@ -17,12 +17,13 @@ export default class Ava {
   props = undefined;
   intents = [];
   handlerCatch = undefined;
+  handlerThen = undefined;
 
   constructor(props = {}) {
     this.props = props;
     if (!this.props.translator) this.props.translator = TranslatorGoogle;
     if (!this.props.classifier) this.props.classifier = ClassifierBayes;
-    if (!this.props.nlp) this.props.nlp = NLPAlchemy;
+    if (!this.props.nlp) this.props.nlp = NLPCore;
 
     this.output(`Welcome to Ava ${Ava.version}`);
     if (props.query) this.listen(props.query);
@@ -30,11 +31,11 @@ export default class Ava {
     return this;
   }
 
-  async listen(text) {
-    this.output(`... ${text}`);
+  async listen(sentence) {
+    this.output(`... ${sentence}`);
 
     try {
-      let request = await analizer.call(null, this, text);
+      let request = await analizer.call(null, this, sentence);
 
       this.intents.map((intent) => {
         intent.script.call(null, this, request, intent.action);
@@ -43,9 +44,12 @@ export default class Ava {
       if (this.handlerCatch) {
         this.handlerCatch.call(this, error);
       } else {
+        reject(error);
         this.output(`Oops! something wrong: ${error.toString().red}`);
       }
     }
+
+    return this;
   }
 
   intent(scripts, actions) {
@@ -69,12 +73,14 @@ export default class Ava {
     return this;
   }
 
+  then(callback) {
+    this.handlerThen = callback;
+
+    return this;
+  }
+
   output(text, newLine = true) {
     if (newLine) text = `${'<AVA>'.magenta} ${text}\n`.bold;
     process.stdout.write(text);
-  }
-
-  step() {
-    this.output('.', false);
   }
 }
