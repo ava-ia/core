@@ -32,7 +32,7 @@ export default {
     state.classifier = {
       engine: 'bayes',
       ms: (new Date() - time),
-      label: classifier.categorize(state.sentence)
+      categories: classifier.categorize(state.sentence) || []
     };
 
     return state;

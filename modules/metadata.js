@@ -1,5 +1,7 @@
 'use strict';
 import colors from 'colors';
+// -- Internal
+const HIDDEN_PROPERTIES = ['actions', 'composer', 'ms', 'intents'];
 
 const metadata = (request, color, level = 0) => {
   if (level === 0) console.log('\n');
@@ -7,7 +9,7 @@ const metadata = (request, color, level = 0) => {
   const indent = new Array(level).join('  ');
 
   for (let property in request) {
-    if (property === 'ms') continue;
+    if (HIDDEN_PROPERTIES.indexOf(property) !== -1) continue;
     const value = request[property];
     const type = typeof(value);
     const isArray = Array.isArray(value) && value.length > 0;

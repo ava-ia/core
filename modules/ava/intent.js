@@ -14,8 +14,6 @@ export default (state) => ({
       });
     }
 
-    console.log(state.intents);
-
     return this;
   }
 })

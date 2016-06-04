@@ -23,7 +23,9 @@ let ava = new Ava({
 })
 // -- Prepare intents
 ava
-  .intent(IntentWeather, [ActionForecastYahoo, ActionForecastMSN])
+  // .intent(IntentWeather, [ActionForecastYahoo, ActionForecastMSN])
+  .intent(IntentWeather, ActionForecastYahoo)
+  .intent(IntentWeather, ActionForecastMSN)
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');

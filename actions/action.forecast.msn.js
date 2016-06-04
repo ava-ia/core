@@ -10,10 +10,7 @@ export default (state, relations) => {
     const { location, when } = relations;
     const ms = new Date()
 
-    console.log(location, when);
-
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
-      console.log(error, response);
       if (error) return reject(error);
       const item = response[0];
       state.actions.push({

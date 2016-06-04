@@ -4,3 +4,4 @@ require('babel-register');
 require('babel-polyfill');
 
 require('./modules/terminal');
+// require('./test');

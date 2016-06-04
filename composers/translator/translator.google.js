@@ -6,6 +6,7 @@ const LANGUAGE = 'en';
 
 export default (state) => {
   return new Promise((resolve, reject) => {
+    if (state.language.iso === LANGUAGE) resolve(state);
 
     const time = new Date();
     GoogleTranslate(state.rawSentence, {from: state.language.iso, to: LANGUAGE}).then(response => {

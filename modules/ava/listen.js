@@ -1,23 +1,18 @@
 'use strict';
 
-// -- Internal
-const LANGUAGE = 'en';
+import { FactoryComposer } from 'modules/ava/factories'
 
 export default (state) => ({
   listen: (sentence) => {
-    state.rawSentence = sentence;
-
     return new Promise(async (resolve, reject) => {
       try {
-        await state.composer.language(state);
-        if (state.language.iso !== LANGUAGE) await state.composer.translator(state);
-        await state.composer.classifier.categorize(state);
-        await state.composer.nlp(state);
-        if (state.nlp.taxonomy && state.classifier.label !== state.nlp.taxonomy.label) state.classifier.learn(state);
+        state.rawSentence = sentence;
+
+        await FactoryComposer(state);
 
         state.actions = [];
-        const intent = state.intents[0]
-        await intent.script.call(null, state, intent);
+        const intent = state.intents[0];
+        await intent.script(state, intent);
 
         // -- @TODO: Iterate over all intents
         // state.intents.map(async (intent) => {

@@ -27,7 +27,7 @@
     "moment": "^2.13.0",
     "natural": "^0.4.0",
     "natural-synaptic": "^1.0.1",
-    "nlp_compromise": "^5.1.0",
+    "nlp_compromise": "^5.2.0",
     "node-fetch": "^1.5.3",
     "salient": "^0.2.1",
     "watson-developer-cloud": "^1.9.2"

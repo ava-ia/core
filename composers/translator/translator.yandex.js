@@ -6,6 +6,7 @@ const LANGUAGE = 'en';
 
 export default (state) => {
   return new Promise((resolve, reject) => {
+    if (state.language.iso === LANGUAGE) return resolve(state);
 
     const time = new Date();
     Linguist.translate(state.rawSentence, state.language.iso || LANGUAGE, LANGUAGE, (response) => {
