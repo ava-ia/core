@@ -1,5 +1,8 @@
 'use strict';
 
-export default (request, ava) => {
+export default (state, relations) => {
 
+  return new Promise((resolve, reject) => {
+
+  });
 };

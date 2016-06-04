@@ -1,7 +1,7 @@
 'use strict';
 import colors from 'colors';
 
-const metadata = (request, level = 0) => {
+const metadata = (request, color, level = 0) => {
   if (level === 0) console.log('\n');
   level = level + 1;
   const indent = new Array(level).join('  ');
@@ -14,12 +14,12 @@ const metadata = (request, level = 0) => {
     const arrayObjects = isArray && value[0] instanceof Object;
 
     if (type === 'string' || type === 'number' || (isArray && !arrayObjects)) {
-      console.log(`${indent}${property.bold.magenta}: ${value.toString()}`);
+      console.log(`${indent}${property.bold[color]}: ${value.toString()}`);
 
     } else if (value instanceof Object && Object.keys(value).length > 0) {
       const ms = value.ms ? ` (${value.ms.toString().bold}ms)` : ''
-      console.log(`${indent}${property.bold.magenta}${ms}:`);
-      metadata(value, level);
+      console.log(`${indent}${property.bold[color]}${ms}:`);
+      metadata(value, color, level);
     }
   }
 }

@@ -1,3 +1,5 @@
+'use strict';
+
 import TranslatorGoogle from './translator.google';
 export default TranslatorGoogle;
 export { TranslatorGoogle };

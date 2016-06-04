@@ -1,10 +1,11 @@
 {
   "name": "ava-ia-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js Do you know if tomorrow will rain in Bangkok?"
+    "start": "node index.js Do you know if tomorrow will rain in Bangkok?",
+    "startES": "node index.js Ava sabes si manana va a llover en Madrid?"
   },
   "author": "Javi Jimenez (@soyjavi) <soyjavi@protonmail.com>",
   "license": "GPLv3",

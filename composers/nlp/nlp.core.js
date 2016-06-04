@@ -5,13 +5,13 @@ import {NLPCompromise, NLPSalient} from 'composers/nlp'
 // -- Modules
 import relations from 'composers/nlp/modules/relations'
 
-export default async (phrase) => {
+export default async (state) => {
   const time = new Date();
-  phrase = phrase.toLowerCase();
+  state.sentence = state.sentence.toLowerCase();
 
   return new Promise((resolve, reject) => {
-    composer(phrase).then((nlp) => {
-      resolve({
+    composer(state.sentence).then((nlp) => {
+      state.nlp = {
         engine: 'core',
         ms: (new Date() - time),
 
@@ -22,7 +22,9 @@ export default async (phrase) => {
         tokens: nlp.salient.tokens,
         topic: nlp.compromise.topics,
         type: nlp.compromise.type,
-      })
+      }
+
+      resolve(state);
     });
   });
 };

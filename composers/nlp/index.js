@@ -1,3 +1,5 @@
+'use strict';
+
 import NLPCore from './nlp.core';
 export default NLPCore;
 export { NLPCore };

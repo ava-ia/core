@@ -4,17 +4,18 @@ import Linguist from 'linguist';
 // -- Internal
 const LANGUAGE = 'en';
 
-export default (phrase, fromLanguage) => {
+export default (state) => {
   return new Promise((resolve, reject) => {
 
     const time = new Date();
-    Linguist.translate(phrase, fromLanguage || LANGUAGE, LANGUAGE, (response) => {
-      resolve({
+    Linguist.translate(state.rawSentence, state.language.iso || LANGUAGE, LANGUAGE, (response) => {
+      state.language = {
         engine: 'yandex',
+        ms: (new Date() - time),
         iso: response.lang,
-        phrase: response.text[0],
-        ms: (new Date() - time)
-      });
+      };
+      state.sentence = response.text[0];
+      resolve(state);
     });
   })
 }
