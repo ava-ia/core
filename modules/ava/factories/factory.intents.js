@@ -8,11 +8,14 @@ export default (state) => {
   return new Promise( async (resolve, reject) => {
     try {
       state.actions = [];
-      // -- @TODO: Iterate over all intents
-      const intent = state.intents[0];
-      await intent.script(state, intent);
+      // -- @TODO: This execute all intents, how can we wait for the first successful one?
+      const intents = state.intents.map( (intent) => intent.script(state, intent) );
+      await Promise.all(intents);
+
       resolve(state);
+
     } catch (error) {
+      // -- @TODO: If it's rejected maybe is because already has actions
       reject(error);
     }
   });
