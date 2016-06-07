@@ -3,6 +3,7 @@
 import weather from 'weather-js';
 // -- modules
 import { relation } from 'actions/modules'
+import { Constants } from 'modules/ava'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 
@@ -16,14 +17,19 @@ export default (state) => {
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
       if (error) return reject(error);
       const item = response[0];
+
       state.actions.push({
         ms: (new Date() - ms),
-        type: 'text',
+
+        type: Constants.action.type.rich,
+        title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
         value: {
-          location: item.location,
-          current: item.current,
-          forecast: item.forecast,
-        }
+          code: item.current.skycode,
+          condition: item.current.skytext,
+          temperature: item.current.temperature,
+        },
+        date: item.current.date,
+        extra: item.forecast
       })
       resolve(state);
     });

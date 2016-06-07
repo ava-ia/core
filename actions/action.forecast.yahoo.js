@@ -4,6 +4,8 @@ import fetch from 'node-fetch';
 import moment from 'moment';
 // -- modules
 import { relation } from 'actions/modules'
+import { Constants } from 'modules/ava'
+
 // -- Internal
 const API = `http://query.yahooapis.com/v1/public/yql?q=`
 const RELATIONS = ['when', 'location'];
@@ -23,17 +25,17 @@ export default (state) => {
 
         state.actions.push({
           ms: (new Date() - ms),
-          type: 'text',
+
+          type: Constants.action.type.rich,
+          title: item.title,
+          url: item.link.split('*')[1],
           value: {
-            lat: item.lat,
-            long: item.long,
-            link: item.link.split('*')[1],
             code: item.condition.code,
-            date: item.condition.date,
-            temp: item.condition.temp,
-            text: item.condition.text,
-            // forecast: item.forecast,
-          }
+            condition: item.condition.text,
+            temperature: item.condition.temp,
+          },
+          date: item.condition.date,
+          // extra: item.forecast
         });
 
         resolve(state);
