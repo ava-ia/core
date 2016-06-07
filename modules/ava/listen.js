@@ -7,12 +7,14 @@ export default (state) => ({
     return new Promise(async (resolve, reject) => {
       try {
         state.rawSentence = sentence;
+        state.response = {};
         await FactoryComposers(state);
         await FactoryIntents(state);
-        resolve(state);
+        // -- @TODO: Actions must be outside??
+        // await FactoryActions(state);
+        state.actions.length > 0 ? resolve(state) : reject()
 
       } catch (error) {
-        console.log('listen.catch')
         reject(error);
       }
     });

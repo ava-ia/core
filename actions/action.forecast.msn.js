@@ -1,13 +1,16 @@
 'use strict';
 
 import weather from 'weather-js';
+// -- modules
+import { relation } from 'actions/modules'
+// -- Internal
+const RELATIONS = ['when', 'location'];
 
-export default (state, relations) => {
+export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { location, when } = relations;
+    const { location, when } = relation(RELATIONS, state.nlp.relations);
     const ms = new Date()
-
     console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
