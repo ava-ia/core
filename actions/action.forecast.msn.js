@@ -5,10 +5,10 @@ import weather from 'weather-js';
 export default (state, relations) => {
 
   return new Promise((resolve, reject) => {
-    console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
-
     const { location, when } = relations;
     const ms = new Date()
+
+    console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
       if (error) return reject(error);

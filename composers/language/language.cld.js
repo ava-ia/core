@@ -5,9 +5,10 @@ import cld from 'cld';
 export default (state) => {
   return new Promise((resolve, reject) => {
 
-    const time = new Date();
     cld.detect(state.rawSentence, (error, value) => {
+      const time = new Date();
       let language = {};
+
       if (!error) {
         language = {
           iso: value.languages[0].code,
