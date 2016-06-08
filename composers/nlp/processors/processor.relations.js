@@ -20,8 +20,12 @@ const TERMS_RELATIONS = {
   value: 'value'
 };
 const COMPLEMENT_VERBS = ['can', 'must', 'should'];
+let lexicon = Compromise.lexicon()
+lexicon['ava'] = 'Person';
 
-export default (terms) => {
+export default (state) => {
+  const root_sentence = Compromise.text(state.sentence).root();
+  const terms = Compromise.text(root_sentence, {lexicon:lexicon}).sentences[0].terms;
   let relations = {};
 
   terms.map((term) => {
@@ -30,15 +34,16 @@ export default (terms) => {
 
     if (relation = TERMS_RELATIONS[key]) {
       if (relation === TERMS_RELATIONS.person && relations[relation]) relation = TERMS_RELATIONS.noun;
-      relations[relation] = extractRelationInfo(key, term);
+      relations[relation] = extractRelation(key, term);
     }
   });
+  state.nlp.relations = relations;
 
-  return relations;
+  return (state);
 };
 
 // -- Private methods
-const extractRelationInfo = (key, term) => {
+const extractRelation = (key, term) => {
   let tag;
   let verb;
   let value = term.normal && term.text;

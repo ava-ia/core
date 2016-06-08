@@ -7,15 +7,16 @@ export default (state) => ({
     return new Promise(async (resolve, reject) => {
       try {
         state.rawSentence = sentence;
-        state.response = {};
+
         await FactoryComposers(state);
-        await FactoryIntents(state);
+        if (state.intents.length > 0) await FactoryIntents(state);
         // -- @TODO: Actions must be outside??
         // await FactoryActions(state);
-        state.actions.length > 0 ? resolve(state) : reject()
+
+        state.actions.length > 0 ? resolve(state) : reject(state)
 
       } catch (error) {
-        reject(error);
+        reject(error, state);
       }
     });
   }

@@ -9,6 +9,6 @@ export default (state) => {
   return new Promise( async (resolve, reject) => {
     factory(state)
       .then( state => resolve(state) )
-      .catch( error => reject(state) )
+      .catch( error => reject(error) )
   });
 }

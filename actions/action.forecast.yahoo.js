@@ -25,6 +25,7 @@ export default (state) => {
 
         state.actions.push({
           ms: (new Date() - ms),
+          engine: 'yahoo',
 
           type: Constants.action.type.rich,
           title: item.title,

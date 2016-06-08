@@ -14,7 +14,7 @@ export default (props) => {
       language: props.language || defaults.language,
       translator: props.translator || defaults.translator,
       classifier: props.classifier || defaults.classifier,
-      nlp: props.core || defaults.nlp,
+      nlp: props.nlp || defaults.nlp,
     },
     intents: [],
     actions: []

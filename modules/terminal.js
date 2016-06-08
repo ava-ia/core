@@ -6,10 +6,10 @@ import Ava from './ava'
 // -- Adaptors
 import {TranslatorGoogle, TranslatorYandex} from 'composers/translator'
 import {ClassifierBayes} from 'composers/classifier'
-import {NLPAlchemy, NLPCore, NLPCompromise} from 'composers/nlp'
+import {NLPDefault, NLPAlchemy} from 'composers/nlp'
 // -- Intents & Actions
-import {IntentWeather} from 'intents'
-import {ActionForecastYahoo, ActionForecastMSN} from 'actions'
+import {IntentWeather, IntentMovie} from 'intents'
+import {ActionForecastYahoo, ActionForecastMSN, ActionMovieDB} from 'actions'
 // -- Internal
 import metadata from './metadata'
 
@@ -17,6 +17,7 @@ import metadata from './metadata'
 // -- New instance of AVA (with customo config);
 let ava = new Ava({
   uniqueAction: true,
+  multiResponse: true,
   // translator: TranslatorYandex,
   // classifier: ClassifierBayes,
   // nlp: NLPAlchemy,
@@ -25,7 +26,8 @@ let ava = new Ava({
 ava
   // .intent(IntentWeather, [ActionForecastYahoo, ActionForecastMSN])
   .intent(IntentWeather, ActionForecastYahoo)
-  .intent(IntentWeather, ActionForecastMSN)
+  // .intent(IntentWeather, ActionForecastMSN)
+  // .intent(IntentMovie, ActionMovieDB)
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
@@ -50,7 +52,5 @@ process.stdin.on('data', (text) => {
     answer(text.replace('\n', ''));
   }
 });
-
-
 
 answer(process.argv.slice(2).join(' '))

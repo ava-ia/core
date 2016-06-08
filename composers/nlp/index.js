@@ -1,9 +1,7 @@
 'use strict';
 
-import NLPCore from './nlp.core';
-export default NLPCore;
-export { NLPCore };
+import NLPDefault from './nlp.default';
+export default NLPDefault;
+export { NLPDefault };
 export NLPAlchemy from './nlp.alchemy';
-export NLPCompromise from './nlp.compromise';
-export NLPSalient from './nlp.salient';
 export NLPWatson from './nlp.watson';
