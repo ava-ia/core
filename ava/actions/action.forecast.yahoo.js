@@ -3,8 +3,8 @@
 import fetch from 'node-fetch';
 import moment from 'moment';
 // -- modules
-import { relation } from 'actions/modules'
-import { Constants } from 'modules/ava'
+import { relation } from 'ava/actions/modules'
+import { Constants } from 'ava'
 
 // -- Internal
 const API = `http://query.yahooapis.com/v1/public/yql?q=`

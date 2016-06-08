@@ -2,21 +2,19 @@
 
 import colors from 'colors';
 // -- Core
-import Ava from './ava'
-// -- Adaptors
-import {TranslatorGoogle, TranslatorYandex} from 'composers/translator'
-import {ClassifierBayes} from 'composers/classifier'
-import {NLPDefault, NLPAlchemy} from 'composers/nlp'
-// -- Intents & Actions
-import {IntentWeather, IntentMovie} from 'intents'
-import {ActionForecastYahoo, ActionForecastMSN, ActionMovieDB} from 'actions'
+import Ava from 'ava'
+// -- Adaptors, Intents & Actions
+import { TranslatorYandex } from 'ava/translators'
+import { ClassifierBayes } from 'ava/classifiers'
+import { NLPAlchemy } from 'ava/nlps'
+import { IntentWeather, IntentMovie } from 'ava/intents'
+import { ActionForecastYahoo, ActionForecastMSN, ActionMovieDB } from 'ava/actions'
 // -- Internal
 import metadata from './metadata'
 
 
 // -- New instance of AVA (with customo config);
 let ava = new Ava({
-  uniqueAction: true,
   multiResponse: true,
   // translator: TranslatorYandex,
   // classifier: ClassifierBayes,

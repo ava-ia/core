@@ -2,8 +2,8 @@
 
 import fetch from 'node-fetch';
 // -- modules
-import { relation } from 'actions/modules'
-import { Constants } from 'modules/ava'
+import { relation } from 'ava/actions/modules'
+import { Constants } from 'ava'
 // -- Internal
 const CREDENTIALS = require('credentials/action.movie.themoviedb.json');
 const API = `https://api.themoviedb.org/`

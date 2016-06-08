@@ -2,8 +2,8 @@
 
 import weather from 'weather-js';
 // -- modules
-import { relation } from 'actions/modules'
-import { Constants } from 'modules/ava'
+import { relation } from 'ava/actions/modules'
+import { Constants } from 'ava'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 

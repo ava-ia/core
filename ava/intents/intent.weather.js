@@ -1,8 +1,8 @@
 'use strict';
 
 // -- Modules
-import { FactoryActions } from 'modules/ava/factories'
-import { intersect } from 'intents/modules'
+import { FactoryActions } from 'ava/factories'
+import { intersect } from 'ava/intents/modules'
 // -- Internal
 const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 'cloud', 'meteo'];
 
