@@ -1,28 +1,24 @@
 // -- More info: https://github.com/ttezel/bayes
 'use strict';
 
-import LevelUp from 'levelup';
 import Bayes from 'bayes';
+// -- Modules
+import Store from 'modules/store';
+
 // -- Internal
-const db = LevelUp('./store/classifier.bayes');
-const classifierForLanguage = (key) => {
-  return new Promise((resolve, reject) => {
-    db.get(key, (error, value) => {
-      if (error) {
-        resolve(Bayes());
-      } else {
-        resolve(Bayes.fromJson(value));
-      }
-    });
-  });
+const db = Store('classifiers/bayes.json');
+const classifierForLanguage = (language) => {
+  const value = db.get(language).value();
+  return (value ? Bayes.fromJson(value) : Bayes());
 };
 
 export default {
 
   learn: async (state) => {
     const classifier = await classifierForLanguage(state.language.iso);
-    classifier.learn(state.rawSentence, state.nlp.taxonomy.label);
-    db.put(state.language.iso, classifier.toJson());
+
+    classifier.learn(state.rawSentence, state.nlp.taxonomy);
+    db.set(state.language.iso, classifier.toJson()).value();
   },
 
   categorize: async (state) => {
@@ -32,7 +28,7 @@ export default {
     state.classifier = {
       engine: 'bayes',
       ms: (new Date() - time),
-      categories: classifier.categorize(state.sentence) || []
+      categories: classifier.categorize(state.rawSentence) || []
     };
 
     return state;

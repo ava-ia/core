@@ -1,6 +1,6 @@
 {
   "name": "ava-ia-core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,8 @@
     "colors": "^1.1.2",
     "compromise": "^0.1.1",
     "google-translate-api": "^2.0.3",
-    "level": "^1.4.0",
     "linguist": "^0.1.7",
+    "lowdb": "^0.13.0",
     "moment": "^2.13.0",
     "natural": "^0.4.0",
     "natural-synaptic": "^1.0.1",
