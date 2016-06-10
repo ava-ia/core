@@ -1,7 +1,7 @@
 'use strict';
 
 // -- Processors
-import { Alchemy, Compromise, Relations, Salient } from 'ava/nlp/processors'
+import { Alchemy, Compromise, Relations, Salient } from 'ava/nlps/processors'
 // -- Modules
 import composeAsync from 'modules/composeAsync'
 

@@ -12,25 +12,22 @@ const classifierForLanguage = (language) => {
   return (value ? Bayes.fromJson(value) : Bayes());
 };
 
-export default {
+export default (state) => {
+  const time = new Date();
+  const classifier = classifierForLanguage(state.language.iso);
+  let categories = classifier.categorize(state.rawSentence);
 
-  learn: async (state) => {
-    const classifier = await classifierForLanguage(state.language.iso);
-
+  if (state.nlp.taxonomy && state.nlp.taxonomy !== categories) {
     classifier.learn(state.rawSentence, state.nlp.taxonomy);
     db.set(state.language.iso, classifier.toJson()).value();
-  },
-
-  categorize: async (state) => {
-    const time = new Date();
-    const classifier = await classifierForLanguage(state.language.iso);
-
-    state.classifier = {
-      engine: 'bayes',
-      ms: (new Date() - time),
-      categories: classifier.categorize(state.rawSentence) || []
-    };
-
-    return state;
+    categories = state.nlp.taxonomy;
   }
+
+  state.classifier = {
+    engine: 'bayes',
+    ms: (new Date() - time),
+    categories
+  };
+
+  return state;
 };

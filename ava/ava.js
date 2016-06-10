@@ -13,8 +13,8 @@ export default (props) => {
     composer: {
       language: props.language || defaults.language,
       translator: props.translator || defaults.translator,
-      classifier: props.classifier || defaults.classifier,
       nlp: props.nlp || defaults.nlp,
+      classifier: props.classifier || defaults.classifier,
     },
     intents: [],
     actions: []
