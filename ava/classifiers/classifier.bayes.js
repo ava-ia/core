@@ -26,7 +26,7 @@ export default (state) => {
   state.classifier = {
     engine: 'bayes',
     ms: (new Date() - time),
-    categories
+    categories: categories.split('/')
   };
 
   return state;
