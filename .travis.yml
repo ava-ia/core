@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "6.1.0"
+  - "4.4.5"
+script:
+  - npm test
+sudo: false
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
