@@ -3,37 +3,16 @@
 
 import AlchemyAPI from 'alchemy-api';
 // -- Internal
-const CREDENTIALS = require('credentials/nlp.alchemy.json');
-var alchemy = new AlchemyAPI(CREDENTIALS.apikey);
+const alchemy = new AlchemyAPI(require('credentials/nlp.alchemy.json').apikey);
 
-const Adaptor = (state) => {
+export default (state) => {
   return new Promise((resolve, reject) => {
-    all(state).then(state => resolve(state))
+
+    alchemy.taxonomies(state.sentence, {}, (error, response) => {
+      const taxonomy = response.taxonomy[0];
+      if (taxonomy) state.nlp.taxonomy = taxonomy.label;
+
+      resolve(state);
+    })
   });
-}
-
-export default Adaptor;
-
-const all = async (state) => {
-  const time = new Date();
-
-  let [taxonomy] = await Promise.all([
-    service('taxonomies', state.sentence, 'taxonomy')
-  ]);
-
-  if (taxonomy.length > 0) state.nlp.taxonomy = taxonomy[0].label;
-
-  return (state);
-}
-
-const service = (name, phrase, property) => {
-  return new Promise((resolve, reject) => {
-    alchemy[name](phrase, {}, (error, response) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(response[property]);
-      }
-    });
-  })
 }
