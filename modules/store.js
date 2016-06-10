@@ -1,3 +1,4 @@
+// -- More info: https://github.com/typicode/lowdb
 'use strict';
 
 import lowdb from 'lowdb';

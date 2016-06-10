@@ -1,11 +1,12 @@
 {
   "name": "ava-ia",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js Do you know if tomorrow will rain in Bangkok?",
-    "test": "node test"
+    "console": "node modules/console.js",
+    "test": "NODE_PATH=. mocha --recursive --compilers js:babel-register --require babel-polyfill"
   },
   "author": "Javi Jimenez (@soyjavi) <soyjavi@protonmail.com>",
   "license": "GPLv3",
@@ -24,12 +25,16 @@
     "google-translate-api": "^2.0.3",
     "linguist": "^0.1.7",
     "lowdb": "^0.13.0",
+    "mocha": "^2.5.3",
     "moment": "^2.13.0",
     "natural": "^0.4.0",
     "natural-synaptic": "^1.0.1",
-    "nlp_compromise": "^5.2.0",
+    "nlp_compromise": "^6.1.2",
     "node-fetch": "^1.5.3",
     "salient": "^0.2.1",
     "watson-developer-cloud": "^1.9.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }

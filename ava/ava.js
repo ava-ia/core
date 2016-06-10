@@ -6,7 +6,7 @@ import defaults from './defaults';
 import intent from './intent';
 import listen from './listen';
 
-export default (props) => {
+export default (props = {}) => {
 
   let state = {
     version: pkg.version,
