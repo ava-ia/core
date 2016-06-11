@@ -8,5 +8,4 @@ node_modules
 .npm
 
 # Project
-credentials
 store/*.json

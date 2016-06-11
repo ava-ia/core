@@ -3,7 +3,7 @@
 
 import AlchemyAPI from 'alchemy-api';
 // -- Internal
-const CREDENTIALS = require('credentials/nlp.alchemy.json');
+const CREDENTIALS = require('credentials').alchemy;
 var alchemy = new AlchemyAPI(CREDENTIALS.apikey);
 
 const Adaptor = (phrase) => {

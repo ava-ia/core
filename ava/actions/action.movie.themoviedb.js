@@ -5,8 +5,7 @@ import fetch from 'node-fetch';
 import { relation } from 'ava/actions/modules'
 import { Constants } from 'ava'
 // -- Internal
-const CREDENTIALS = require('credentials/action.movie.themoviedb.json');
-const API = `https://api.themoviedb.org/`
+const CONFIG = require('credentials').themoviedb;
 const RELATIONS = ['object'];
 
 const action = (state) => {
@@ -15,7 +14,7 @@ const action = (state) => {
     const { object } = relation(RELATIONS, state.nlp.relations) || state.nlp.concepts;
     console.log('ActionMovideDB'.bold.yellow, `object: ${object}`);
 
-    let url = `${API}/3/search/multi?api_key=${CREDENTIALS.apikey}&query=${object}`;
+    let url = `${CONFIG.URL}/3/search/multi?api_key=${CONFIG.apikey}&query=${object}`;
     fetch(url)
       .then(response => response.text())
       .then(body => {
