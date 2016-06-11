@@ -2,7 +2,7 @@
 
 import colors from 'colors';
 // -- Core
-import Ava from 'ava'
+import AVA from 'ava'
 // -- Adaptors, Intents & Actions
 import { TranslatorYandex } from 'ava/translators'
 import { ClassifierBayes } from 'ava/classifiers'
@@ -14,7 +14,7 @@ import metadata from './metadata'
 
 
 // -- New instance of AVA (with customo config);
-let ava = new Ava({
+let ava = new AVA({
   multiResponse: true,
   // translator: TranslatorYandex,
   // classifier: ClassifierBayes,

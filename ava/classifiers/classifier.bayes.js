@@ -6,7 +6,7 @@ import Bayes from 'bayes';
 import Store from 'modules/store';
 
 // -- Internal
-const db = Store('classifiers.bayes.json');
+const db = Store('classifier.bayes.json');
 const classifierForLanguage = (language) => {
   const value = db.get(language).value();
   return (value ? Bayes.fromJson(value) : Bayes());
@@ -26,7 +26,7 @@ export default (state) => {
   state.classifier = {
     engine: 'bayes',
     ms: (new Date() - time),
-    categories: categories.split('/')
+    categories: categories ? categories.split('/') : []
   };
 
   return state;

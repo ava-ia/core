@@ -11,9 +11,11 @@ export default (state) => {
 
       if (!error) {
         language = {
+          engine: 'cld',
+          ms: new Date() - time,
+
           iso: value.languages[0].code,
           percent: value.languages[0].percent,
-          ms: new Date() - time
         };
       }
       state.language = language;
