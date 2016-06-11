@@ -3,8 +3,8 @@
 
 import Watson from 'watson-developer-cloud';
 // -- Internal
-const CREDENTIALS = require('credentials/nlp.alchemy.json');
-var AlchemyLanguage = Watson.alchemy_language({ api_key: CREDENTIALS.apikey });
+const CONFIG = require('credentials').alchemy;
+var AlchemyLanguage = Watson.alchemy_language({ api_key: CONFIG.apikey });
 
 const Adaptor = (phrase) => {
   return new Promise((resolve, reject) => {

@@ -3,7 +3,8 @@
 
 import AlchemyAPI from 'alchemy-api';
 // -- Internal
-const alchemy = new AlchemyAPI(require('credentials/nlp.alchemy.json').apikey);
+const CONFIG = require('credentials').alchemy;
+const alchemy = new AlchemyAPI(CONFIG.apikey);
 
 export default (state) => {
   return new Promise((resolve, reject) => {
@@ -13,7 +14,7 @@ export default (state) => {
       if (taxonomy) {
         state.nlp.taxonomy = (taxonomy.label.charAt(0) === '/') ? taxonomy.label.slice( 1 ) : taxonomy.label;
       }
-      
+
       resolve(state);
     })
   });
