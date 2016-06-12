@@ -1,9 +1,6 @@
 'use strict';
 
-// import composeAsync from 'modules/composeAsync'
-
 export default (state) => {
-  // const factory = composeAsync();
   return new Promise( async (resolve, reject) => {
     try {
       state.actions = [];

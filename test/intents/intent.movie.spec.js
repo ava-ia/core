@@ -1,5 +1,7 @@
+'use strict';
+
 import { assert, expect, should } from 'chai';
-import { IntentMovie } from 'ava/intents';
+import { IntentMovie } from 'intents';
 // -- Mock
 import ActionMock from './action.mock'
 

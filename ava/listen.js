@@ -1,6 +1,6 @@
 'use strict';
 
-import { FactoryComposers, FactoryIntents } from 'ava/factories'
+import { FactoryComposers, FactoryIntents } from './factories'
 
 export default (state) => ({
   listen: (sentence) => {

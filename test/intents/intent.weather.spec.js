@@ -1,5 +1,7 @@
+'use strict';
+
 import { assert, expect, should } from 'chai';
-import { IntentWeather } from 'ava/intents';
+import { IntentWeather } from 'intents';
 // -- Mock
 import ActionMock from './action.mock'
 

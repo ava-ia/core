@@ -1,1 +1,0 @@
-export intersect from './intersect';

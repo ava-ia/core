@@ -1,6 +1,6 @@
 'use strict';
 
-import composeAsync from 'modules/composeAsync'
+import { composeAsync } from '../helpers'
 
 export default (state) => {
   const { language, translator, classifier, nlp } = state.composer;

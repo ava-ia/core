@@ -1,8 +1,10 @@
 'use strict';
 
-process.env.NODE_PATH = __dirname;
-require('module').Module._initPaths();
+// @TODO Bad idea if ava-ia/core is a package
+// process.env.NODE_PATH = __dirname;
+// require('module').Module._initPaths();
+
 require('babel-register');
 require('babel-polyfill');
 
-require('./modules/terminal');
+require('./terminal');

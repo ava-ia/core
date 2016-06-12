@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import pkg from 'package.json';
+import pkg from '../package.json';
 // -- Functions
-import defaults from './defaults';
+import { LanguageCLD, TranslatorGoogle, NLP, ClassifierBayes } from './defaults';
 import intent from './intent';
 import listen from './listen';
 
@@ -11,10 +11,10 @@ export default (props = {}) => {
   let state = {
     version: pkg.version,
     composer: {
-      language: props.language || defaults.language,
-      translator: props.translator || defaults.translator,
-      nlp: props.nlp || defaults.nlp,
-      classifier: props.classifier || defaults.classifier,
+      language: props.language || LanguageCLD,
+      translator: props.translator || TranslatorGoogle,
+      nlp: props.nlp || NLP,
+      classifier: props.classifier || ClassifierBayes,
     },
     intents: [],
     actions: []

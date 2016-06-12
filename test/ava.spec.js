@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import { assert, expect } from 'chai';
 import colors from 'colors';

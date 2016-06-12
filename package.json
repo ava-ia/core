@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "main": "./ava/index.js",
   "homepage": "",
   "author": {
@@ -31,28 +31,27 @@
   "license": "MIT",
   "dependencies": {
     "alchemy-api": "^1.3.2",
+    "bayes": "0.0.6",
+    "chrono-node": "^1.2.3",
+    "cld": "^2.4.5",
+    "compromise": "^0.1.1",
+    "google-translate-api": "^2.0.3",
+    "lowdb": "^0.13.0",
+    "moment": "^2.13.0",
+    "nlp_compromise": "^6.1.2",
+    "node-fetch": "^1.5.3",
+    "salient": "^0.2.1",
+    "weather-js": "^1.0.2"
+  },
+  "devDependencies": {
     "babel-core": "^6.9.0",
     "babel-polyfill": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-    "bayes": "0.0.6",
+
     "chai": "^3.5.0",
-    "chrono-node": "^1.2.3",
-    "cld": "^2.4.5",
     "colors": "^1.1.2",
-    "compromise": "^0.1.1",
-    "google-translate-api": "^2.0.3",
-    "linguist": "^0.1.7",
-    "lowdb": "^0.13.0",
-    "mocha": "^2.5.3",
-    "moment": "^2.13.0",
-    "natural": "^0.4.0",
-    "natural-synaptic": "^1.0.1",
-    "nlp_compromise": "^6.1.2",
-    "node-fetch": "^1.5.3",
-    "salient": "^0.2.1",
-    "watson-developer-cloud": "^1.9.2",
-    "weather-js": "^1.0.2"
+    "mocha": "^2.5.3"
   }
 }
