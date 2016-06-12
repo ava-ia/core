@@ -3,7 +3,6 @@
 
 import AlchemyAPI from 'alchemy-api';
 import Credentials from '../../../credentials';
-
 // -- Internal
 const alchemy = new AlchemyAPI(Credentials.alchemy.apikey);
 

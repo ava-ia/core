@@ -5,6 +5,8 @@
    - Use `noun` tag like `here` like a {location} relation
    - Improve value: `3 buses` must be {value: 3} {object: bus}
    - {when} must be correctly parse
+
+   - [bug] `I hate when rain in London` is not detected by IntentWeather
 ----------------------------------------------------------------------------- */
 
 import Compromise from 'nlp_compromise';

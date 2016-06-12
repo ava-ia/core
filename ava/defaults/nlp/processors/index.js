@@ -1,6 +1,6 @@
 'use strict';
 
-export Alchemy from './processor.alchemy';
+export Taxonomy from './processor.taxonomy';
 export Compromise from './processor.compromise';
 export Relations from './processor.relations';
-export Salient from './processor.salient';
+export Sentiment from './processor.sentiment';

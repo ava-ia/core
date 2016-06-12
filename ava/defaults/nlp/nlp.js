@@ -1,11 +1,11 @@
 'use strict';
 
-import { Alchemy, Compromise, Relations, Salient } from './processors'
+import { Compromise, Taxonomy, Relations, Sentiment } from './processors'
 import { composeAsync } from '../../helpers'
 
 export default (state) => {
   const time = new Date();
-  const factory = composeAsync(Compromise, Salient, Relations, Alchemy);
+  const factory = composeAsync(Compromise, Taxonomy, Relations, Sentiment);
 
   return new Promise( (resolve, reject) => {
     state.sentence = state.sentence.toLowerCase();
