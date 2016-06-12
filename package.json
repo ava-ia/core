@@ -6,7 +6,7 @@
   "homepage": "",
   "author": {
     "name": "AVAia Team",
-    "url": "http://github.com/react-toolbox"
+    "url": "http://github.com/ava-ia"
   },
   "contributors": [
     {
@@ -27,7 +27,6 @@
     "start": "node index.js Ava, Do you know if tomorrow will rain in Bangkok?",
     "test": "NODE_PATH=. mocha --recursive --compilers js:babel-register --require babel-polyfill"
   },
-  "author": "Javi Jimenez (@soyjavi) <soyjavi@protonmail.com>",
   "license": "MIT",
   "dependencies": {
     "alchemy-api": "^1.3.2",
@@ -40,7 +39,7 @@
     "moment": "^2.13.0",
     "nlp_compromise": "^6.1.2",
     "node-fetch": "^1.5.3",
-    "salient": "^0.2.1",
+    "sentiment": "^1.0.6",
     "weather-js": "^1.0.2"
   },
   "devDependencies": {
@@ -49,7 +48,6 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-
     "chai": "^3.5.0",
     "colors": "^1.1.2",
     "mocha": "^2.5.3"
