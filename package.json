@@ -1,8 +1,8 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.0.10",
-  "main": "./ava",
+  "version": "0.0.11",
+  "main": "./ava/index.js",
   "homepage": "",
   "author": {
     "name": "AVAia Team",
@@ -24,8 +24,7 @@
     "email": "issues@react-toolbox.com"
   },
   "scripts": {
-    "start": "node index.js Do you know if tomorrow will rain in Bangkok?",
-    "console": "node modules/console.js",
+    "start": "node index.js Ava, Do you know if tomorrow will rain in Bangkok?",
     "test": "NODE_PATH=. mocha --recursive --compilers js:babel-register --require babel-polyfill"
   },
   "author": "Javi Jimenez (@soyjavi) <soyjavi@protonmail.com>",

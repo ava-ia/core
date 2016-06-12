@@ -16,7 +16,7 @@ export default (state) => ({
         state.actions.length > 0 ? resolve(state) : reject(state)
 
       } catch (error) {
-        reject(error, state);
+        reject(error);
       }
     });
   }

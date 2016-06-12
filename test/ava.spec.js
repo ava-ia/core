@@ -1,6 +1,7 @@
 "use strict";
 
 import { assert, expect } from 'chai';
+import colors from 'colors';
 import AVA from 'ava';
 
 describe('AVA', function() {

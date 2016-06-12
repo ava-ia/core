@@ -12,21 +12,9 @@ const TERMS = [
   'director',
   'camera',
   'editor',
+  'cinema',
+  'tv',
   'producer'
-];
-const JOBS = [
-  'Writing',
-  'Directing',
-  'Actors',
-  'Camera',
-  'Editing',
-  'Art',
-  'Costume & Make-Up',
-  'Production',
-  'Sound',
-  'Visual Effects',
-  'Crew',
-  'Lighting'
 ];
 
 export default (state, intent) => {
