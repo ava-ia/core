@@ -1,7 +1,7 @@
 'use strict';
 
 import { assert, expect, should } from 'chai';
-import { IntentWeather } from 'intents';
+import { weather } from '../../src/intents';
 // -- Mock
 import ActionMock from './action.mock'
 
@@ -14,13 +14,13 @@ describe('IntentWeather', () => {
   let intent;
 
   beforeEach( () => {
-    intent = {script: IntentWeather, actions: [ActionMock]};
+    intent = {script: weather, actions: [ActionMock]};
     state.actions = [];
     state.nlp = {tokens: ['will', 'rain', 'tomorrow', 'in', 'london']}
   });
 
   it('Up & Running', async () => {
-    await IntentWeather(state, intent);
+    await weather(state, intent);
 
     const actions = state.actions;
     expect(actions.length).equal(1);

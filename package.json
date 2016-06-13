@@ -1,8 +1,8 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.0.13",
-  "main": "./ava/index.js",
+  "version": "0.0.14",
+  "main": "./lib/index.js",
   "homepage": "",
   "author": {
     "name": "AVAia Team",
@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "node index.js Ava, Do you know if tomorrow will rain in Bangkok?",
-    "test": "NODE_PATH=. mocha --recursive --compilers js:babel-register --require babel-polyfill"
+    "test": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
+    "build": "babel src --out-dir lib"
   },
   "license": "MIT",
   "dependencies": {

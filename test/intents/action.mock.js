@@ -1,6 +1,6 @@
 'use strict';
 
-import { Constants } from 'ava'
+import { constants } from '../../src'
 
 export default (state) => {
 
@@ -9,7 +9,7 @@ export default (state) => {
       state.actions.push({
         engine: 'mock',
         ms: 10,
-        type: Constants.action.type.rich
+        type: constants.action.type.rich
       });
 
       resolve(state);

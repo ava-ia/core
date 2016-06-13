@@ -7,4 +7,4 @@
 require('babel-register');
 require('babel-polyfill');
 
-require('./terminal');
+require('./test/terminal');

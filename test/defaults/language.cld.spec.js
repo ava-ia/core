@@ -1,15 +1,15 @@
 'use strict';
 
 import { assert, expect, should, eventually } from 'chai';
-import { LanguageCLD } from 'ava/defaults';
+import { languageCLD } from '../../src/defaults';
 
-describe('LanguageCLD', () => {
+describe('languageCLD', () => {
 
   let state;
   beforeEach( () => state = {rawSentence: 'Hello world!'} );
 
   it('Up & Running', async () => {
-    await LanguageCLD(state)
+    await languageCLD(state)
 
     const language = state.language;
     expect(Object.keys(language).length).equal(4)
@@ -21,7 +21,7 @@ describe('LanguageCLD', () => {
 
   it('Detect different language than english', async () => {
     state.rawSentence = 'Hola me llamo Javi';
-    await LanguageCLD(state)
+    await languageCLD(state)
 
     const language = state.language;
     expect(language.iso).equal('es');
@@ -29,7 +29,7 @@ describe('LanguageCLD', () => {
 
   it('If cant detect iso is null', async () => {
     state.rawSentence = "abcdefghijklmnopqrstvxyz"; // Klingon Language
-    await LanguageCLD(state)
+    await languageCLD(state)
 
     const language = state.language;
     expect(Object.keys(language).length).equal(0);

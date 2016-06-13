@@ -2,12 +2,12 @@
 
 import { assert, expect } from 'chai';
 import colors from 'colors';
-import AVA from 'ava';
+import Ava from '../src';
 
-describe('AVA', function() {
+describe('Ava', function() {
 
   let ava;
-  beforeEach( () => ava = new AVA() );
+  beforeEach( () => ava = new Ava() );
 
   it('Up & Running', function () {
     const methods = Object.keys(ava);

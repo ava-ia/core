@@ -1,7 +1,7 @@
 'use strict';
 
 import { assert, expect, should } from 'chai';
-import { Sentiment } from 'ava/defaults/nlp/processors';
+import { sentiment } from '../../src/defaults/processors';
 // -- Mock
 
 describe('ProcessorSentiment', () => {
@@ -12,7 +12,7 @@ describe('ProcessorSentiment', () => {
 
   it('Up & Running', () => {
     state.sentence = 'hello world';
-    const nlp = Sentiment(state).nlp;
+    const nlp = sentiment(state).nlp;
 
     expect(nlp).to.have.all.keys('sentiment', 'tokens');
     expect(nlp.sentiment).equal(0);
@@ -23,14 +23,14 @@ describe('ProcessorSentiment', () => {
 
   it('Can detect a positive sentiment', () => {
     state.sentence = 'I love you!';
-    const nlp = Sentiment(state).nlp;
+    const nlp = sentiment(state).nlp;
 
     expect(nlp.sentiment).equal(3);
   });
 
   it('Can detect a negative sentiment', () => {
     state.sentence = 'I hate you!';
-    const nlp = Sentiment(state).nlp;
+    const nlp = sentiment(state).nlp;
 
     expect(nlp.sentiment).equal(-3);
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 import { assert, expect, should } from 'chai';
-import { Compromise } from 'ava/defaults/nlp/processors';
+import { compromise } from '../../src/defaults/processors';
 // -- Mock
 
 describe('ProcessorCompromise', () => {
@@ -12,7 +12,7 @@ describe('ProcessorCompromise', () => {
 
   it('Up & Running', () => {
     state.sentence = 'Hello world';
-    const nlp = Compromise(state).nlp;
+    const nlp = compromise(state).nlp;
 
     expect(Object.keys(nlp).length).equal(2);
     expect(nlp.type).equal('declarative');
@@ -21,7 +21,7 @@ describe('ProcessorCompromise', () => {
 
   it('Can get topics in a sentence', () => {
     state.sentence = 'I wanna go to London next week';
-    const nlp = Compromise(state).nlp;
+    const nlp = compromise(state).nlp;
 
     expect(nlp.topics.length).equal(1);
     expect(nlp.topics[0].text).equal('london');
@@ -29,14 +29,14 @@ describe('ProcessorCompromise', () => {
 
   it('Can detect interrogative sentences', () => {
     state.sentence = 'Where you wanna go tonight?';
-    const nlp = Compromise(state).nlp;
+    const nlp = compromise(state).nlp;
 
     expect(nlp.type).equal('interrogative');
   });
 
   it('Can detect exclamative sentences', () => {
     state.sentence = 'I hate you!';
-    const nlp = Compromise(state).nlp;
+    const nlp = compromise(state).nlp;
 
     expect(nlp.type).equal('exclamative');
   });
