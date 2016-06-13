@@ -19,7 +19,7 @@ $ npm install --save ava-ia
 ```
 
 
-## A little theory...
+## A little story about language processing...
 
 If you never works with assistants/bots you have to know that we need to analyze a given input and give it a semantic value. To do this often use NLP, *Natural Language Processing*. AVA in its case incorporates its own NLP but as you will see later can use either. For example:
 
@@ -56,12 +56,19 @@ And that is, :)
 ## Basic usage
 
 ```js
-import AVA from `ava-ia`;
+import Ava from `ava-ia`;
+import { weather, movie } from `ava-ia/intents`;
+import { forecastYahoo, forecastMSN, movieDB } from `ava-ia/actions`;
 
-const ava = new AVA()
-  .intent(IntentWeather, [ActionForecastYahoo, ActionForecastMSN])
-  .intent(IntentExchange, [ActionXE]);
+// 1. New instance
+const ava = new Ava();
 
+// 2. Configure the intents
+ava
+  .intent(weather, [forecastYahoo, forecastMSN])
+  .intent(movie, movieDB);
+
+// 3. Chat with Ava
 ava.listen('Do you know if tomorrow will rain in Bangkok?')
   .then(state => console.log(state))
   .catch(error => console.log(state))
@@ -84,7 +91,7 @@ all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
