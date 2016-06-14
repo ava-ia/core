@@ -21,21 +21,16 @@ export default (state) => {
       .then(response => response.text())
       .then(body => {
         const item = JSON.parse(body).query.results.channel.item;
+        const condition = _extractCondition(item.condition, item.forecast, when);
 
         state.actions.push({
           ms: (new Date() - ms),
           engine: 'yahoo',
-
           type: constants.action.type.rich,
           title: item.title,
           url: item.link.split('*')[1],
-          value: {
-            code: item.condition.code,
-            condition: item.condition.text,
-            temperature: item.condition.temp,
-          },
-          date: item.condition.date,
-          // extra: item.forecast
+          condition,
+          // extra: item.forecast,
         });
 
         resolve(state);
@@ -43,4 +38,28 @@ export default (state) => {
         reject(error);
       });
   });
+};
+
+const _extractCondition = (condition = {}, forecast = [], when) => {
+  let value = {
+    code: condition.code,
+    condition: condition.text,
+    temperature: condition.temp,
+    date: moment(condition.date, 'ddd, DD MMM YYYY hh:mm A ZZ').format(),
+  };
+
+  forecast.map( (condition) => {
+    const date = moment(condition.date, 'DD MMM YYYY');
+
+    if (date.isSame(when, 'day')) {
+      return value = {
+        code: condition.code,
+        condition: condition.text,
+        temperature: [condition.low, condition.high],
+        date: date.format(),
+      };
+    }
+  });
+
+  return value;
 };
