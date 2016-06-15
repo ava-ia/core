@@ -8,9 +8,10 @@ export default (state) => ({
       state.rawSentence = sentence;
 
       const factory = composeAsync(factoryComposers, factoryIntents);
+
       factory(state)
         .then( value => {
-          state.actions.length > 0 ? resolve(state) : reject(new Error('No actions'))
+          state.action ? resolve(state) : reject(new Error('No action'))
         })
         .catch ( error => {
           if (!error) error = {code: 0, message: "Sorry, I haven't understood you"};

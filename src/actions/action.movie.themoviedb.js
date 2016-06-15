@@ -20,17 +20,14 @@ const action = (state) => {
       .then(response => response.text())
       .then(body => {
         const data = JSON.parse(body).results[0];
-
         if (data) {
-          let action = _extract(data);
-          action.ms = (new Date() - ms);
-          action.engine = 'themoviedb';
-          action.type = constants.action.type.rich;
-          state.actions.push(action);
+          state.action = _extract(data);
+          state.action.ms = (new Date() - ms);
+          state.action.engine = 'themoviedb';
+          state.action.type = constants.action.type.rich;
         }
 
         resolve(state);
-
       })
   });
 };

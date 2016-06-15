@@ -19,17 +19,16 @@ export default (state) => {
 
       const item = response[0];
       const condition = _determineCondition(item.current, item.forecast, when);
-      let action = {
+      state.action = {
         ms: (new Date() - ms),
         engine: 'msn',
 
         type: constants.action.type.rich,
         title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
         value: condition
-      };
+      }
+      if (!when) state.action.related = item.forecast;
 
-      if (!when) action.related = item.forecast;
-      state.actions.push(action);
       resolve(state);
     });
   });
