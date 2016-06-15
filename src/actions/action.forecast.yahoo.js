@@ -21,26 +21,28 @@ export default (state) => {
       .then(response => response.text())
       .then(body => {
         const item = JSON.parse(body).query.results.channel.item;
-        const condition = _extractCondition(item.condition, item.forecast, when);
-
-        state.actions.push({
+        const condition = _determineCondition(item.condition, item.forecast, when);
+        let action = {
           ms: (new Date() - ms),
           engine: 'yahoo',
+
           type: constants.action.type.rich,
           title: item.title,
           url: item.link.split('*')[1],
-          condition,
-          // extra: item.forecast,
-        });
+          value: condition
+        };
 
+        if (!when) action.related = item.forecast;
+        state.actions.push(action);
         resolve(state);
+
       }).catch(function(error) {
         reject(error);
       });
   });
 };
 
-const _extractCondition = (condition = {}, forecast = [], when) => {
+const _determineCondition = (condition = {}, forecast = [], when) => {
   let value = {
     code: condition.code,
     condition: condition.text,
@@ -50,7 +52,6 @@ const _extractCondition = (condition = {}, forecast = [], when) => {
 
   forecast.map( (condition) => {
     const date = moment(condition.date, 'DD MMM YYYY');
-
     if (date.isSame(when, 'day')) {
       return value = {
         code: condition.code,
