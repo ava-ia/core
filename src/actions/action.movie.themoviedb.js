@@ -8,6 +8,8 @@ const config = credentials('themoviedb');
 const RELATIONS = ['object'];
 
 const action = (state) => {
+  if (!config) return (state);
+
   return new Promise((resolve, reject) => {
     const ms = new Date()
     const { object } = relation(RELATIONS, state.nlp.relations) || state.nlp.concepts;
