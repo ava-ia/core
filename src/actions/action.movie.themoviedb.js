@@ -2,20 +2,20 @@
 
 import fetch from 'node-fetch';
 import constants from '../constants'
-import { credentials, relation } from '../helpers'
+import { config, relation } from '../helpers'
 // -- Internal
-const config = credentials('themoviedb');
+const credentials = config('themoviedb');
 const RELATIONS = ['object'];
 
 const action = (state) => {
-  if (!config) return (state);
+  if (!credentials) return (state);
 
   return new Promise((resolve, reject) => {
     const ms = new Date()
     const { object } = relation(RELATIONS, state.nlp.relations) || state.nlp.concepts;
     console.log('ActionMovieDB'.bold.yellow, `object: ${object}`);
 
-    let url = `${config.url}/3/search/multi?api_key=${config.apikey}&query=${object}`;
+    let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${object}`;
     fetch(url)
       .then(response => response.text())
       .then(body => {

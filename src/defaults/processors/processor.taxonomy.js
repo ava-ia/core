@@ -2,14 +2,14 @@
 'use strict';
 
 import AlchemyAPI from 'alchemy-api';
-import { credentials } from '../../helpers';
+import { config } from '../../helpers';
 // -- Internal
-const config = credentials('alchemy');
+const credentials = config('alchemy');
 let processor;
-if (config) processor = new AlchemyAPI(config.apikey);
+if (credentials) processor = new AlchemyAPI(credentials.apikey);
 
 export default (state) => {
-  if (!config) return (state);
+  if (!credentials) return (state);
 
   return new Promise((resolve, reject) => {
     processor.taxonomies(state.sentence, {}, (error, response) => {
