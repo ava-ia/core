@@ -24,9 +24,6 @@ export default (state, intent) => {
     if (tokens || classifiers) {
       await factoryActions(state, intent.actions);
       resolve(state);
-
-    } else {
-      reject();
     }
   })
 };

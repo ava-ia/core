@@ -1,10 +1,14 @@
 {
+
+  "timeout": 5000,
+
   "alchemy": {
     "url": "https://gateway-a.watsonplatform.net/calls",
-    "apikey": "{your-api-key}"
+    "apikey": "602ff4b4d4c0d0a62924395e91e7c1147d4fe2e1"
   },
+
   "themoviedb": {
     "url": "https://api.themoviedb.org/",
-    "apikey": "{your-api-key}"
+    "apikey": "984bb461f0f1e050567f7d3e1a35cc1e"
   }
 }

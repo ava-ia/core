@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "./lib/index.js",
   "homepage": "",
   "author": {
@@ -35,11 +35,10 @@
     "bayes": "0.0.6",
     "chrono-node": "^1.2.3",
     "cld": "^2.4.5",
-    "compromise": "^0.1.1",
     "google-translate-api": "^2.0.3",
     "lowdb": "^0.13.0",
     "moment": "^2.13.0",
-    "nlp_compromise": "^6.1.2",
+    "nlp_compromise": "^6.2.1",
     "node-fetch": "^1.5.3",
     "sentiment": "^1.0.6",
     "weather-js": "^1.0.2"

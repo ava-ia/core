@@ -15,8 +15,6 @@ export default (state, intent) => {
       factoryActions(state, intent.actions)
         .then( state => resolve(state) )
         .catch( error => reject(error) )
-    } else {
-      reject();
     }
   })
 };

@@ -2,13 +2,9 @@
 
 import composeAsync from './composeAsync'
 
-export default (state) => {
+export default async (state) => {
   const { language, translator, classifier, nlp } = state.composer;
   const factory = composeAsync(language, translator, nlp, classifier);
 
-  return new Promise( (resolve, reject) => {
-    factory(state)
-      .then( state => resolve(state) )
-      .catch( error => reject(error) )
-  });
+  return await factory(state);
 }

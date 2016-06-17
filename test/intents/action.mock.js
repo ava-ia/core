@@ -6,11 +6,11 @@ export default (state) => {
 
   return new Promise(async (resolve, reject) => {
     setTimeout(() => {
-      state.actions.push({
+      state.action = {
         engine: 'mock',
         ms: 10,
         type: constants.action.type.rich
-      });
+      };
 
       resolve(state);
     }, 10)

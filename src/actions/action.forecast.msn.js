@@ -14,22 +14,29 @@ export default (state) => {
     const ms = new Date()
     console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
+    if (!location) {
+      state.action = {
+        type: constants.action.type.request,
+        request: { relation: ['location'] }
+      };
+      resolve(state);
+    }
+
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
       if (error) return reject(error);
 
       const item = response[0];
       const condition = _determineCondition(item.current, item.forecast, when);
-      let action = {
+      state.action = {
         ms: (new Date() - ms),
         engine: 'msn',
 
         type: constants.action.type.rich,
         title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
         value: condition
-      };
+      }
+      if (!when) state.action.related = item.forecast;
 
-      if (!when) action.related = item.forecast;
-      state.actions.push(action);
       resolve(state);
     });
   });

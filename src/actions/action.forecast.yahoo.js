@@ -17,12 +17,20 @@ export default (state) => {
     const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
     console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
 
+    if (!location) {
+      state.action = {
+        type: constants.action.type.request,
+        request: { relation: ['location'] }
+      };
+      resolve(state);
+    }
+
     fetch(`${API}${query}&format=json`)
       .then(response => response.text())
       .then(body => {
         const item = JSON.parse(body).query.results.channel.item;
         const condition = _determineCondition(item.condition, item.forecast, when);
-        let action = {
+        state.action = {
           ms: (new Date() - ms),
           engine: 'yahoo',
 
@@ -31,9 +39,8 @@ export default (state) => {
           url: item.link.split('*')[1],
           value: condition
         };
+        if (!when) state.action.related = item.forecast;
 
-        if (!when) action.related = item.forecast;
-        state.actions.push(action);
         resolve(state);
 
       }).catch(function(error) {

@@ -8,26 +8,34 @@ import ActionMock from './action.mock'
 describe('IntentWeather', () => {
 
   let state = {
-    actions: [],
     classifier: {categories: []}
   };
   let intent;
 
   beforeEach( () => {
     intent = {script: weather, actions: [ActionMock]};
-    state.actions = [];
+    state.action = undefined;
     state.nlp = {tokens: ['will', 'rain', 'tomorrow', 'in', 'london']}
   });
 
   it('Up & Running', async () => {
     await weather(state, intent);
 
-    const actions = state.actions;
-    expect(actions.length).equal(1);
-
-    const action = actions[0];
-    expect(Object.keys(action).length).equal(3)
-    expect(action.engine).equal('mock');
-    expect(typeof(action.ms)).equal('number');
+    expect(Object.keys(state.action).length).equal(3)
+    expect(state.action.engine).equal('mock');
+    expect(typeof(state.action.ms)).equal('number');
   });
+
+  it('Should have {when} & {location} relations', async () => {
+    // @TODO
+  });
+
+  it('If dont have {when} response with an forecast', async () => {
+    // @TODO
+  });
+
+  it('If dont have {location} ask for it', async () => {
+    // @TODO
+  });
+
 });
