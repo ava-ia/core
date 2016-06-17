@@ -17,6 +17,14 @@ export default (state) => {
     const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
     console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
 
+    if (!location) {
+      state.action = {
+        type: constants.action.type.request,
+        request: { relation: ['location'] }
+      };
+      resolve(state);
+    }
+
     fetch(`${API}${query}&format=json`)
       .then(response => response.text())
       .then(body => {
