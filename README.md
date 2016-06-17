@@ -57,8 +57,8 @@ And that is, :)
 
 ```js
 import Ava from `ava-ia`;
-import { weather, movie } from `ava-ia/intents`;
-import { forecastYahoo, forecastMSN, movieDB } from `ava-ia/actions`;
+import { weather, movie } from `ava-ia/lib/intents`;
+import { forecastYahoo, forecastMSN, movieDB } from `ava-ia/lib/actions`;
 
 // 1. New instance
 const ava = new Ava();
