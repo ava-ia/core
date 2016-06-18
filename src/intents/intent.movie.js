@@ -16,14 +16,11 @@ const TERMS = [
 ];
 
 export default (state, intent) => {
-  return new Promise( async (resolve, reject) => {
-    const tokens = intersect(TERMS, state.nlp.tokens);
-    const classifiers = intersect(TERMS, state.classifier.categories);
-    console.log('IntentMovie'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
+  const tokens = intersect(TERMS, state.nlp.tokens);
+  const classifiers = intersect(TERMS, state.classifier.categories);
+  console.log('IntentMovie'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
-    if (tokens || classifiers) {
-      await factoryActions(state, intent.actions);
-      resolve(state);
-    }
-  })
+  if (tokens || classifiers) {
+    return factoryActions(state, intent.actions);
+  }
 };

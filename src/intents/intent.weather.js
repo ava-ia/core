@@ -6,15 +6,11 @@ const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 
 
 export default (state, intent) => {
 
-  return new Promise( (resolve, reject) => {
-    const tokens = intersect(TERMS, state.nlp.tokens);
-    const classifiers = intersect(TERMS, state.classifier.categories);
-    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
+  const tokens = intersect(TERMS, state.nlp.tokens);
+  const classifiers = intersect(TERMS, state.classifier.categories);
+  console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
-    if (tokens || classifiers) {
-      factoryActions(state, intent.actions)
-        .then( state => resolve(state) )
-        .catch( error => reject(error) )
-    }
-  })
+  if (tokens || classifiers) {
+    return factoryActions(state, intent.actions)
+  }
 };
