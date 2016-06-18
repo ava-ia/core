@@ -47,7 +47,7 @@ const _extract = (data) => {
 
   if (data.media_type === 'person') {
     item.entity = constants.entity.person;
-    item.embed = data.known_for.map(movie => _extract(movie));
+    item.related = data.known_for.map(movie => _extract(movie));
   }
 
   return item;
