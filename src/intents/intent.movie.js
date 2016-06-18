@@ -15,12 +15,12 @@ const TERMS = [
   'producer'
 ];
 
-export default (state, intent) => {
+export default (state, actions) => {
   const tokens = intersect(TERMS, state.nlp.tokens);
   const classifiers = intersect(TERMS, state.classifier.categories);
   console.log('IntentMovie'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
   if (tokens || classifiers) {
-    return factoryActions(state, intent.actions);
+    return factoryActions(state, actions);
   }
 };
