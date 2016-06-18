@@ -13,6 +13,8 @@ export { default as intersect } from './intersect';
 
 export { default as relation } from './relation';
 
+export { default as request } from './request';
+
 export { default as store } from './store';
 
 export { default as timeout } from './timeout';

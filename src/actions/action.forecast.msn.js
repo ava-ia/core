@@ -3,7 +3,7 @@
 import moment from 'moment';
 import weather from 'weather-js';
 import constants from '../constants'
-import { relation } from '../helpers'
+import { relation, request } from '../helpers'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 
@@ -14,13 +14,7 @@ export default (state) => {
     const ms = new Date()
     console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
-    if (!location) {
-      state.action = {
-        type: constants.action.type.request,
-        request: { relation: ['location'] }
-      };
-      resolve(state);
-    }
+    if (!location) return resolve( request(state, {relation: ['location']}) );
 
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
       if (error) return reject(error);
