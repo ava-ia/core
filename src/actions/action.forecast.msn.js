@@ -17,21 +17,21 @@ export default (state) => {
     if (!location) return resolve( request(state, {relation: ['location']}) );
 
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
-      if (error) return reject(error);
+      if (!error) {
+        const item = response[0];
+        const condition = _determineCondition(item.current, item.forecast, when);
+        state.action = {
+          ms: (new Date() - ms),
+          engine: 'msn',
 
-      const item = response[0];
-      const condition = _determineCondition(item.current, item.forecast, when);
-      state.action = {
-        ms: (new Date() - ms),
-        engine: 'msn',
+          type: constants.action.type.rich,
+          title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
+          value: condition
+        }
+        if (!when) state.action.related = item.forecast;
 
-        type: constants.action.type.rich,
-        title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
-        value: condition
+        resolve(state);
       }
-      if (!when) state.action.related = item.forecast;
-
-      resolve(state);
     });
   });
 };
