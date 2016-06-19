@@ -6,7 +6,7 @@ import colors from 'colors';
 
 // -- Mock
 
-describe('Processorrelations', () => {
+describe('ProcessorRelations', () => {
 
   let state;
 
