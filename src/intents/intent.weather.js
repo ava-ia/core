@@ -1,6 +1,6 @@
 'use strict';
 
-import { factoryActions, intersect } from '../helpers'
+import { factoryActions, intersect, wait } from '../helpers'
 // -- Internal
 const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 'cloud', 'meteo'];
 
@@ -11,5 +11,7 @@ export default (state, actions) => {
 
   if (tokens || classifiers) {
     return factoryActions(state, actions)
+  } else {
+    return wait;
   }
 };
