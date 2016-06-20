@@ -4,7 +4,7 @@ import wikipedia from 'wtf_wikipedia';
 import constants from '../constants'
 import { relation } from '../helpers'
 // -- Internal
-const RELATIONS = ['object', 'location'];
+const RELATIONS = ['object', 'subject', 'location'];
 const DOCUMENT_TERMS = [
   // -- Common
   'image',
@@ -22,18 +22,25 @@ const DOCUMENT_TERMS = [
   'area_total_km2',
   'utc_offset_DST'
 ]
-// -- @TODO: Use document.infobox_template
-
+/* -- @TODO -------------------------------------------------------------------
+    - Use document.infobox_template
+    - Try to get image
+----------------------------------------------------------------------------- */
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { object, location } = relation(RELATIONS, state.nlp.relations);
+    const { object, subject, location } = relation(RELATIONS, state.nlp.relations);
     const ms = new Date()
-    console.log('ActionWikipedia'.bold.yellow, `object: ${object}, location: ${location}`);
+    const concept = object || location || subject;
+    console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
 
-    wikipedia.from_api(object || location, 'en', (response) => {
+    if (!concept) resolve(state)
+
+    wikipedia.from_api(concept, 'en', (response) => {
       const document = wikipedia.parse(response);
-      if (document.type === 'page') {
+      if (document.type === 'page' && document.categories.length > 0)
+
+      if (document.type === 'page' && document.categories.length > 0) {
         const summary = document.text.Intro.map( sentence => sentence.text ).join(' ');
 
         state.action = {
@@ -41,7 +48,7 @@ export default (state) => {
           engine: 'wikipedia',
 
           type: constants.action.type.rich,
-          title: document.infobox.name ? document.infobox.name.text : '??',
+          title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,
           related: _extract(document.infobox)
         };

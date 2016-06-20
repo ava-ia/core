@@ -20,9 +20,9 @@ export default (state) => {
     if (!location) return resolve( request(state, {relation: ['location']}) );
 
     fetch(`${API}${query}&format=json`)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(body => {
-        const item = JSON.parse(body).query.results.channel.item;
+        const item = body.query.results.channel.item;
         const condition = _determineCondition(item.condition, item.forecast, when);
         state.action = {
           ms: (new Date() - ms),

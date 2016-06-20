@@ -11,7 +11,7 @@ export default (state) => ({
       const factory = composeAsync(factoryComposers, factoryIntents);
 
       factory(state).
-        then( value => {
+        then( state => {
           state.action ? resolve(state) : reject(new Error('Unknown action'))
         }).
         catch ( error => {

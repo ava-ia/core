@@ -18,9 +18,9 @@ const action = (state) => {
 
     let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`;
     fetch(url)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(body => {
-        const data = JSON.parse(body).results[0];
+        const data = body.results[0];
         if (data) {
           state.action = _extract(data);
           state.action.ms = (new Date() - ms);
