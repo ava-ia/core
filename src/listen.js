@@ -10,11 +10,11 @@ export default (state) => ({
       timeout(reject);
       const factory = composeAsync(factoryComposers, factoryIntents);
 
-      factory(state)
-        .then( value => {
-          state.action ? resolve(state) : reject(new Error('No action'))
-        })
-        .catch ( error => {
+      factory(state).
+        then( state => {
+          state.action ? resolve(state) : reject(new Error('Unknown action'))
+        }).
+        catch ( error => {
           if (!error) error = { code: 0, message: "Sorry, I haven't understood you" };
           reject(error);
         })

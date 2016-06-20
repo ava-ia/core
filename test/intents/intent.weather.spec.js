@@ -19,7 +19,7 @@ describe('IntentWeather', () => {
   });
 
   it('Up & Running', async () => {
-    await weather(state, intent);
+    await weather(state, intent.actions);
 
     expect(Object.keys(state.action).length).equal(3)
     expect(state.action.engine).equal('mock');

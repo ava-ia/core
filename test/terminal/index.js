@@ -4,8 +4,8 @@ import colors from 'colors';
 // -- Core
 import Ava from '../../src'
 // -- Intents & Actions
-import { weather, movie } from '../../src/intents'
-import { forecastYahoo, forecastMSN, movieDB } from '../../src/actions'
+import { weather, movie, any } from '../../src/intents'
+import { forecastYahoo, forecastMSN, movieDB, wikipedia } from '../../src/actions'
 // -- Internal
 import metadata from './metadata'
 
@@ -20,10 +20,9 @@ let ava = new Ava({
 
 // -- Prepare intents
 ava
-  // .intent(weather, [forecastYahoo, forecastMSN])
-  .intent(weather, forecastMSN)
-  // .intent(weather, forecastMSN)
-  // .intent(movie, movieDB)
+  .intent(weather, [forecastYahoo, forecastMSN])
+  .intent(movie, movieDB)
+  .intent(any, wikipedia)
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
@@ -31,7 +30,7 @@ const answer = (sentence) => {
     .listen(sentence)
     .then(state => {
       metadata(state, 'magenta');
-      console.log('<AVA>'.bold.green, state.action)
+      // console.log('<AVA>'.bold.green, state.action)
     })
     .catch(error => {
       console.log('<AVA>'.bold.red, error || `Sorry but I didn't understand you`)

@@ -3,7 +3,7 @@
 import moment from 'moment';
 import weather from 'weather-js';
 import constants from '../constants'
-import { relation } from '../helpers'
+import { relation, request } from '../helpers'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 
@@ -14,30 +14,24 @@ export default (state) => {
     const ms = new Date()
     console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
-    if (!location) {
-      state.action = {
-        type: constants.action.type.request,
-        request: { relation: ['location'] }
-      };
-      resolve(state);
-    }
+    if (!location) return resolve( request(state, {relation: ['location']}) );
 
     weather.find({search: location, degreeType: 'C'}, (error, response) => {
-      if (error) return reject(error);
+      if (!error) {
+        const item = response[0];
+        const condition = _determineCondition(item.current, item.forecast, when);
+        state.action = {
+          ms: (new Date() - ms),
+          engine: 'msn',
 
-      const item = response[0];
-      const condition = _determineCondition(item.current, item.forecast, when);
-      state.action = {
-        ms: (new Date() - ms),
-        engine: 'msn',
+          type: constants.action.type.rich,
+          title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
+          value: condition
+        }
+        if (!when) state.action.related = item.forecast;
 
-        type: constants.action.type.rich,
-        title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
-        value: condition
+        resolve(state);
       }
-      if (!when) state.action.related = item.forecast;
-
-      resolve(state);
     });
   });
 };

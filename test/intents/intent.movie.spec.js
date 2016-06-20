@@ -19,7 +19,7 @@ describe('IntentMovie', () => {
   });
 
   it('Up & Running', async () => {
-    await movie(state, intent);
+    await movie(state, intent.actions);
 
     expect(Object.keys(state.action).length).equal(3)
     expect(state.action.engine).equal('mock');

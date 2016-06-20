@@ -1,20 +1,17 @@
 'use strict';
 
-import { factoryActions, intersect } from '../helpers'
+import { factoryActions, intersect, wait } from '../helpers'
 // -- Internal
 const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 'cloud', 'meteo'];
 
-export default (state, intent) => {
+export default (state, actions) => {
+  const tokens = intersect(TERMS, state.nlp.tokens);
+  const classifiers = intersect(TERMS, state.classifier.categories);
+  console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
-  return new Promise( (resolve, reject) => {
-    const tokens = intersect(TERMS, state.nlp.tokens);
-    const classifiers = intersect(TERMS, state.classifier.categories);
-    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
-
-    if (tokens || classifiers) {
-      factoryActions(state, intent.actions)
-        .then( state => resolve(state) )
-        .catch( error => reject(error) )
-    }
-  })
+  if (tokens || classifiers) {
+    return factoryActions(state, actions)
+  } else {
+    return wait;
+  }
 };

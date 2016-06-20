@@ -5,21 +5,22 @@ import constants from '../constants'
 import { config, relation } from '../helpers'
 // -- Internal
 const credentials = config('themoviedb');
-const RELATIONS = ['object'];
+const RELATIONS = ['object', 'subject'];
 
 const action = (state) => {
   if (!credentials) return (state);
 
   return new Promise((resolve, reject) => {
     const ms = new Date()
-    const { object } = relation(RELATIONS, state.nlp.relations) || state.nlp.concepts;
-    console.log('ActionMovieDB'.bold.yellow, `object: ${object}`);
+    const { object, subject } = relation(RELATIONS, state.nlp.relations);
+    const query = object || subject || state.nlp.relations;
+    console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
 
-    let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${object}`;
+    let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`;
     fetch(url)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(body => {
-        const data = JSON.parse(body).results[0];
+        const data = body.results[0];
         if (data) {
           state.action = _extract(data);
           state.action.ms = (new Date() - ms);
@@ -47,7 +48,7 @@ const _extract = (data) => {
 
   if (data.media_type === 'person') {
     item.entity = constants.entity.person;
-    item.embed = data.known_for.map(movie => _extract(movie));
+    item.related = data.known_for.map(movie => _extract(movie));
   }
 
   return item;
