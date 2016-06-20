@@ -31,8 +31,8 @@ describe('ProcessorRelations', () => {
     expect(nlp).to.have.all.keys('subject', 'action', 'when', 'object', 'location');
 
     expect(nlp.subject).to.have.all.keys('text', 'tag');
-    expect(nlp.subject.text).equal('ava');
-    expect(nlp.subject.tag).equal('person');
+    expect(nlp.subject.text).equal('you');
+    expect(nlp.subject.tag).equal('pronoun');
 
     expect(nlp.action).to.have.all.keys('text', 'tag', 'verb');
     expect(nlp.action.text).equal('will');
