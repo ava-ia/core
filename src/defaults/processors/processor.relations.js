@@ -22,12 +22,12 @@ const TERMS_RELATIONS = {
   value: 'value'
 };
 const COMPLEMENT_VERBS = ['can', 'must', 'should'];
-let lexicon = Compromise.lexicon()
-lexicon['ava'] = 'Person';
+let lexicon = Compromise.lexicon();
+lexicon['ava', 'AVA', 'Ava'] = 'Person';
 
 export default (state) => {
-  const sentence = Compromise.text(state.sentence).normal();
-  const terms = Compromise.text(sentence, {lexicon}).sentences[0].terms;
+  const sentence = state.sentence || Compromise.text(state.sentence).normal();
+  const terms = Compromise.text(sentence, { lexicon }).sentences[0].terms;
   let relations = {};
 
   terms.map((term) => {
