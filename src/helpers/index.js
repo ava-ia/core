@@ -6,7 +6,6 @@ export { default as composeAsync } from './composeAsync';
 export { default as config } from './config';
 
 export { default as factoryActions } from './factory.actions';
-export { default as factoryComposers } from './factory.composers';
 export { default as factoryIntents } from './factory.intents';
 
 export { default as intersect } from './intersect';

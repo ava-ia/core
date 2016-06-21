@@ -16,10 +16,10 @@ export default (state) => {
   const classifier = classifierForLanguage(state.language.iso);
   let categories = classifier.categorize(state.rawSentence);
 
-  if (state.nlp.taxonomy && state.nlp.taxonomy !== categories) {
-    classifier.learn(state.rawSentence, state.nlp.taxonomy);
+  if (state.taxonomy && state.taxonomy !== categories) {
+    classifier.learn(state.rawSentence, state.taxonomy);
     db.set(state.language.iso, classifier.toJson()).value();
-    categories = state.nlp.taxonomy;
+    categories = state.taxonomy;
   }
 
   state.classifier = {

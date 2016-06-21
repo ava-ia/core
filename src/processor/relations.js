@@ -21,9 +21,9 @@ const TERMS_RELATIONS = {
   place: 'location',
   value: 'value'
 };
-const COMPLEMENT_VERBS = ['can', 'must', 'should'];
 let lexicon = Compromise.lexicon();
-lexicon['ava', 'AVA', 'Ava'] = 'Person';
+// lexicon['ava', 'AVA', 'Ava'] = 'Person';
+lexicon['Ava'] = 'Person';
 
 export default (state) => {
   const sentence = state.sentence || Compromise.text(state.sentence).normal();
@@ -39,7 +39,7 @@ export default (state) => {
       relations[relation] = extractRelation(tag, term, relations[relation]);
     }
   });
-  state.nlp.relations = relations;
+  state.relations = relations;
 
   return (state);
 };

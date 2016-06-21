@@ -8,14 +8,14 @@ import ActionMock from './action.mock'
 describe('IntentMovie', () => {
 
   let state = {
-    classifier: {categories: []}
+    classifier: { categories: [] }
   };
   let intent;
 
   beforeEach( () => {
     intent = {script: movie, actions: [ActionMock]};
     state.action = undefined;
-    state.nlp = {tokens: ['i', 'want', 'go', 'to', 'cinema']}
+    state.tokens = ['i', 'want', 'go', 'to', 'cinema']
   });
 
   it('Up & Running', async () => {

@@ -15,7 +15,7 @@ describe('IntentWeather', () => {
   beforeEach( () => {
     intent = {script: weather, actions: [ActionMock]};
     state.action = undefined;
-    state.nlp = {tokens: ['will', 'rain', 'tomorrow', 'in', 'london']}
+    state.tokens = ['will', 'rain', 'tomorrow', 'in', 'london']
   });
 
   it('Up & Running', async () => {

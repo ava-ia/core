@@ -12,10 +12,6 @@ import metadata from './metadata'
 // -- New instance of Ava (with custom config);
 let ava = new Ava({
   multiResponse: true,
-  // translator: {your_own_translator},
-  // language: {your_own_language},
-  // nlp: {your_own_nlp},
-  // classifier: {your_own_classifier},
 })
 
 // -- Prepare intents
@@ -30,7 +26,7 @@ const answer = (sentence) => {
     .listen(sentence)
     .then(state => {
       metadata(state, 'magenta');
-      // console.log('<AVA>'.bold.green, state.action)
+      console.log('<AVA>'.bold.green, state.action)
     })
     .catch(error => {
       console.log('<AVA>'.bold.red, error || `Sorry but I didn't understand you`)
