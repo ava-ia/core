@@ -11,25 +11,20 @@ describe('Processor: language', () => {
   it('Up & Running', async () => {
     await language(state)
 
-    const result = state.language;
-    expect(Object.keys(result).length).equal(4)
-    expect(result.engine).equal('cld');
-    expect(typeof(result.ms)).equal('number');
-    expect(result.iso).equal('en');
-    expect(typeof(result.percent)).equal('number');
+    expect(state.language).equal('en');
   });
 
   it('Detect different language than english', async () => {
     state.rawSentence = 'Hola me llamo Javi';
     await language(state)
 
-    expect(state.language.iso).equal('es');
+    expect(state.language).equal('es');
   });
 
   it('If cant detect iso is null', async () => {
-    state.rawSentence = "abcdefghijklmnopqrstvxyz"; // Klingon Language
+    state.rawSentence = "abcdefghijklmnopqrstvxyz"; // 🤖Language
     await language(state)
 
-    expect(Object.keys(state.language).length).equal(0);
+    expect(state.language).to.equal(undefined);
   });
 });

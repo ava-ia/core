@@ -12,21 +12,15 @@ const classifierForLanguage = (language) => {
 };
 
 export default (state) => {
-  const time = new Date();
-  const classifier = classifierForLanguage(state.language.iso);
+  const classifier = classifierForLanguage(state.language);
   let categories = classifier.categorize(state.rawSentence);
 
   if (state.taxonomy && state.taxonomy !== categories) {
     classifier.learn(state.rawSentence, state.taxonomy);
-    db.set(state.language.iso, classifier.toJson()).value();
+    db.set(state.language, classifier.toJson()).value();
     categories = state.taxonomy;
   }
-
-  state.classifier = {
-    engine: 'bayes',
-    ms: (new Date() - time),
-    categories: categories ? categories.split('/') : []
-  };
+  state.classifier = categories ? categories.split('/') : []
 
   return state;
 };

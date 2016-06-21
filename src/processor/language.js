@@ -6,19 +6,9 @@ export default (state) => {
   return new Promise((resolve, reject) => {
 
     cld.detect(state.rawSentence, (error, value) => {
-      const time = new Date();
-      let language = {};
-
       if (!error) {
-        language = {
-          engine: 'cld',
-          ms: new Date() - time,
-
-          iso: value.languages[0].code,
-          percent: value.languages[0].percent,
-        };
+        state.language = value.languages[0].code;
       }
-      state.language = language;
       state.sentence = state.rawSentence;
 
       resolve(state);
