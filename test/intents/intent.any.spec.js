@@ -1,25 +1,22 @@
 'use strict';
 
 import { assert, expect, should } from 'chai';
-import { movie } from '../../src/intents';
+import { any } from '../../src/intents';
 // -- Mock
 import ActionMock from '../actions/action.mock'
 
-describe('IntentMovie', () => {
+describe('IntentAny', () => {
 
-  let state = {
-    classifier: { categories: [] }
-  };
+  let state = {};
   let intent;
 
   beforeEach( () => {
-    intent = {script: movie, actions: [ActionMock]};
+    intent = {script: any, actions: [ActionMock]};
     state.action = undefined;
-    state.tokens = ['i', 'want', 'go', 'to', 'cinema']
   });
 
   it('Up & Running', async () => {
-    await movie(state, intent.actions);
+    await any(state, intent.actions);
 
     expect(Object.keys(state.action).length).equal(3)
     expect(state.action.engine).equal('mock');

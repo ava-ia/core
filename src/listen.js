@@ -1,14 +1,15 @@
 'use strict';
 
-import { composeAsync, factoryComposers, factoryIntents, timeout } from './helpers'
+import { composeAsync, factoryIntents, timeout } from './helpers'
+import factoryProcessor from './processor'
 
 export default (state) => ({
-  listen: (sentence) => {
+  listen: (sentence, ms) => {
     return new Promise( (resolve, reject) => {
       state.rawSentence = sentence;
 
-      timeout(reject);
-      const factory = composeAsync(factoryComposers, factoryIntents);
+      if (ms) timeout(reject, ms);
+      const factory = composeAsync(factoryProcessor, factoryIntents);
 
       factory(state).
         then( state => {

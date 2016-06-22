@@ -8,14 +8,11 @@ import { weather, movie, any } from '../../src/intents'
 import { forecastYahoo, forecastMSN, movieDB, wikipedia } from '../../src/actions'
 // -- Internal
 import metadata from './metadata'
+const timeout = 10000;
 
 // -- New instance of Ava (with custom config);
 let ava = new Ava({
   multiResponse: true,
-  // translator: {your_own_translator},
-  // language: {your_own_language},
-  // nlp: {your_own_nlp},
-  // classifier: {your_own_classifier},
 })
 
 // -- Prepare intents
@@ -27,10 +24,10 @@ ava
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
   ava
-    .listen(sentence)
+    .listen(sentence, timeout)
     .then(state => {
       metadata(state, 'magenta');
-      // console.log('<AVA>'.bold.green, state.action)
+      console.log('<AVA>'.bold.green, state.action)
     })
     .catch(error => {
       console.log('<AVA>'.bold.red, error || `Sorry but I didn't understand you`)
