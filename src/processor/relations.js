@@ -22,8 +22,7 @@ const TERMS_RELATIONS = {
   value: 'value'
 };
 let lexicon = Compromise.lexicon();
-// lexicon['ava', 'AVA', 'Ava'] = 'Person';
-lexicon['Ava'] = 'Person';
+lexicon['ava'] = 'Person';
 
 export default (state) => {
   const sentence = state.sentence || Compromise.text(state.sentence).normal();
