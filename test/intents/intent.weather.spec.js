@@ -3,7 +3,7 @@
 import { assert, expect, should } from 'chai';
 import { weather } from '../../src/intents';
 // -- Mock
-import ActionMock from './action.mock'
+import ActionMock from '../actions/action.mock'
 
 describe('IntentWeather', () => {
 

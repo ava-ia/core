@@ -8,6 +8,7 @@ import { weather, movie, any } from '../../src/intents'
 import { forecastYahoo, forecastMSN, movieDB, wikipedia } from '../../src/actions'
 // -- Internal
 import metadata from './metadata'
+const timeout = 10000;
 
 // -- New instance of Ava (with custom config);
 let ava = new Ava({
@@ -23,7 +24,7 @@ ava
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
   ava
-    .listen(sentence)
+    .listen(sentence, timeout)
     .then(state => {
       metadata(state, 'magenta');
       console.log('<AVA>'.bold.green, state.action)
