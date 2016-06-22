@@ -31,7 +31,7 @@ describe('Processor: relations', () => {
     expect(result).to.have.all.keys('subject', 'action', 'when', 'object', 'location');
 
     expect(result.subject).to.have.all.keys('text', 'tag');
-    expect(result.subject.text).equal('ava do you');
+    expect(result.subject.text).equal('ava');
     expect(result.subject.tag).equal('person');
 
     expect(result.action).to.have.all.keys('text', 'tag', 'verb');
