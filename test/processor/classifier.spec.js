@@ -8,12 +8,6 @@ describe('Processor: classifier', () => {
   let state;
   beforeEach( () => state = {rawSentence: 'Hello world!', language: 'en'} );
 
-  it('Up & Running', () => {
-    classifier(state);
-
-    expect(state.classifier.length).equal(2)
-  });
-
   it('Learn using a taxonomy', () => {
     state.taxonomy = 'greetings/developers';
     classifier(state);
