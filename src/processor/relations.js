@@ -1,14 +1,5 @@
 'use strict';
 
-/* -- @TODO --------------------------------------------------------------------
-   - Don't use the same {subject}/{object}
-   - Use `noun` tag like `here` like a {location} relation
-   - Improve value: `3 buses` must be {value: 3} {object: bus}
-   - {when} must be correctly parse
-
-   - [bug] `I hate when rain in London` is not detected by IntentWeather
------------------------------------------------------------------------------ */
-
 import Compromise from 'nlp_compromise';
 import Chrono from 'chrono-node';
 // -- Internal
@@ -23,6 +14,7 @@ const TERMS_RELATIONS = {
 };
 let lexicon = Compromise.lexicon();
 lexicon['ava'] = 'Person';
+lexicon['here'] = 'Place';
 
 export default (state) => {
   const sentence = state.sentence || Compromise.text(state.sentence).normal();
@@ -34,8 +26,10 @@ export default (state) => {
     let relation;
 
     if (relation = TERMS_RELATIONS[tag]) {
-      if (relation === TERMS_RELATIONS.person && relations[relation]) relation = TERMS_RELATIONS.noun;
-      relations[relation] = extractRelation(tag, term, relations[relation]);
+      if (relation === TERMS_RELATIONS.person && relations[relation]) {
+        relation = (relations[relation] !== (term.normal || term.text)) ? TERMS_RELATIONS.noun : undefined;
+      }
+      if (relation) relations[relation] = extractRelation(tag, term, relations[relation]);
     }
   });
   state.relations = relations;
@@ -65,6 +59,9 @@ const extractRelation = (tag, term, previous) => {
       }
       text = compromiseVerb.conjugate().infinitive;
       break;
+
+    case 'noun':
+      text = Compromise.text(text).root()
 
     case 'person':
       tag = term.pos.Pronoun ? 'pronoun' : tag;
