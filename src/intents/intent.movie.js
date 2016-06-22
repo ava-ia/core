@@ -1,6 +1,6 @@
 'use strict';
 
-import { factoryActions, intersect, wait } from '../helpers'
+import { factoryActions, intersect, resolve } from '../helpers'
 // -- Internal
 const TERMS = [
   'film',
@@ -23,6 +23,6 @@ export default (state, actions) => {
   if (tokens || classifiers) {
     return factoryActions(state, actions);
   } else {
-    return wait;
+    return resolve(state);
   }
 };

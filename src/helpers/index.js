@@ -14,8 +14,8 @@ export { default as relation } from './relation';
 
 export { default as request } from './request';
 
+export { default as resolve } from './resolve';
+
 export { default as store } from './store';
 
 export { default as timeout } from './timeout';
-
-export { default as wait } from './wait';

@@ -9,8 +9,7 @@ export default (props = {}) => {
 
   let state = {
     version: pkg.version,
-    intents: [],
-    actions: []
+    intents: []
   }
 
   return Object.assign(
