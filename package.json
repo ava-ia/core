@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "./lib/index.js",
   "homepage": "",
   "author": {
@@ -38,7 +38,7 @@
     "google-translate-api": "^2.0.3",
     "lowdb": "^0.13.0",
     "moment": "^2.13.0",
-    "nlp_compromise": "^6.2.1",
+    "nlp_compromise": "^6.3.1",
     "node-fetch": "^1.5.3",
     "sentiment": "^1.0.6",
     "weather-js": "^1.0.2",
@@ -51,6 +51,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "colors": "^1.1.2",
     "mocha": "^2.5.3"
   }

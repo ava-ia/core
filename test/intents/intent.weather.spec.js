@@ -3,7 +3,7 @@
 import { assert, expect, should } from 'chai';
 import { weather } from '../../src/intents';
 // -- Mock
-import ActionMock from './action.mock'
+import ActionMock from '../actions/action.mock'
 
 describe('IntentWeather', () => {
 
@@ -15,7 +15,7 @@ describe('IntentWeather', () => {
   beforeEach( () => {
     intent = {script: weather, actions: [ActionMock]};
     state.action = undefined;
-    state.nlp = {tokens: ['will', 'rain', 'tomorrow', 'in', 'london']}
+    state.tokens = ['will', 'rain', 'tomorrow', 'in', 'london']
   });
 
   it('Up & Running', async () => {

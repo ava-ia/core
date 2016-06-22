@@ -1,6 +1,6 @@
 'use strict';
 
-import { factoryActions, intersect, wait } from '../helpers'
+import { factoryActions, intersect, resolve } from '../helpers'
 // -- Internal
 const TERMS = [
   'film',
@@ -16,13 +16,13 @@ const TERMS = [
 ];
 
 export default (state, actions) => {
-  const tokens = intersect(TERMS, state.nlp.tokens);
+  const tokens = intersect(TERMS, state.tokens);
   const classifiers = intersect(TERMS, state.classifier.categories);
   console.log('IntentMovie'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
   if (tokens || classifiers) {
     return factoryActions(state, actions);
   } else {
-    return wait;
+    return resolve(state);
   }
 };

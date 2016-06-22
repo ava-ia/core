@@ -29,7 +29,7 @@ const DOCUMENT_TERMS = [
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { object, subject, location } = relation(RELATIONS, state.nlp.relations);
+    const { object, subject, location } = relation(RELATIONS, state.relations);
     const ms = new Date()
     const concept = object || location || subject;
     console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
@@ -38,8 +38,6 @@ export default (state) => {
 
     wikipedia.from_api(concept, 'en', (response) => {
       const document = wikipedia.parse(response);
-      if (document.type === 'page' && document.categories.length > 0)
-
       if (document.type === 'page' && document.categories.length > 0) {
         const summary = document.text.Intro.map( sentence => sentence.text ).join(' ');
 
@@ -48,6 +46,7 @@ export default (state) => {
           engine: 'wikipedia',
 
           type: constants.action.type.rich,
+          image: document.images[0],
           title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,
           related: _extract(document.infobox)

@@ -1,9 +1,6 @@
 'use strict';
 
-import config from './config'
-const timeout = config('timeout') || 60000;
-
-export default (reject) =>
+export default (reject, ms = 60000) =>
   setTimeout( () => {
-    reject(new Error(`Timeout after ${timeout} ms`))
-  }, timeout);
+    reject(new Error(`Timeout after ${ms} ms`))
+  }, ms);

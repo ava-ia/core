@@ -10,7 +10,7 @@ const RELATIONS = ['when', 'location'];
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { location, when } = relation(RELATIONS, state.nlp.relations);
+    const { location, when } = relation(RELATIONS, state.relations);
     const ms = new Date()
     console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
