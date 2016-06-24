@@ -10,6 +10,8 @@ export { default as factoryIntents } from './factory.intents';
 
 export { default as intersect } from './intersect';
 
+export { default as match } from './match';
+
 export { default as relation } from './relation';
 
 export { default as request } from './request';
