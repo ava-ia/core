@@ -5,7 +5,7 @@ import Bayes from 'bayes';
 import { store } from '../helpers';
 
 // -- Internal
-const db = store('classifier.bayes.json');
+const db = store('classifier.json');
 const classifierForLanguage = (language) => {
   const value = db.get(language).value();
   return (value ? Bayes.fromJson(value) : Bayes());

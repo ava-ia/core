@@ -46,7 +46,7 @@ export default (state) => {
           engine: 'wikipedia',
 
           type: constants.action.type.rich,
-          image: document.images[0],
+          image: `http://en.wikipedia.org/wiki/${document.images[0]}`,
           title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,
           related: _extract(document.infobox)
