@@ -21,7 +21,7 @@ export default (state) => {
   const terms = Compromise.text(sentence, { lexicon }).sentences[0].terms;
   let relations = {};
 
-  terms.map((term) => {
+  terms.map( term => {
     let tag = (term.pos.Verb ? 'verb' : term.tag).toLowerCase();
     let relation;
 
