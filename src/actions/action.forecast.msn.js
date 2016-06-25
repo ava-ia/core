@@ -12,7 +12,8 @@ export default (state) => {
   return new Promise((resolve, reject) => {
     const { location, when } = relation(RELATIONS, state.relations);
     const ms = new Date()
-    console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
+    if (state.debug)
+      console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
     if (!location) return resolve( request(state, {relation: ['location']}) );
 

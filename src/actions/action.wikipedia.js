@@ -32,7 +32,8 @@ export default (state) => {
     const { object, subject, location } = relation(RELATIONS, state.relations);
     const ms = new Date()
     const concept = object || location || subject;
-    console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
+    if (state.debug)
+      console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
 
     if (!concept) resolve(state)
 

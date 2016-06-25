@@ -33,7 +33,8 @@ export default (state) => {
       }
     })
 
-    console.log('ActionTranslator'.bold.yellow, 'sentence:'.bold, sentence, 'to:'.bold,  to);
+    if (state.debug)
+      console.log('ActionTranslator'.bold.yellow, 'sentence:'.bold, sentence, 'to:'.bold,  to);
     if (sentence && to) {
       GoogleTranslate(sentence, {to}).then( response => {
         state.action = {

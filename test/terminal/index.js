@@ -13,7 +13,7 @@ const timeout = 10000;
 
 // -- New instance of Ava (with custom config);
 let ava = new Ava({
-  multiResponse: true,
+  debug: true,
 })
 
 // -- Prepare intents

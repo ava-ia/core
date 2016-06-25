@@ -7,8 +7,8 @@ const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 
 export default (state, actions) => {
   const tokens = intersect(TERMS, state.tokens);
   const classifiers = intersect(TERMS, state.classifier);
-
-  console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
+  if (state.debug)
+    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
   if (tokens || classifiers) {
     return factoryActions(state, actions);

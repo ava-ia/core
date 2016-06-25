@@ -14,7 +14,8 @@ const action = (state) => {
     const ms = new Date()
     const { object, subject } = relation(RELATIONS, state.relations);
     const query = object || subject || state.relations;
-    console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
+    if (state.debug)
+      console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
 
     let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`;
     fetch(url)

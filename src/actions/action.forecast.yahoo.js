@@ -15,7 +15,8 @@ export default (state) => {
     const { location, when } = relation(RELATIONS, state.relations);
     const ms = new Date()
     const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
-    console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
+    if (state.debug)
+      console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
 
     if (!location) return resolve( request(state, {relation: ['location']}) );
 
