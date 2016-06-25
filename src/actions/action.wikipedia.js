@@ -1,8 +1,7 @@
 'use strict';
 
 import wikipedia from 'wtf_wikipedia';
-import constants from '../constants'
-import { relation } from '../helpers'
+import { entities, relation } from '../helpers'
 // -- Internal
 const RELATIONS = ['object', 'subject', 'location'];
 const DOCUMENT_TERMS = [
@@ -45,8 +44,7 @@ export default (state) => {
         state.action = {
           ms: (new Date() - ms),
           engine: 'wikipedia',
-
-          type: constants.action.type.rich,
+          entity: entities.knowledge,
           image: `http://en.wikipedia.org/wiki/${document.images[0]}`,
           title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,

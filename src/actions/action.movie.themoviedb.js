@@ -1,8 +1,7 @@
 'use strict';
 
 import fetch from 'node-fetch';
-import constants from '../constants'
-import { config, relation } from '../helpers'
+import { config, entities, relation } from '../helpers'
 // -- Internal
 const credentials = config('themoviedb');
 const RELATIONS = ['object', 'subject'];
@@ -26,7 +25,7 @@ const action = (state) => {
           state.action = _extract(data);
           state.action.ms = (new Date() - ms);
           state.action.engine = 'themoviedb';
-          state.action.type = constants.action.type.rich;
+          state.action.entity = entities.knowledge;
         }
 
         resolve(state);
@@ -48,7 +47,7 @@ const _extract = (data) => {
   };
 
   if (data.media_type === 'person') {
-    item.entity = constants.entity.person;
+    item.entity = entities.person;
     item.related = data.known_for.map(movie => _extract(movie));
   }
 

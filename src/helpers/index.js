@@ -3,6 +3,7 @@
 export { default as compose } from './compose';
 export { default as composeAsync } from './composeAsync';
 export { default as config } from './config';
+export { default as entities } from './entities';
 export { default as factoryActions } from './factory.actions';
 export { default as factoryIntents } from './factory.intents';
 export { default as intersect } from './intersect';

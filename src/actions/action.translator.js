@@ -3,8 +3,7 @@
 import countries from 'world-countries';
 import Compromise from 'nlp_compromise';
 import GoogleTranslate from 'google-translate-api';
-import constants from '../constants'
-import { relation, request } from '../helpers'
+import { entities, relation, request } from '../helpers'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 const DEMONYM = 'Demonym';
@@ -40,8 +39,7 @@ export default (state) => {
         state.action = {
           engine: 'translator',
           ms: (new Date() - ms),
-          type: constants.action.type.rich,
-
+          entity: entities.knowledge,
           value: response.text
         };
         resolve(state);

@@ -2,8 +2,7 @@
 
 import fetch from 'node-fetch';
 import moment from 'moment';
-import constants from '../constants'
-import { relation, request } from '../helpers'
+import { entities, relation, request } from '../helpers'
 
 // -- Internal
 const API = `http://query.yahooapis.com/v1/public/yql?q=`
@@ -28,8 +27,7 @@ export default (state) => {
         state.action = {
           ms: (new Date() - ms),
           engine: 'yahoo',
-
-          type: constants.action.type.rich,
+          entity: entities.knowledge,
           title: item.title,
           url: item.link.split('*')[1],
           value: condition

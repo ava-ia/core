@@ -1,8 +1,8 @@
 'use strict';
-import constants from '../constants'
+import entities from './entities'
 
 export default (state, request) => {
-  state.action = { type: constants.action.type.request, request: request};
+  state.action = { entity: entities.request, request: request};
 
   return state;
 }
