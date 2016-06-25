@@ -1,6 +1,6 @@
 'use strict';
 
-import { assert, expect, should, eventually } from 'chai';
+import { expect } from 'chai';
 import language from '../../src/processor/language';
 
 describe('Processor: language', () => {
