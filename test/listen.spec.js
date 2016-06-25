@@ -30,7 +30,7 @@ describe('.listen()', () => {
     expect(typeof(listen.catch)).to.equal('function');
   });
 
-  it('Is successful', () => {
+  it('Is successful', async () => {
     ava.intent(any, actionMock);
     const state = await ava.listen('Hello world!');
 
