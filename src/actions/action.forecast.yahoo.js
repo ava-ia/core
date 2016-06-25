@@ -2,8 +2,7 @@
 
 import fetch from 'node-fetch';
 import moment from 'moment';
-import constants from '../constants'
-import { relation, request } from '../helpers'
+import { entities, relation, request } from '../helpers'
 
 // -- Internal
 const API = `http://query.yahooapis.com/v1/public/yql?q=`
@@ -15,7 +14,8 @@ export default (state) => {
     const { location, when } = relation(RELATIONS, state.relations);
     const ms = new Date()
     const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
-    console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
+    if (state.debug)
+      console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
 
     if (!location) return resolve( request(state, {relation: ['location']}) );
 
@@ -27,8 +27,7 @@ export default (state) => {
         state.action = {
           ms: (new Date() - ms),
           engine: 'yahoo',
-
-          type: constants.action.type.rich,
+          entity: entities.knowledge,
           title: item.title,
           url: item.link.split('*')[1],
           value: condition

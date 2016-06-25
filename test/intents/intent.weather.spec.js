@@ -1,41 +1,45 @@
 'use strict';
 
-import { assert, expect, should } from 'chai';
+import { expect } from 'chai';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+chai.use(chaiAsPromised);
+chai.should();
+
 import { weather } from '../../src/intents';
-// -- Mock
 import ActionMock from '../actions/action.mock'
 
 describe('IntentWeather', () => {
 
-  let state = {
-    classifier: {categories: []}
-  };
-  let intent;
-
+  let state = {};
   beforeEach( () => {
-    intent = {script: weather, actions: [ActionMock]};
     state.action = undefined;
+    state.classifier = [];
     state.tokens = ['will', 'rain', 'tomorrow', 'in', 'london']
   });
 
   it('Up & Running', async () => {
-    await weather(state, intent.actions);
-
-    expect(Object.keys(state.action).length).equal(3)
-    expect(state.action.engine).equal('mock');
-    expect(typeof(state.action.ms)).equal('number');
+    expect(weather).to.be.ok;
   });
 
-  it('Should have {when} & {location} relations', async () => {
-    // @TODO
+  it('Detected with {tokens}', async () => {
+    await weather(state, [ActionMock]);
+
+    expect(state.action).to.be.ok;
   });
 
-  it('If dont have {when} response with an forecast', async () => {
-    // @TODO
+  it('Detected with {classifier}', async () => {
+    state.tokens = [];
+    state.classifier = ['rain']
+    await weather(state, [ActionMock]);
+
+    expect(state.action).to.be.ok;
   });
 
-  it('If dont have {location} ask for it', async () => {
-    // @TODO
+  it('Not detected', async () => {
+    state.tokens = [];
+    state.classifier = [];
+    expect( weather(state, [ActionMock]) ).to.be.rejected;
   });
 
 });

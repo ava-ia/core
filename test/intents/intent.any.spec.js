@@ -1,26 +1,25 @@
 'use strict';
 
-import { assert, expect, should } from 'chai';
+import { expect } from 'chai';
+
 import { any } from '../../src/intents';
-// -- Mock
 import ActionMock from '../actions/action.mock'
 
 describe('IntentAny', () => {
 
   let state = {};
-  let intent;
-
   beforeEach( () => {
-    intent = {script: any, actions: [ActionMock]};
     state.action = undefined;
   });
 
   it('Up & Running', async () => {
-    await any(state, intent.actions);
+    expect(any).to.be.ok;
+  });
 
-    expect(Object.keys(state.action).length).equal(3)
-    expect(state.action.engine).equal('mock');
-    expect(typeof(state.action.ms)).equal('number');
+  it('Detected with any condition', async () => {
+    await any(state, [ActionMock]);
+
+    expect(state.action).to.be.ok;
   });
 
 });

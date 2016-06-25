@@ -2,8 +2,7 @@
 
 import moment from 'moment';
 import weather from 'weather-js';
-import constants from '../constants'
-import { relation, request } from '../helpers'
+import { entities, relation, request } from '../helpers'
 // -- Internal
 const RELATIONS = ['when', 'location'];
 
@@ -12,7 +11,8 @@ export default (state) => {
   return new Promise((resolve, reject) => {
     const { location, when } = relation(RELATIONS, state.relations);
     const ms = new Date()
-    console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
+    if (state.debug)
+      console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
 
     if (!location) return resolve( request(state, {relation: ['location']}) );
 
@@ -23,8 +23,7 @@ export default (state) => {
         state.action = {
           ms: (new Date() - ms),
           engine: 'msn',
-
-          type: constants.action.type.rich,
+          entity: entities.knowledge,
           title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
           value: condition
         }

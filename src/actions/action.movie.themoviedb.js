@@ -1,8 +1,7 @@
 'use strict';
 
 import fetch from 'node-fetch';
-import constants from '../constants'
-import { config, relation } from '../helpers'
+import { config, entities, relation } from '../helpers'
 // -- Internal
 const credentials = config('themoviedb');
 const RELATIONS = ['object', 'subject'];
@@ -14,7 +13,8 @@ const action = (state) => {
     const ms = new Date()
     const { object, subject } = relation(RELATIONS, state.relations);
     const query = object || subject || state.relations;
-    console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
+    if (state.debug)
+      console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
 
     let url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`;
     fetch(url)
@@ -25,7 +25,7 @@ const action = (state) => {
           state.action = _extract(data);
           state.action.ms = (new Date() - ms);
           state.action.engine = 'themoviedb';
-          state.action.type = constants.action.type.rich;
+          state.action.entity = entities.knowledge;
         }
 
         resolve(state);
@@ -47,7 +47,7 @@ const _extract = (data) => {
   };
 
   if (data.media_type === 'person') {
-    item.entity = constants.entity.person;
+    item.entity = entities.person;
     item.related = data.known_for.map(movie => _extract(movie));
   }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { constants } from '../../src'
+import { entities } from '../../src/helpers'
 
 export default (state) => {
 
@@ -9,7 +9,7 @@ export default (state) => {
       state.action = {
         engine: 'mock',
         ms: 10,
-        type: constants.action.type.rich
+        type: entities.knowledge
       };
 
       resolve(state);

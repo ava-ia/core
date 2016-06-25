@@ -1,8 +1,7 @@
 'use strict';
 
 import wikipedia from 'wtf_wikipedia';
-import constants from '../constants'
-import { relation } from '../helpers'
+import { entities, relation } from '../helpers'
 // -- Internal
 const RELATIONS = ['object', 'subject', 'location'];
 const DOCUMENT_TERMS = [
@@ -32,7 +31,8 @@ export default (state) => {
     const { object, subject, location } = relation(RELATIONS, state.relations);
     const ms = new Date()
     const concept = object || location || subject;
-    console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
+    if (state.debug)
+      console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
 
     if (!concept) resolve(state)
 
@@ -44,9 +44,8 @@ export default (state) => {
         state.action = {
           ms: (new Date() - ms),
           engine: 'wikipedia',
-
-          type: constants.action.type.rich,
-          image: document.images[0],
+          entity: entities.knowledge,
+          image: `http://en.wikipedia.org/wiki/${document.images[0]}`,
           title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,
           related: _extract(document.infobox)

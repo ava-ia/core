@@ -1,6 +1,6 @@
 'use strict';
 
-import { assert, expect, should, eventually } from 'chai';
+import { expect } from 'chai';
 import language from '../../src/processor/language';
 
 describe('Processor: language', () => {
@@ -8,23 +8,29 @@ describe('Processor: language', () => {
   let state;
   beforeEach( () => state = {rawSentence: 'Hello world!'} );
 
-  it('Up & Running', async () => {
-    await language(state)
-
-    expect(state.language).equal('en');
+  it('Up & Running', () => {
+    expect(language).to.be.ok;
   });
 
-  it('Detect different language than english', async () => {
+  it('Compose property {language}', async () => {
+    await language(state)
+    expect(state).to.have.all.keys('rawSentence', 'sentence', 'language');
+  });
+
+  it('Detect English language', async () => {
+    await language(state)
+    expect(state.language).to.equal('en');
+  });
+
+  it('Detect non-english language', async () => {
     state.rawSentence = 'Hola me llamo Javi';
     await language(state)
-
-    expect(state.language).equal('es');
+    expect(state.language).to.equal('es');
   });
 
-  it('If cant detect iso is null', async () => {
+  it('Can not detect language', async () => {
     state.rawSentence = "abcdefghijklmnopqrstvxyz"; // 🤖Language
     await language(state)
-
-    expect(state.language).to.equal(undefined);
+    expect(state.language).not.to.be.ok;
   });
 });

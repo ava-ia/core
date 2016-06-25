@@ -6,6 +6,7 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 chai.should();
+
 import Ava from '../src';
 import { any, weather } from '../src/intents'
 import actionMock from './actions/action.mock'
@@ -17,7 +18,11 @@ describe('.listen()', () => {
   let ava;
   beforeEach( () => ava = new Ava() );
 
-  it('Up and running', async () => {
+  it('Up and running', () => {
+    expect(ava.listen).to.be.ok;
+  });
+
+  it('Returns a Promise (then/catch)', () => {
     const listen = ava.listen();
 
     expect(listen instanceof Promise).to.equal(true);
@@ -25,7 +30,7 @@ describe('.listen()', () => {
     expect(typeof(listen.catch)).to.equal('function');
   });
 
-  it('Listen is successful', async () => {
+  it('Is successful', async () => {
     ava.intent(any, actionMock);
     const state = await ava.listen('Hello world!');
 
