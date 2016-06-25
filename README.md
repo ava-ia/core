@@ -61,7 +61,9 @@ import { weather, movie } from `ava-ia/lib/intents`;
 import { forecastYahoo, forecastMSN, movieDB } from `ava-ia/lib/actions`;
 
 // 1. New instance
-const ava = new Ava();
+const ava = new Ava({
+  debug: true // If you want see intents/actions trace log.
+});
 
 // 2. Configure the intents
 ava
@@ -73,6 +75,52 @@ ava.listen('Do you know if tomorrow will rain in Bangkok?')
   .then(state => console.log(state))
   .catch(error => console.log(state))
 ```
+
+## Instance methods
+
+### listen()
+
+The purpose of this method is *talk* with Ava. Just receive an `string` parameter and returns a `Promise`:
+
+```js
+ava.listen('Do you know if tomorrow will rain in Bangkok?')
+  .then(state => console.log(state))
+  .catch(error => console.log(state))
+```
+
+If the promise is successful will return a `object` with the state which contains the result of the processor and intents. The attributes of the *state* are:
+
+  - `rawSentence`: contains an *string* with the origin sentence.
+  - `language`: contains an *string* ISO code for language (cca2) of the sentence.
+  - `sentence`: contains an *string* sentence translated to english
+  - `taxonomy`: If `config.json` contains your [AlchemyAPI]() code containing an *array* of taxonomies.
+  - `classifier`: contains an array of terms for identify the sense of the sentence.
+  - `type`: *declarative*, *interrogative* or *exclamative* sentence.
+  - `topics`: contains an *array* of most important terms of the sentence.
+  - `tokens`: contains an *array* of rooted terms.
+  - `relations`: contains an *object* with the sentence relations:
+      + `subject`
+      + `adverb`
+      + `action`
+      + `object`
+      + `when`
+      + `location`
+      + `value`
+  - `sentiment`: contains an *number* being `-5` most negative , `0` neutral and `+5` most positive.
+
+The most important attribute of *state* is `action` which contains an *object* with:
+  - `engine`: a *string* with the name of the action
+  - `ms`: contains the *number* of miliseconds waisted for resolve the action.
+  - `entity`: a *string* describing the type of content of the action.
+  - `title`: a *string*
+  - `text`: a *string* (optional).
+  - `value`: a *object* with explicit information about the content (optional).
+  - `image`: a *stringURL* (optional).
+  - `url`: a *url* with contains more info (optional).
+  - `related`: a *object* with extra information (optional).
+  - `date`: a *date* (optional).
+
+In case Ava can't find a action for our sentence will return an error that we can capture in `catch` method.
 
 
 ## License
