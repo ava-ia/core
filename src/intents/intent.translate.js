@@ -4,7 +4,7 @@ import { factoryActions, resolve, syntax } from '../helpers'
 // -- Internal
 const RULES = [
   'translate [Preposition]? [Demonym]',
-  'translate * [Preposition]? [Demonym]',
+  'translate * [Preposition] [Demonym]',
 ];
 
 export default (state, actions) => {

@@ -6,6 +6,7 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 chai.should();
+
 import Ava from '../src';
 import { any, weather } from '../src/intents'
 import actionMock from './actions/action.mock'

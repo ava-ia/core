@@ -18,7 +18,8 @@ lexicon['here'] = 'Place';
 
 export default (state) => {
   const sentence = state.sentence || Compromise.text(state.sentence).normal();
-  const terms = Compromise.text(sentence, { lexicon }).sentences[0].terms;
+  const compromiseSentences = Compromise.text(sentence, { lexicon }).sentences
+  const terms = (compromiseSentences[0]) ? compromiseSentences[0].terms : [];
   let relations = {};
 
   terms.map( term => {

@@ -1,16 +1,19 @@
 'use strict';
 
-import { assert, expect, should } from 'chai';
+import { expect } from 'chai';
+
 import translator from '../../src/processor/translator';
-// -- Mock
 
 describe('Processor: translator', () => {
 
   let state;
-
   beforeEach( () => state = {})
 
-  it('Up & Running', async () => {
+  it('Up & Running', () => {
+    expect(translator).to.be.ok;
+  });
+
+  it('Detected an english sentence', async () => {
     state.rawSentence = 'hello world';
     state.language = 'en';
     await translator(state);
@@ -19,7 +22,7 @@ describe('Processor: translator', () => {
     expect(state.sentence).equal(undefined);
   });
 
-  it('If a sentence is not english, translate it and identify the language', async () => {
+  it('Detected a non-english sentence, translate it and identify the language', async () => {
     state.rawSentence = 'Hola Mundo!';
     await translator(state);
 

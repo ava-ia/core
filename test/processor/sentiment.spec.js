@@ -1,8 +1,8 @@
 'use strict';
 
-import { assert, expect, should } from 'chai';
+import { expect } from 'chai';
+
 import sentiment from '../../src/processor/sentiment';
-// -- Mock
 
 describe('Processor: sentiment', () => {
 
@@ -11,27 +11,29 @@ describe('Processor: sentiment', () => {
   beforeEach( () => state = {sentence: ''})
 
   it('Up & Running', () => {
-    state.sentence = 'hello world';
-    sentiment(state);
-
-    expect(state).to.have.all.keys('sentence', 'sentiment', 'tokens');
-    expect(state.sentiment).equal(0);
-    expect(state.tokens.length).equal(2);
-    expect(state.tokens[0]).equal('hello');
-    expect(state.tokens[1]).equal('world');
+    expect(sentiment).to.be.ok;
   });
 
-  it('Can detect a positive sentiment', () => {
+  it('Compose property {sentiment}', () => {
+    sentiment(state)
+    expect(state).to.have.all.keys('sentence', 'sentiment');
+  });
+
+  it('Detected a neutral sentiment', () => {
+    state.sentence = 'hello world';
+    sentiment(state);
+    expect(state.sentiment).equal(0);
+  });
+
+  it('Detected a positive sentiment', () => {
     state.sentence = 'I love you!';
     sentiment(state);
-
     expect(state.sentiment).equal(3);
   });
 
-  it('Can detect a negative sentiment', () => {
+  it('Detected a negative sentiment', () => {
     state.sentence = 'I hate you!';
     sentiment(state);
-
     expect(state.sentiment).equal(-3);
   });
 

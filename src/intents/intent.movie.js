@@ -17,7 +17,7 @@ const TERMS = [
 
 export default (state, actions) => {
   const tokens = intersect(TERMS, state.tokens);
-  const classifiers = intersect(TERMS, state.classifier.categories);
+  const classifiers = intersect(TERMS, state.classifier);
   console.log('IntentMovie'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
 
   if (tokens || classifiers) {

@@ -1,29 +1,44 @@
 'use strict';
 
-import { assert, expect, should } from 'chai';
+import { expect } from 'chai';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+chai.use(chaiAsPromised);
+chai.should();
+
 import { movie } from '../../src/intents';
-// -- Mock
 import ActionMock from '../actions/action.mock'
 
 describe('IntentMovie', () => {
 
-  let state = {
-    classifier: { categories: [] }
-  };
-  let intent;
-
+  let state = {};
   beforeEach( () => {
-    intent = {script: movie, actions: [ActionMock]};
     state.action = undefined;
+    state.classifier = [];
     state.tokens = ['i', 'want', 'go', 'to', 'cinema']
   });
 
   it('Up & Running', async () => {
-    await movie(state, intent.actions);
-
-    expect(Object.keys(state.action).length).equal(3)
-    expect(state.action.engine).equal('mock');
-    expect(typeof(state.action.ms)).equal('number');
+    expect(movie).to.be.ok;
   });
 
+  it('Detected with {tokens}', async () => {
+    await movie(state, [ActionMock]);
+
+    expect(state.action).to.be.ok;
+  });
+
+  it('Detected with {classifier}', async () => {
+    state.tokens = [];
+    state.classifier = ['cinema']
+    await movie(state, [ActionMock]);
+
+    expect(state.action).to.be.ok;
+  });
+
+  it('Not detected', async () => {
+    state.tokens = [];
+    state.classifier = [];
+    expect( movie(state, [ActionMock]) ).to.be.rejected;
+  });
 });
