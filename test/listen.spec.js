@@ -11,8 +11,6 @@ import Ava from '../src';
 import { any, weather } from '../src/intents'
 import actionMock from './actions/action.mock'
 
-import colors from 'colors';
-
 describe('.listen()', () => {
 
   let ava;

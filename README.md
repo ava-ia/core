@@ -82,7 +82,7 @@ ava.listen('Do you know if tomorrow will rain in Bangkok?')
 #### intent()
 The purpose of this method is *teach* Ava about what kind of things can *answer* you. As you read in the introduction the core of ava use *Intents* and *Actions* which are simple functions than receiving a state and return it with an internal composition.
 
-The method `intent` is *chainable* that means you can attach all the intents you need, more intents means Ava is more inteligent 😉. This method takes two parameters:
+The method `intent` is *chainable* that means you can attach all the intents you need, more intents means Ava is more clever 😉. This method takes two parameters:
 
   - `intent`: the *function* you wanna attach
   - `actions`: an action *function* (or *Array* of functions) those will call if the intent is is satisfactorily resolved.

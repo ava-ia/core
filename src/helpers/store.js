@@ -6,7 +6,6 @@ import path from 'path';
 import fs from 'fs';
 // -- Internal
 const folder = path.resolve('.', 'store');
-// const folder = process.cwd() + '/store';
 
 if (!fs.existsSync(folder)) fs.mkdirSync(folder);
 
