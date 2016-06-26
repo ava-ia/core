@@ -28,7 +28,7 @@ const DOCUMENT_TERMS = [
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { object, subject, location } = relation(RELATIONS, state.relations);
+    const { object, subject, location } = relation(RELATIONS, state);
     const ms = new Date()
     const concept = object || location || subject;
     if (state.debug)

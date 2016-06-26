@@ -11,7 +11,7 @@ const action = (state) => {
 
   return new Promise((resolve, reject) => {
     const ms = new Date()
-    const { object, subject } = relation(RELATIONS, state.relations);
+    const { object, subject } = relation(RELATIONS, state);
     const query = object || subject || state.relations;
     if (state.debug)
       console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
