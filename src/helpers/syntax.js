@@ -13,18 +13,26 @@ export default (sentence, rules) => {
 
     if (matches.length > 0 && matches[0] !== null) {
       const terms = matches[0].terms;
-      let values = [];
-
+      let values = {};
       let keys = rule.match(regex).map( key => {
         key = key.slice(1, -1).toLowerCase();
         for (const term of terms) {
-          if ( term.tag.toLowerCase() === key && values.indexOf(term.text) === -1) {
-            values.push(term.text);
-            break;
+          if ( term.tag.toLowerCase() === key) {
+            if (!values[key]) {
+              values[key] = term.text;
+              break;
+            } else {
+              if (!Array.isArray(values[key])) values[key] = [values[key]]
+              if (values[key].indexOf(term.text) === -1) {
+                values[key].push(term.text);
+                break;
+              }
+            }
           }
         }
       });
-      match = values.length > 0 ? values : matches[0].text();
+
+      match = Object.keys(values).length > 0 ? values : matches[0].text();
       break;
     }
   }
