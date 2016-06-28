@@ -12,9 +12,6 @@ export default (state, actions) => {
   if (state.debug)
     console.log('IntentTranslate'.bold.green, 'match:'.bold, match);
 
-  if (match) {
-    return factoryActions(state, actions);
-  } else {
-    return resolve(state);
-  }
+
+  return (match ? factoryActions(state, actions) : resolve(state));
 };

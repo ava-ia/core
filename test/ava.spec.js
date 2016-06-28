@@ -1,7 +1,6 @@
 'use strict';
 
 import { assert, expect } from 'chai';
-import colors from 'colors';
 import Ava from '../src';
 
 describe('Ava', function() {

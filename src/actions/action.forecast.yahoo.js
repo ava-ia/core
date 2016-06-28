@@ -11,7 +11,7 @@ const RELATIONS = ['when', 'location'];
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const { location, when } = relation(RELATIONS, state.relations);
+    const { location, when } = relation(RELATIONS, state);
     const ms = new Date()
     const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
     if (state.debug)

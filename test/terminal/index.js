@@ -5,10 +5,9 @@ import fetch from 'node-fetch';
 // -- Core
 import Ava from '../../src'
 // -- Intents & Actions
-import { weather, movie, translate, any } from '../../src/intents'
-import { forecastYahoo, forecastMSN, movieDB, wikipedia, translator } from '../../src/actions'
+import { weather, movie, translate, any, conversor } from '../../src/intents'
+import { currency, forecastYahoo, forecastMSN, movieDB, wikipedia, translator } from '../../src/actions'
 // -- Internal
-import metadata from './metadata'
 const timeout = 10000;
 
 // -- New instance of Ava (with custom config);
@@ -20,7 +19,8 @@ let ava = new Ava({
 ava
   // .intent(weather, [forecastYahoo, forecastMSN])
   // .intent(movie, movieDB)
-  .intent(translate, translator)
+  // .intent(translate, translator)
+  .intent(conversor, currency)
   // .intent(any, wikipedia)
 
 const answer = (sentence) => {
@@ -28,8 +28,7 @@ const answer = (sentence) => {
   ava
     .listen(sentence, timeout)
     .then(state => {
-      // metadata(state, 'magenta');
-      console.log('<AVA>'.bold.green, state.action)
+      console.log('<AVA>'.bold.green, state);
     })
     .catch(error => {
       console.log('<AVA>'.bold.red, error || `Sorry but I didn't understand you`)
