@@ -8,7 +8,7 @@ chai.should();
 
 import { currency } from '../../src/actions';
 
-describe('ActionCurrency', () => {
+describe('Action: currency', () => {
 
   let state = {};
   beforeEach( () => {

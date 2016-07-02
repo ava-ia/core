@@ -12,8 +12,6 @@ const PREPOSITION = 'Preposition';
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    // How can I say in italian i have hungry
-
     const action_index = state.tokens.indexOf('translate');
     const terms = Compromise.text(state.sentence).sentences[0].terms;
     const ms = new Date()

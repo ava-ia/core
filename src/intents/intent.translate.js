@@ -9,9 +9,7 @@ const RULES = [
 
 export default (state, actions) => {
   const match = syntax(state.sentence, RULES);
-  if (state.debug)
-    console.log('IntentTranslate'.bold.green, 'match:'.bold, match);
-
+  if (state.debug) console.log('IntentTranslate'.bold.green, 'match:'.bold, match);
 
   return (match ? factoryActions(state, actions) : resolve(state));
 };

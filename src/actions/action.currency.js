@@ -40,8 +40,7 @@ export default (state) => {
     const to = getCurrency(match.currency[1]);
     const value = parseFloat(match.value);
 
-    if (state.debug)
-      console.log('ActionCurrency'.bold.yellow, 'match:', match);
+    if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
 
     fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
       .then( response => response.json() )
