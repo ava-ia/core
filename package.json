@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./lib/index.js",
   "homepage": "",
   "author": {
@@ -24,26 +24,29 @@
     "email": "issues@react-toolbox.com"
   },
   "scripts": {
-    "start": "node index.js Ava, Do you know if tomorrow will rain in Bangkok?",
-    "test": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
-    "build": "babel src --out-dir lib"
+    "start": "npm run build & npm run terminal",
+    "test": "npm run mocha",
+
+    "build": "babel src --out-dir lib",
+    "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
+    "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill"
   },
   "license": "MIT",
   "dependencies": {
-    "alchemy-api": "^1.3.2",
-    "babel-polyfill": "^6.9.0",
+    "alchemy-api": "1.3.2",
+    "babel-polyfill": "6.9.0",
     "bayes": "0.0.6",
-    "chrono-node": "^1.2.3",
-    "cld": "^2.4.5",
-    "google-translate-api": "^2.0.3",
-    "lowdb": "^0.13.0",
-    "moment": "^2.13.0",
-    "nlp_compromise": "^6.3.1",
-    "node-fetch": "^1.5.3",
-    "sentiment": "^1.0.6",
-    "weather-js": "^1.0.2",
-    "world-countries": "^1.7.8",
-    "wtf_wikipedia": "^0.3.2"
+    "chrono-node": "1.2.3",
+    "cld": "2.4.5",
+    "google-translate-api": "2.0.3",
+    "lowdb": "0.13.0",
+    "moment": "2.13.0",
+    "nlp_compromise": "6.3.1",
+    "node-fetch": "1.5.3",
+    "sentiment": "1.0.6",
+    "weather-js": "1.0.2",
+    "world-countries": "1.7.8",
+    "wtf_wikipedia": "0.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
