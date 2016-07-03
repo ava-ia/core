@@ -10,7 +10,7 @@ describe('Helper: entities', () => {
   });
 
   it('Detected a simple matching sentence', () => {
-    expect(entities).to.have.all.keys('request', 'person', 'location', 'object', 'knowledge');
+    expect(entities).to.have.all.keys('request', 'person', 'location', 'object', 'knowledge', 'number');
   });
 
 });
