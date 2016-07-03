@@ -38,7 +38,7 @@
     "bayes": "0.0.6",
     "chrono-node": "1.2.3",
     "cld": "2.4.5",
-    "google-translate-api": "2.0.3",
+    "google-translate-api": "2.1.1",
     "lowdb": "0.13.0",
     "moment": "2.13.0",
     "nlp_compromise": "6.3.1",
