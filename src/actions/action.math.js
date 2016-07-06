@@ -4,10 +4,9 @@ import fetch from 'node-fetch';
 import { entities, resolve, syntax } from '../helpers'
 
 const SYNTAXES = [
-  '[Value] (minus|plus) [Value]',
-  '[Value] (+|-|*|/) [Value]',
-  '(add|subtract|multiply|divide) [Value] [Preposition] [Value]',
-  '[Value] (divided|multiplied) [Preposition] [Value]',
+  '. [Value] [Preposition] [Value]',
+  '[Value] . [Preposition] [Value]',
+  '[Value] . [Value]',
 ]
 
 const OPERATIONS = [
@@ -22,7 +21,7 @@ export default (state) => {
   const match = syntax(state.sentence, SYNTAXES);
   if (!match) return resolve(state);
 
-  const operation = match.noun || match.conjunction;
+  const operation = match.noun || match.conjunction || match.infinitive;
   const a = parseFloat(match.value[0]);
   const b = parseFloat(match.value[1]);
 
