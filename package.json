@@ -41,7 +41,7 @@
     "google-translate-api": "2.1.1",
     "lowdb": "0.13.0",
     "moment": "2.13.0",
-    "nlp_compromise": "6.3.1",
+    "nlp_compromise": "6.4.7",
     "node-fetch": "1.5.3",
     "sentiment": "1.0.6",
     "weather-js": "1.0.2",

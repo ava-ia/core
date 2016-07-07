@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 // -- Core
 import Ava from '../../lib';
 import { weather, movie, translate, conversor, any } from '../../lib/intents';
-import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia } from '../../lib/actions';
+import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia, math } from '../../lib/actions';
 // -- Internal
 const timeout = 10000;
 
@@ -20,7 +20,7 @@ ava
   .intent(movie, movieDB)
   .intent(translate, translator)
   .intent(conversor, currency)
-  .intent(any, wikipedia)
+  .intent(any, math, wikipedia)
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');

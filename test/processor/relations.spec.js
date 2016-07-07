@@ -55,7 +55,7 @@ describe('Processor: relations', () => {
 
     expect(result.location).to.have.all.keys('text', 'tag');
     expect(result.location.text).equal('bangkok');
-    expect(result.location.tag).equal('place');
+    expect(result.location.tag).equal('city');
   });
 
   it('Detect if {action} is a past tense', () => {

@@ -32,9 +32,9 @@ describe('Processor: compromise', () => {
     expect(state.tags.length).equal(6);
     expect(state.tags[0]).equal('Person');
     expect(state.tags[1]).equal('FutureTense');
-    expect(state.tags[2]).equal('Place');
+    expect(state.tags[2]).equal('City');
     expect(state.tags[3]).equal('Conjunction');
-    expect(state.tags[4]).equal('Place');
+    expect(state.tags[4]).equal('City');
     expect(state.tags[5]).equal('Date');
   });
 
