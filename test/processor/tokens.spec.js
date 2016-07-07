@@ -49,4 +49,12 @@ describe('Processor: tokens', () => {
     expect(state.tokens.length).to.equal(2);
     expect(state.tokens[1]).to.equal('apple');
   });
+
+  it('Tokenize sentence and use infinitive verbs', () => {
+    state.sentence = "It's raining now in London";
+    tokens(state);
+    expect(state.tokens.length).to.equal(6);
+    expect(state.tokens[1]).to.equal('is');
+    expect(state.tokens[2]).to.equal('rain');
+  });
 });
