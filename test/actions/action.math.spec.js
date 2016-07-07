@@ -31,17 +31,23 @@ describe('Action: math', () => {
     math(state);
     expect(state.action.value).to.be.equal(a + b);
 
-    // @TODO
-    // state.sentence = `add ${a} to ${b}`;
-    // math(state);
-    // expect(state.action.value).to.be.equal(a + b)
+    state.sentence = `How much is ${a}+${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a + b);
+
+    state.sentence = `add ${a} to ${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a + b)
   });
 
   it('Detect a subtraction (-) operation', () => {
-    // @TODO
-    // state.sentence = `How much is ${a} minus ${b}`;
-    // math(state);
-    // expect(state.action.value).to.be.equal(a - b)
+    state.sentence = `How much is ${a} minus ${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a - b)
+
+    state.sentence = `How much is ${a}-${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a - b);
 
     state.sentence = `subtract ${a} to ${b}`;
     math(state);
@@ -52,12 +58,20 @@ describe('Action: math', () => {
     state.sentence = `How much is ${a} multiplied by ${b}`;
     math(state);
     expect(state.action.value).to.be.equal(a * b)
+
+    state.sentence = `How much is ${a}*${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a * b);
   });
 
   it('Detect a division (/) operation', () => {
     state.sentence = `How much is ${a} divided by ${b}`;
     math(state);
     expect(state.action.value).to.be.equal(a / b)
+
+    state.sentence = `How much is ${a}/${b}`;
+    math(state);
+    expect(state.action.value).to.be.equal(a / b);
   });
 
   it('Not detected', async () => {

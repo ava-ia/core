@@ -8,14 +8,14 @@ export default (sentence, rules) => {
   const rootSentence = Compromise.text(sentence).root();
 
   for (const rule of rules) {
-    const matches = Compromise.text(rootSentence).match(rule);
+    const matches = Compromise.text(sentence).match(rule);
 
     if (matches.length > 0 && matches[0] !== null) {
       let values = {};
 
       for (const term of matches[0].terms) {
         const key = term.tag.toLowerCase();
-        const text = Compromise.text(term.text).root()
+        const text = key !== 'symbol' ? Compromise.text(term.text).root() : term.text;
 
         if (!values[key]) {
           values[key] = text;
