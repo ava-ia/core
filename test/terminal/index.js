@@ -3,10 +3,9 @@
 import colors from 'colors';
 import fetch from 'node-fetch';
 // -- Core
-import Ava from '../../src'
-// -- Intents & Actions
-import { weather, movie, translate, any, conversor } from '../../src/intents'
-import { currency, forecastYahoo, forecastMSN, movieDB, wikipedia, translator } from '../../src/actions'
+import Ava from '../../lib';
+import { weather, movie, translate, conversor, any } from '../../lib/intents';
+import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia, math } from '../../lib/actions';
 // -- Internal
 const timeout = 10000;
 
@@ -17,11 +16,11 @@ let ava = new Ava({
 
 // -- Prepare intents
 ava
-  // .intent(weather, [forecastYahoo, forecastMSN])
-  // .intent(movie, movieDB)
-  // .intent(translate, translator)
+  .intent(weather, [forecastYahoo, forecastMSN])
+  .intent(movie, movieDB)
+  .intent(translate, translator)
   .intent(conversor, currency)
-  // .intent(any, wikipedia)
+  .intent(any, math, wikipedia)
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
@@ -47,11 +46,3 @@ process.stdin.on('data', (text) => {
 });
 
 answer(process.argv.slice(2).join(' '))
-
-// ----
-// fetch('http://www.wikiwand.com/api/searchwiki/en/Leonardo')
-// fetch('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&titles=Neuschwanstein%20Castle&redirects=')
-//   .then(response => response.json())
-//   .then(body => {
-//     console.log('???', body)
-//   });

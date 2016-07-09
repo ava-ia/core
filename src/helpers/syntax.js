@@ -1,7 +1,6 @@
 'use strict';
 
 import Compromise from 'nlp_compromise';
-const regex = /\[(.*?)\]/g;
 
 export default (sentence, rules) => {
   if (!Array.isArray(rules)) rules = [rules];
@@ -12,27 +11,20 @@ export default (sentence, rules) => {
     const matches = Compromise.text(rootSentence).match(rule);
 
     if (matches.length > 0 && matches[0] !== null) {
-      const terms = matches[0].terms;
       let values = {};
-      let keys = rule.match(regex);
-      if (keys) {
-        keys.map( key => {
-          key = key.slice(1, -1).toLowerCase();
-          for (const term of terms) {
-            if ( term.tag.toLowerCase() === key) {
-              if (!values[key]) {
-                values[key] = term.text;
-                break;
-              } else {
-                if (!Array.isArray(values[key])) values[key] = [values[key]]
-                if (values[key].indexOf(term.text) === -1) {
-                  values[key].push(term.text);
-                  break;
-                }
-              }
-            }
+
+      for (const term of matches[0].terms) {
+        const key = term.tag.toLowerCase();
+        const text = key !== 'symbol' ? Compromise.text(term.text).root() : term.text;
+
+        if (!values[key]) {
+          values[key] = text;
+        } else {
+          if (!Array.isArray(values[key])) values[key] = [values[key]]
+          if (values[key].indexOf(text) === -1) {
+            values[key].push(text);
           }
-        });
+        }
       }
 
       match = Object.keys(values).length > 0 ? values : matches[0].text();

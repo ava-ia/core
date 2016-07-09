@@ -3,7 +3,7 @@
 import fetch from 'node-fetch';
 import { entities, syntax } from '../helpers'
 // -- Internal
-const CURRENCIES = {
+const NAMES = {
   'lev': 'BGN',
   'real': 'BRL',
   'franc': 'CHF',
@@ -36,12 +36,11 @@ export default (state) => {
   return new Promise( (resolve, reject) => {
     const ms = new Date()
     const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
-    const to = CURRENCIES[match.currency[0]] || match.currency[0];
-    const from = CURRENCIES[match.currency[1]] || match.currency[1];
+    const from = getCurrency(match.currency[0]);
+    const to = getCurrency(match.currency[1]);
     const value = parseFloat(match.value);
 
-    if (state.debug)
-      console.log('ActionCurrency'.bold.yellow, 'match:', match);
+    if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
 
     fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
       .then( response => response.json() )
@@ -60,4 +59,8 @@ export default (state) => {
         resolve(state);
       })
   });
+};
+
+const getCurrency = (value) => {
+  return (NAMES[value.toLowerCase()] || value.toUpperCase());
 };

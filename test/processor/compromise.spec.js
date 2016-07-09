@@ -15,15 +15,27 @@ describe('Processor: compromise', () => {
   it('Compose properties {type, topics}', () => {
     state.sentence = 'Hello world';
     compromise(state);
-    expect(state).to.have.all.keys('sentence', 'type', 'topics');
+    expect(state).to.have.all.keys('sentence', 'type', 'topics', 'tags');
   });
 
   it('Detect topics in a sentence', () => {
-    state.sentence = 'I wanna visit London and Madrid next week';
+    state.sentence = 'I will visit London and Madrid next week';
     compromise(state);
     expect(state.topics.length).equal(2);
     expect(state.topics[0]).equal('london');
     expect(state.topics[1]).equal('madrid');
+  });
+
+  it('Detect tags in a sentence', () => {
+    state.sentence =  'I will visit London and Madrid next week';
+    compromise(state);
+    expect(state.tags.length).equal(6);
+    expect(state.tags[0]).equal('Person');
+    expect(state.tags[1]).equal('FutureTense');
+    expect(state.tags[2]).equal('City');
+    expect(state.tags[3]).equal('Conjunction');
+    expect(state.tags[4]).equal('City');
+    expect(state.tags[5]).equal('Date');
   });
 
   it('Detect an declarative sentence', () => {

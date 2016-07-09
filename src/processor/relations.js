@@ -10,6 +10,7 @@ const TERMS_RELATIONS = {
   noun: 'object',
   date: 'when',
   place: 'location',
+  city: 'location',
   value: 'value'
 };
 let lexicon = Compromise.lexicon();
