@@ -8,7 +8,7 @@ export default (sentence, rules) => {
   const rootSentence = Compromise.text(sentence).root();
 
   for (const rule of rules) {
-    const matches = Compromise.text(sentence).match(rule);
+    const matches = Compromise.text(rootSentence).match(rule);
 
     if (matches.length > 0 && matches[0] !== null) {
       let values = {};

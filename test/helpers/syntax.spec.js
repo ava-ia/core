@@ -12,7 +12,7 @@ describe('Helper: syntax', () => {
   });
 
   it('Detected a simple matching sentence', () => {
-    const state = syntax(sentence, '20 euros in dollars');
+    const state = syntax(sentence, '20 [currency] in [currency]');
     expect(state).to.be.ok;
     expect(state.value).to.equal('20');
     expect(state.currency[0]).to.equal('euro');
