@@ -5,14 +5,14 @@
 
 The main purpose of AVA (Agnostic Virtual Assistant) is create a clever/fast assistant for any kind of context. This repository concerns the *core* of AVA so feel free for try in your NodeJS projects.
 
-Nowadays we can find a lot of assistants, and more and more in coming years, all of us know that Apps in future will be more *conversational* and less *click/action*. For that reason our approach is create an agnostic and reusable system for help developers to create any kind of virtual assistants.
+Nowadays we can find a lot of assistants, and more and more in the coming years, all of us know that Apps in the future will be more *conversational* and less *click/action*. For that reason our approach is create an agnostic and reusable system for help developers to create any kind of virtual assistants.
 
-This is an Open Source project, so any help will be well coming.
+This is an Open Source project, so any help will be welcomed.
 
 
 ## A little story about language processing... *and how Ava works*.
 
-If you never works with assistants/bots you have to know that we need to analyze a given input and give it a semantic value. To do this often use NLP, *Natural Language Processing*. AVA in its case incorporates its own NLP but as you will see later can use either. For example:
+If you have never worked with assistants/bots then you have to know that we need to analyze a given input and give it a semantic value. To do this often use NLP, *Natural Language Processing*. AVA in its case incorporates its own NLP but as you will see later we can use either. For example:
 
 > "I need an appointment with the dentist tomorrow at 2pm in London"
 
@@ -80,7 +80,7 @@ ava.listen('Do you know if tomorrow will rain in Bangkok?')
 ## Instance methods
 
 #### intent()
-The purpose of this method is *teach* Ava about what kind of things can *answer* you. As you read in the introduction the core of ava use *Intents* and *Actions* which are simple functions than receiving a state and return it with an internal composition.
+The purpose of this method is to *teach* Ava about what kinds of things it can *answer* for you. As you read in the introduction the core of ava use *Intents* and *Actions* which are simple functions that receive a state and return it with an internal composition.
 
 The method `intent` is *chainable* that means you can attach all the intents you need, more intents means Ava is more clever 😉. This method takes two parameters:
 
@@ -102,7 +102,7 @@ import { forecastYahoo, forecastMSN } from `ava-ia/lib/actions`;
 ava.intent(weather, [forecastYahoo, forecastMSN]);
 ```
 
-Ava will wait for the first successful action, that means like it's a race between the *actions* of a determinate *intent* and wins which finish first. If you wanna create a chain of `intents` it's quite easy:
+Ava will wait for the first successful action, that means it's like a race between the *actions* of a determinate *intent* and wins which finish first. If you wanna create a chain of `intents` it's quite easy:
 
 ```js
 import { weather, movie } from `ava-ia/lib/intents`;
@@ -122,7 +122,7 @@ ava.listen('Do you know if tomorrow will rain in Bangkok?')
   .catch(error => console.log(state))
 ```
 
-If the promise is successful will return a `object` with the state which contains the result of the processor and intents. The attributes of the *state* are:
+If the promise is successful it will return a `object` with the state which contains the result of the processor and intents. The attributes of the *state* are:
 
   - `rawSentence`: contains an *string* with the origin sentence.
   - `language`: contains an *string* ISO code for language (cca2) of the sentence.
@@ -154,11 +154,11 @@ The most important attribute of *state* is `action` which contains an *object* w
   - `related`: a *object* with extra information (optional).
   - `date`: a *date* (optional).
 
-In case Ava can't find a action for our sentence will return an error that we can capture in `catch` method.
+In the case that Ava can't find a action for our sentence it will return an error that we can capture in the `catch` method.
 
 
 ## Extend Ava with new *Intents* & *Actions*
-Extend Ava is quite easy, as you know all predefined *Intents* & *Actions* are stateless functions. So if you respect the input interface you can create your own Ava easily, lets see how.
+Extending Ava is quite easy, as you know all predefined *Intents* & *Actions* are stateless functions. So if you respect the input interface you can create your own Ava easily, lets see how.
 
 #### Create a new *Intent*
 Remember that when we set an intent in a determinate Ava instance we only need code:
