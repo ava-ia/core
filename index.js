@@ -5,6 +5,5 @@
 // require('module').Module._initPaths();
 
 require('babel-register');
-require('babel-polyfill');
 
 require('./test/terminal');
