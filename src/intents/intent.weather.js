@@ -1,18 +1,23 @@
-'use strict';
-
 import { factoryActions, intersect, resolve } from '../helpers'
 // -- Internal
-const TERMS = ['weather', 'umbrella', 'rain', 'forecast', 'snow', 'fog', 'sun', 'cloud', 'meteo'];
+const TERMS = [
+  'weather',
+  'umbrella',
+  'rain',
+  'forecast',
+  'snow',
+  'fog',
+  'sun',
+  'cloud',
+  'meteo'
+]
 
 export default (state, actions) => {
-  const tokens = intersect(TERMS, state.tokens);
-  const classifiers = intersect(TERMS, state.classifier);
-  if (state.debug)
-    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
-
-  if (tokens || classifiers) {
-    return factoryActions(state, actions);
-  } else {
-    return resolve(state);
+  const tokens = intersect(TERMS, state.tokens)
+  const classifiers = intersect(TERMS, state.classifier)
+  if (state.debug) {
+    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`)
   }
-};
+
+  return (tokens || classifiers) ? factoryActions(state, actions) : resolve(state)
+}

@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "./lib/index.js",
   "homepage": "",
   "author": {
@@ -28,8 +28,7 @@
     "test": "npm run mocha",
     "build": "babel src --out-dir lib",
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
-
-    "lint": "eslint .",
+    "lint": "eslint src/**",
     "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill"
   },
   "license": "MIT",

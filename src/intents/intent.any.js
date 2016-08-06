@@ -1,9 +1,7 @@
-'use strict';
-
 import { factoryActions } from '../helpers'
 
 export default (state, actions) => {
-  if (state.debug) console.log('IntentAny'.bold.green);
+  if (state.debug) console.log('IntentAny'.bold.green)
 
   return factoryActions(state, actions)
-};
+}

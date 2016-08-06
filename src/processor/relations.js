@@ -1,7 +1,5 @@
-'use strict';
-
-import Compromise from 'nlp_compromise';
-import Chrono from 'chrono-node';
+import Compromise from 'nlp_compromise'
+import Chrono from 'chrono-node'
 // -- Internal
 const TERMS_RELATIONS = {
   person: 'subject',
@@ -12,66 +10,70 @@ const TERMS_RELATIONS = {
   place: 'location',
   city: 'location',
   value: 'value'
-};
-let lexicon = Compromise.lexicon();
-lexicon['ava'] = 'Person';
-lexicon['here'] = 'Place';
+}
+const lexicon = Compromise.lexicon()
+lexicon.ava = 'Person'
+lexicon.here = 'Place'
 
 export default (state) => {
-  const sentence = state.sentence || Compromise.text(state.sentence).normal();
+  const sentence = state.sentence || Compromise.text(state.sentence).normal()
   const compromiseSentences = Compromise.text(sentence, { lexicon }).sentences
-  const terms = (compromiseSentences[0]) ? compromiseSentences[0].terms : [];
-  let relations = {};
+  const terms = (compromiseSentences[0]) ? compromiseSentences[0].terms : []
+  const relations = {}
 
-  terms.map( term => {
-    let tag = (term.pos.Verb ? 'verb' : term.tag).toLowerCase();
-    let relation;
+  terms.map(term => {
+    const tag = (term.pos.Verb ? 'verb' : term.tag).toLowerCase()
+    let relation
 
     if (relation = TERMS_RELATIONS[tag]) {
       if (relation === TERMS_RELATIONS.person && relations[relation]) {
-        relation = (relations[relation] !== (term.normal || term.text)) ? TERMS_RELATIONS.noun : undefined;
+        relation = (relations[relation] !== (term.normal || term.text)) ? TERMS_RELATIONS.noun : undefined
       }
-      if (relation) relations[relation] = extractRelation(tag, term, relations[relation]);
+      if (relation) relations[relation] = extractRelation(tag, term, relations[relation])
     }
-  });
-  state.relations = relations;
+  })
+  state.relations = relations
 
-  return (state);
-};
+  return (state)
+}
 
 // -- Private methods
 const extractRelation = (tag, term, previous) => {
-  let relation = {};
-  let text = term.normal || term.text;
+  const relation = {}
+  let text = term.normal || term.text
 
-  switch(tag) {
+  switch (tag) {
     case 'date':
       text = Chrono.parseDate(text)
-      break;
+      break
 
     case 'verb':
-      const compromiseVerb = Compromise.verb(term.expansion || term.text);
+      const compromiseVerb = Compromise.verb(term.expansion || term.text)
       if (!previous) {
         relation.verb = {
           tense: compromiseVerb.conjugation().toLowerCase().split('tense')[0],
           negative: compromiseVerb.isNegative()
-        };
+        }
       } else {
-        relation.verb = previous.verb;
+        relation.verb = previous.verb
       }
-      text = compromiseVerb.conjugate().infinitive;
-      break;
+      text = compromiseVerb.conjugate().infinitive
+      break
 
     case 'noun':
       text = Compromise.text(text).root()
+      break
 
     case 'person':
-      tag = term.pos.Pronoun ? 'pronoun' : tag;
-      break;
+      tag = term.pos.Pronoun ? 'pronoun' : tag
+      break
+
+    default:
+      break
   }
 
-  relation.tag = tag;
-  relation.text = text;
+  relation.tag = tag
+  relation.text = text
 
-  return relation;
-};
+  return relation
+}

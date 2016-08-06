@@ -1,18 +1,16 @@
 // -- More info: https://github.com/typicode/lowdb
-'use strict';
-
-import lowdb from 'lowdb';
-import path from 'path';
-import fs from 'fs';
+import lowdb from 'lowdb'
+import path from 'path'
+import fs from 'fs'
 // -- Internal
-const folder = path.resolve('.', 'store');
+const folder = path.resolve('.', 'store')
 
-if (!fs.existsSync(folder)) fs.mkdirSync(folder);
+if (!fs.existsSync(folder)) fs.mkdirSync(folder)
 
 export default (file, defaults = {}) => {
-  const store = lowdb(`${folder}/${file}`, { storage: require('lowdb/lib/file-async') });
+  const store = lowdb(`${folder}/${file}`, { storage: require('lowdb/lib/file-async') })
 
-  if (defaults) store.defaults(defaults).value();
+  if (defaults) store.defaults(defaults).value()
 
-  return store;
+  return store
 }

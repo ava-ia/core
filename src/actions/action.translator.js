@@ -1,50 +1,50 @@
-'use strict';
-
-import countries from 'world-countries';
-import Compromise from 'nlp_compromise';
-import GoogleTranslate from 'google-translate-api';
-import { entities, relation, request } from '../helpers'
+import countries from 'world-countries'
+import Compromise from 'nlp_compromise'
+import googleTranslate from 'google-translate-api'
+import { entities } from '../helpers'
 // -- Internal
-const RELATIONS = ['when', 'location'];
-const DEMONYM = 'Demonym';
-const PREPOSITION = 'Preposition';
+const DEMONYM = 'Demonym'
+const PREPOSITION = 'Preposition'
 
 export default (state) => {
 
   return new Promise((resolve, reject) => {
-    const action_index = state.tokens.indexOf('translate');
-    const terms = Compromise.text(state.sentence).sentences[0].terms;
+    const actionIndex = state.tokens.indexOf('translate')
+    const terms = Compromise.text(state.sentence).sentences[0].terms
     const ms = new Date()
-    let to;
-    let sentence = '';
+    let to
+    let sentence = ''
 
-    terms.map( (term, index) => {
-      if (index > action_index) {
+    terms.map((term, index) => {
+      if (index > actionIndex) {
         if (term.tag === DEMONYM) {
-          const demonym = term.text.toLowerCase();
-          const country = countries.find( country => country.demonym.toLowerCase() === demonym );
-          if (country) to = country.cca2;
+          const demonym = term.text.toLowerCase()
+          const country = countries.find(item => item.demonym.toLowerCase() === demonym)
+          if (country) to = country.cca2
         } else if (!(term.tag === PREPOSITION && terms[index + 1].tag === DEMONYM)) {
           sentence += `${term.text} `
         }
       }
     })
 
-    if (state.debug)
-      console.log('ActionTranslator'.bold.yellow, 'sentence:'.bold, sentence, 'to:'.bold,  to);
-    if (sentence && to) {
-      GoogleTranslate(sentence, {to}).then( response => {
-        state.action = {
-          engine: 'translator',
-          ms: (new Date() - ms),
-          entity: entities.knowledge,
-          value: response.text
-        };
-        resolve(state);
-      });
-
-    } else {
-      resolve(state);
+    if (state.debug) {
+      console.log('ActionTranslator'.bold.yellow, 'sentence:'.bold, sentence, 'to:'.bold,  to)
     }
-  });
-};
+
+    if (sentence && to) {
+      googleTranslate(sentence, { to })
+        .then(response => {
+          state.action = {
+            engine: 'google',
+            ms: (new Date() - ms),
+            entity: entities.knowledge,
+            value: response.text
+          }
+          resolve(state)
+        })
+        .catch(reject)
+    } else {
+      resolve(state)
+    }
+  })
+}
