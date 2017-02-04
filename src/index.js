@@ -1,3 +1,3 @@
-import Ava from './ava'
+import Ava from './ava';
 
-export default Ava
+export default Ava;
