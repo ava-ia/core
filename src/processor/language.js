@@ -1,14 +1,14 @@
-import cld from 'cld'
+import cld from 'cld';
 
 export default (state) => {
   return new Promise((resolve) => {
     cld.detect(state.rawSentence, (error, value) => {
       if (!error) {
-        state.language = value.languages[0].code
+        state.language = value.languages[0].code;
       }
-      state.sentence = state.rawSentence
+      state.sentence = state.rawSentence;
 
-      resolve(state)
-    })
-  })
-}
+      resolve(state);
+    });
+  });
+};

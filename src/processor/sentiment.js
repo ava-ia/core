@@ -1,8 +1,8 @@
-import sentiment from 'sentiment'
+import sentiment from 'sentiment';
 
 export default (state) => {
-  const sentence = sentiment(state.sentence.toLowerCase())
-  state.sentiment = sentence.score
+  const sentence = sentiment(state.sentence.toLowerCase());
+  state.sentiment = sentence.score;
 
-  return state
-}
+  return state;
+};

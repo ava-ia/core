@@ -1,11 +1,12 @@
 // import path from 'path';
 // const config = require(path.resolve('.', 'config.json'));
 
-let file
+let file;
+
 try {
-  file = require(process.cwd() + '/config.json')
+  file = require(process.cwd() + '/config.json');
 } catch (error) {
-  file = {}
+  file = {};
 }
 
-export default (key) => file[key]
+export default (key) => file[key];

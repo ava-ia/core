@@ -1,7 +1,7 @@
-import entities from './entities'
+import entities from './entities';
 
 export default (state, request) => {
-  state.action = { entity: entities.request, request }
+  state.action = { entity: entities.request, request };
 
-  return state
-}
+  return state;
+};
