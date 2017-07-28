@@ -1,4 +1,6 @@
 # <a href='https://github.com/ava-ia/core'><img src='https://dl.dropboxusercontent.com/s/pdoawhkvg295ish/ava.png?dl=0' height='128'></a>
+Tell me more, to get an idea of what state is, and learn better the philosophy of the project ( sorry from my english)
+
 
 [![npm version](https://img.shields.io/npm/v/ava-ia.svg?style=flat-square)](https://www.npmjs.com/package/ava-ia) [![Build Status](http://img.shields.io/travis/ava-ia/core/master.svg?style=flat-square)](https://travis-ci.org/ava-ia/core) [![NPM Status](http://img.shields.io/npm/dm/ava-ia.svg?style=flat-square)](https://www.npmjs.org/package/ava-ia) [![devDependency Status](https://img.shields.io/david/ava-ia/core.svg?style=flat-square)](https://david-dm.org/ava-ia/core#info=dependencies) [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/soyjavi)
 [![npm](https://img.shields.io/npm/l/botkit.svg?style=flat-square)](https://spdx.org/licenses/MIT)
