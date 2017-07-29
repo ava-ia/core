@@ -30,5 +30,5 @@ export default (sentence, rules) => {
     }
   }
 
-  return (match);
+  return match;
 };

@@ -46,6 +46,7 @@ describe('Action: currency', () => {
 
   it('Not detected', async () => {
     state.sentence = 'Hello world';
+
     expect( currency(state) ).to.be.rejected;
   });
 });

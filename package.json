@@ -1,7 +1,7 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.2.0",
+  "version": "0.1.2",
   "main": "./lib/index.js",
   "homepage": "",
   "author": {
@@ -30,7 +30,7 @@
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
     "lint": "eslint src/**",
     "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
-    "_mocha": "mocha test/actions/*translator*.js --compilers js:babel-register --require babel-polyfill"
+    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill"
   },
   "license": "MIT",
   "dependencies": {

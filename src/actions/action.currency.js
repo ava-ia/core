@@ -32,15 +32,18 @@ const getCurrency = (value) => (NAMES[value.toLowerCase()] || value.toUpperCase(
 
 export default (state) => {
   const ms = new Date();
-  const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
-  const from = getCurrency(match.currency[0]);
-  const to = getCurrency(match.currency[1]);
-  const value = parseFloat(match.value);
 
   return new Promise((resolve, reject) => {
+    const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
+    if (!match) return reject();
+
+    const from = getCurrency(match.currency[0]);
+    const to = getCurrency(match.currency[1]);
+    const value = parseFloat(match.value);
+
     if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
 
-    fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
+    return fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
       .then((response) => response.json())
       .then((json) => {
         if (json && json.rates && Object.keys(json.rates).length > 0) {
