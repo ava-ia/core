@@ -1,5 +1,3 @@
-'use strict';
-
 import { factoryActions, resolve, syntax } from '../helpers';
 // -- Internal
 const RULES = [

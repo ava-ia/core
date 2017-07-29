@@ -1,14 +1,11 @@
-'use strict';
-
-import fetch from 'node-fetch';
-import { entities, resolve, syntax } from '../helpers'
+import { entities, resolve, syntax } from '../helpers';
 
 const SYNTAXES = [
   '. [Value] [Preposition] [Value]',
   '[Value] . [Preposition] [Value]',
   '[Value][Symbol][Value]',
   '[Value] . [Value]',
-]
+];
 
 const OPERATIONS = [
   { calc: (a, b) => a + b, terms: ['+', 'plus', 'add'] },
@@ -18,22 +15,26 @@ const OPERATIONS = [
 ];
 
 export default (state) => {
-  const ms = new Date()
+  const ms = new Date();
   const match = syntax(state.sentence, SYNTAXES);
   if (!match) return resolve(state);
   const operation = match.noun || match.conjunction || match.infinitive || match.symbol;
   const a = parseFloat(match.value[0]);
   const b = parseFloat(match.value[1]);
 
-  if (operation, a, b) {
+  if (state.debug) {
+    console.log('ActionMath'.bold.yellow, 'operation:'.bold, operation, 'a:'.bold, a, 'b:'.bold, b);
+  }
+
+  if (operation && a && b) {
     for (const type of OPERATIONS) {
       if (type.terms.indexOf(operation) > -1) {
         const value = type.calc(a, b);
         state.action = {
           ms: (new Date() - ms),
-          engine: 'math',
+          engine: 'ava',
           title: `It's ${value}`,
-          value: value,
+          value,
           entity: entities.number,
         };
 
@@ -42,5 +43,5 @@ export default (state) => {
     }
   }
 
-  resolve(state);
+  return resolve(state);
 };

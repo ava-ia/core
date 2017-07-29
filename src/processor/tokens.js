@@ -1,5 +1,3 @@
-'use strict';
-
 import Compromise from 'nlp_compromise';
 
 export default (state) => {

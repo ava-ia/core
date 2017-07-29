@@ -1,9 +1,9 @@
 {
   "name": "ava-ia",
   "description": "Agnostic virtual assistant",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./lib/index.js",
-  "homepage": "",
+  "homepage": "http://github.com/ava-ia",
   "author": {
     "name": "AVAia Team",
     "url": "http://github.com/ava-ia"
@@ -11,7 +11,7 @@
   "contributors": [
     {
       "name": "Javi Jimenez Villar",
-      "email": "soyjavi@protonmail.com",
+      "email": "hello@soyjavi.com",
       "url": "http://soyjavi.com/"
     }
   ],
@@ -26,37 +26,42 @@
   "scripts": {
     "start": "npm run build & npm run terminal",
     "test": "npm run mocha",
-
     "build": "babel src --out-dir lib",
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
-    "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill"
+    "lint": "eslint src/**",
+    "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
+    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill"
   },
   "license": "MIT",
   "dependencies": {
-    "alchemy-api": "1.3.2",
-    "bayes": "0.0.6",
-    "chrono-node": "1.2.3",
-    "cld": "2.4.7",
-    "google-translate-api": "2.1.1",
-    "lowdb": "0.13.0",
-    "moment": "2.13.0",
-    "nlp_compromise": "6.4.7",
-    "node-fetch": "1.5.3",
-    "sentiment": "1.0.6",
-    "weather-js": "1.0.2",
-    "world-countries": "1.7.8",
-    "wtf_wikipedia": "0.3.2"
+    "alchemy-api": "1.3.3",
+    "bayes": "0.0.7",
+    "chrono-node": "1.3.5",
+    "cld": "2.4.5",
+    "google-translate-api": "2.3.0",
+    "lowdb": "0.16.2",
+    "moment": "2.18.1",
+    "nlp_compromise": "6.5.3",
+    "node-fetch": "1.7.1",
+    "sentiment": "4.0.0",
+    "weather-js": "2.0.0",
+    "world-countries": "1.8.1",
+    "wtf_wikipedia": "1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.9.0",
-    "babel-plugin-transform-runtime": "^6.12.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^5.3.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
     "colors": "^1.1.2",
-    "mocha": "^2.5.3"
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-import": "^1.12.0",
+    "mocha": "^3.4.2"
   }
 }

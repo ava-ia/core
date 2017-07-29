@@ -1,7 +1,5 @@
-'use strict';
-
 import wikipedia from 'wtf_wikipedia';
-import { entities, relation } from '../helpers'
+import { entities, relation } from '../helpers';
 // -- Internal
 const RELATIONS = ['object', 'subject', 'location'];
 const DOCUMENT_TERMS = [
@@ -19,27 +17,38 @@ const DOCUMENT_TERMS = [
   'population_total',
   'population_netro',
   'area_total_km2',
-  'utc_offset_DST'
-]
+  'utc_offset_DST',
+];
 /* -- @TODO -------------------------------------------------------------------
     - Use document.infobox_template
     - Try to get image
 ----------------------------------------------------------------------------- */
+const extract = (properties = {}) => {
+  const related = {};
+
+  DOCUMENT_TERMS.forEach((key) => {
+    if (properties[key] && properties[key].text) related[key] = properties[key].text;
+  });
+
+  return related;
+};
+
 export default (state) => {
+  const { object, subject, location } = relation(RELATIONS, state);
+  const ms = new Date();
+  const concept = object || location || subject;
 
-  return new Promise((resolve, reject) => {
-    const { object, subject, location } = relation(RELATIONS, state);
-    const ms = new Date()
-    const concept = object || location || subject;
-    if (state.debug)
+  return new Promise(resolve => {
+    if (state.debug) {
       console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
+    }
 
-    if (!concept) resolve(state)
+    if (!concept) resolve(state);
 
     wikipedia.from_api(concept, 'en', (response) => {
       const document = wikipedia.parse(response);
       if (document.type === 'page' && document.categories.length > 0) {
-        const summary = document.text.Intro.map( sentence => sentence.text ).join(' ');
+        const summary = document.text.Intro.map(sentence => sentence.text).join(' ');
 
         state.action = {
           ms: (new Date() - ms),
@@ -48,7 +57,7 @@ export default (state) => {
           image: `http://en.wikipedia.org/wiki/${document.images[0]}`,
           title: document.infobox.name ? document.infobox.name.text : concept,
           value: summary,
-          related: _extract(document.infobox)
+          related: extract(document.infobox),
         };
 
         resolve(state);
@@ -56,12 +65,3 @@ export default (state) => {
     });
   });
 };
-
-const _extract = (properties = {}) => {
-  let related = {};
-  DOCUMENT_TERMS.map( key => {
-    if (properties[key] && properties[key].text) related[key] = properties[key].text;
-  });
-
-  return related;
-}

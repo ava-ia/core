@@ -26,7 +26,15 @@ describe('Action: translator', () => {
     await translator(state);
 
     expect(state.action).to.be.ok;
-    expect(state.action.value).to.be.equal('posso tradurre ho fame');
+    expect(state.action.value.toLowerCase()).to.be.equal('ho fame');
+  });
+
+  it("Detected using 'how can i translate in...'", async () => {
+    state.sentence = "How can I translate in spanish i'm hungry";
+    await translator(state);
+
+    expect(state.action).to.be.ok;
+    expect(state.action.value.toLowerCase()).to.be.equal('tengo hambre');
   });
 
   it('Not detected', async () => {

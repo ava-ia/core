@@ -1,6 +1,4 @@
-'use strict';
-
-import { factoryActions, resolve, syntax } from '../helpers'
+import { factoryActions, resolve, syntax } from '../helpers';
 // -- Internal
 const RULES = [
   'translate [Preposition]? [Demonym]',

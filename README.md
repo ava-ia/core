@@ -257,6 +257,13 @@ In this example we use `resolve` method 'cause we are inside a *Promise*, as you
 ## Mastering in Ava
 If you wanna learn more about Ava *internals* please take a look to our [wiki](https://github.com/ava-ia/core/wiki). Feel free to offer new features, improvements or anything you can think of. This project makes sense with your participation and experience using Ava.
 
+## Support
+
+### Funding
+
+This software is provided to you as open source, free of charge. The time and effort to develop and maintain this project is dedicated by @soyjavi. If you (or your employer) benefit from this project, please consider a financial contribution. Your contribution helps continue the efforts that produce this and other open source software.
+
+Funds are accepted via [PayPal](https://paypal.me/soyjavi), any amount is appreciated.
 
 ## License
 

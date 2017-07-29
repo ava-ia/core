@@ -1,10 +1,7 @@
-'use strict';
-
 import cld from 'cld';
 
-export default (state) => {
-  return new Promise((resolve, reject) => {
-
+export default function(state) {
+  return new Promise((resolve) => {
     cld.detect(state.rawSentence, (error, value) => {
       if (!error) {
         state.language = value.languages[0].code;
@@ -14,4 +11,4 @@ export default (state) => {
       resolve(state);
     });
   });
-};
+}

@@ -1,5 +1,3 @@
-'use strict';
-
 export { default as compose } from './compose';
 export { default as composeAsync } from './composeAsync';
 export { default as config } from './config';

@@ -1,5 +1,3 @@
-'use strict';
-
 import Compromise from 'nlp_compromise';
 
 export default (sentence, rules) => {
@@ -11,7 +9,7 @@ export default (sentence, rules) => {
     const matches = Compromise.text(rootSentence).match(rule);
 
     if (matches.length > 0 && matches[0] !== null) {
-      let values = {};
+      const values = {};
 
       for (const term of matches[0].terms) {
         const key = term.tag.toLowerCase();
@@ -20,7 +18,7 @@ export default (sentence, rules) => {
         if (!values[key]) {
           values[key] = text;
         } else {
-          if (!Array.isArray(values[key])) values[key] = [values[key]]
+          if (!Array.isArray(values[key])) values[key] = [values[key]];
           if (values[key].indexOf(text) === -1) {
             values[key].push(text);
           }
@@ -32,5 +30,5 @@ export default (sentence, rules) => {
     }
   }
 
-  return (match);
+  return match;
 };

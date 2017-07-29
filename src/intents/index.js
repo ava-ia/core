@@ -1,5 +1,3 @@
-'use strict';
-
 export { default as any } from './intent.any';
 export { default as conversor } from './intent.conversor';
 export { default as movie } from './intent.movie';

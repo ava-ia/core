@@ -1,6 +1,4 @@
-'use strict';
-
-import { composeAsync } from '../helpers'
+import { composeAsync } from '../helpers';
 
 import language from './language';
 import translator from './translator';
@@ -15,4 +13,4 @@ export default (state) => {
   const factory = composeAsync(language, translator, taxonomy, classifier, compromise, tokens, relations, sentiment);
 
   return factory(state);
-}
+};
