@@ -3,7 +3,7 @@
   "description": "Agnostic virtual assistant",
   "version": "0.1.2",
   "main": "./lib/index.js",
-  "homepage": "",
+  "homepage": "http://github.com/ava-ia",
   "author": {
     "name": "AVAia Team",
     "url": "http://github.com/ava-ia"
