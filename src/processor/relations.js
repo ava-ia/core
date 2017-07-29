@@ -21,11 +21,12 @@ const extractRelation = (tag, term, previous) => {
   let text = term.normal || term.text;
 
   switch (tag) {
-    case 'date':
+    case 'date': {
       text = Chrono.parseDate(text);
       break;
+    }
 
-    case 'verb':
+    case 'verb': {
       const compromiseVerb = Compromise.verb(term.expansion || term.text);
       if (!previous) {
         relation.verb = {
@@ -37,14 +38,17 @@ const extractRelation = (tag, term, previous) => {
       }
       text = compromiseVerb.conjugate().infinitive;
       break;
+    }
 
-    case 'noun':
+    case 'noun': {
       text = Compromise.text(text).root();
       break;
+    }
 
-    case 'person':
+    case 'person': {
       tag = term.pos.Pronoun ? 'pronoun' : tag;
       break;
+    }
 
     default:
       break;
@@ -63,7 +67,7 @@ export default (state) => {
   const terms = (compromiseSentences[0]) ? compromiseSentences[0].terms : [];
   const relations = {};
 
-  terms.map(term => {
+  terms.forEach(term => {
     const tag = (term.pos.Verb ? 'verb' : term.tag).toLowerCase();
     let relation = TERMS_RELATIONS[tag];
 

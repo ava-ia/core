@@ -2,7 +2,7 @@
   "parser": "babel-eslint",
   "extends": ["airbnb/base"],
   "rules": {
-    "arrow-body-style": [1, "as-needed"],
+    "arrow-body-style": ["error", "as-needed"],
     "prefer-arrow-callback": 1,
     "space-before-function-paren": [2, "never"],
     "func-names": 0,

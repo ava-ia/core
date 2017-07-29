@@ -15,9 +15,7 @@ const determineCondition = (condition = {}, forecast = [], when) => {
   };
 
   if (when) {
-    const day = forecast.find((item) => {
-      return moment(item.date, 'DD MMM YYYY').isSame(when, 'day');
-    });
+    const day = forecast.find((item) => moment(item.date, 'DD MMM YYYY').isSame(when, 'day'));
     if (day) {
       value = {
         code: condition.code,
@@ -31,18 +29,18 @@ const determineCondition = (condition = {}, forecast = [], when) => {
   return value;
 };
 
-
 export default (state) => {
+  const { location, when } = relation(RELATIONS, state);
+  const ms = new Date();
+  const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
+
   return new Promise((resolve, reject) => {
-    const { location, when } = relation(RELATIONS, state);
-    const ms = new Date();
-    const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
     if (state.debug) {
       console.log('ActionForecastYahoo'.bold.yellow, `location: ${location}, when: ${when}`);
     }
     if (!location) return resolve(request(state, { relation: ['location'] }));
 
-    fetch(`${API}${query}&format=json`)
+    return fetch(`${API}${query}&format=json`)
       .then(response => response.json())
       .then(body => {
         const item = body.query.results.channel.item;

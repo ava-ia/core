@@ -17,7 +17,7 @@ export default (state) => {
         state.taxonomy = (taxonomy.label.charAt(0) === '/') ? taxonomy.label.slice(1) : taxonomy.label;
       }
 
-      resolve(state);
+      return resolve(state);
     });
   });
 };

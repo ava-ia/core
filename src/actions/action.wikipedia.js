@@ -25,7 +25,8 @@ const DOCUMENT_TERMS = [
 ----------------------------------------------------------------------------- */
 const extract = (properties = {}) => {
   const related = {};
-  DOCUMENT_TERMS.map((key) => {
+
+  DOCUMENT_TERMS.forEach((key) => {
     if (properties[key] && properties[key].text) related[key] = properties[key].text;
   });
 
@@ -33,10 +34,11 @@ const extract = (properties = {}) => {
 };
 
 export default (state) => {
+  const { object, subject, location } = relation(RELATIONS, state);
+  const ms = new Date();
+  const concept = object || location || subject;
+
   return new Promise(resolve => {
-    const { object, subject, location } = relation(RELATIONS, state);
-    const ms = new Date();
-    const concept = object || location || subject;
     if (state.debug) {
       console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
     }

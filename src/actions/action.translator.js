@@ -5,8 +5,7 @@ import { entities } from '../helpers';
 // -- Internal
 const DEMONYM = 'Demonym';
 
-export default (state) => {
-
+export default function(state) {
   return new Promise((resolve, reject) => {
     const actionIndex = state.tokens.indexOf('translate');
     const terms = Compromise.text(state.sentence).sentences[0].terms;
@@ -15,7 +14,7 @@ export default (state) => {
     let demonymIndex;
     let sentence = '';
 
-    terms.map((term, index) => {
+    terms.forEach((term, index) => {
       if (index > actionIndex) {
         if (term.tag === DEMONYM && demonymIndex === undefined) {
           const demonym = term.text.toLowerCase();
@@ -51,4 +50,4 @@ export default (state) => {
       resolve(state);
     }
   });
-};
+}

@@ -31,13 +31,13 @@ const NAMES = {
 const getCurrency = (value) => (NAMES[value.toLowerCase()] || value.toUpperCase());
 
 export default (state) => {
-  return new Promise((resolve, reject) => {
-    const ms = new Date();
-    const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
-    const from = getCurrency(match.currency[0]);
-    const to = getCurrency(match.currency[1]);
-    const value = parseFloat(match.value);
+  const ms = new Date();
+  const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
+  const from = getCurrency(match.currency[0]);
+  const to = getCurrency(match.currency[1]);
+  const value = parseFloat(match.value);
 
+  return new Promise((resolve, reject) => {
     if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
 
     fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)

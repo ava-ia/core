@@ -1,6 +1,6 @@
 import cld from 'cld';
 
-export default (state) => {
+export default function(state) {
   return new Promise((resolve) => {
     cld.detect(state.rawSentence, (error, value) => {
       if (!error) {
@@ -11,4 +11,4 @@ export default (state) => {
       resolve(state);
     });
   });
-};
+}

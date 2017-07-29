@@ -15,9 +15,7 @@ const determineCondition = function(condition = {}, forecast = [], when) {
   };
 
   if (when) {
-    const day = forecast.find((item) => {
-      return moment(item.date, 'YYYY-MM-DD').isSame(when, 'day');
-    });
+    const day = forecast.find((item) => moment(item.date, 'YYYY-MM-DD').isSame(when, 'day'));
     if (day) {
       value = {
         code: day.skycodeday,
@@ -31,16 +29,17 @@ const determineCondition = function(condition = {}, forecast = [], when) {
 };
 
 export default (state) => {
+  const { location, when } = relation(RELATIONS, state);
+  const ms = new Date();
+
   return new Promise((resolve) => {
-    const { location, when } = relation(RELATIONS, state);
-    const ms = new Date();
     if (state.debug) {
       console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
     }
 
     if (!location) return resolve(request(state, { relation: ['location'] }));
 
-    weather.find({ search: location, degreeType: 'C' }, (error, response) => {
+    return weather.find({ search: location, degreeType: 'C' }, (error, response) => {
       if (!error) {
         const item = response[0];
         const condition = determineCondition(item.current, item.forecast, when);
