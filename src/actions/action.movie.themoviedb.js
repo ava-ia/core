@@ -1,8 +1,8 @@
-import fetch from 'node-fetch'
-import { config, entities, relation } from '../helpers'
+import fetch from 'node-fetch';
+import { config, entities, relation } from '../helpers';
 // -- Internal
-const credentials = config('themoviedb')
-const RELATIONS = ['object', 'subject']
+const credentials = config('themoviedb');
+const RELATIONS = ['object', 'subject'];
 
 const extract = (data) => {
   const item = {
@@ -13,41 +13,41 @@ const extract = (data) => {
     value: {
       id: data.id,
       popularity: data.popularity,
-      vote_average: data.vote_average
-    }
-  }
+      vote_average: data.vote_average,
+    },
+  };
 
   if (data.media_type === 'person') {
-    item.entity = entities.person
-    item.related = data.known_for.map(movie => extract(movie))
+    item.entity = entities.person;
+    item.related = data.known_for.map(movie => extract(movie));
   }
 
-  return item
-}
+  return item;
+};
 
 export default (state) => {
-  if (!credentials) return (state)
+  if (!credentials) return (state);
 
   return new Promise((resolve) => {
-    const ms = new Date()
-    const { object, subject } = relation(RELATIONS, state)
-    const query = object || subject || state.relations
+    const ms = new Date();
+    const { object, subject } = relation(RELATIONS, state);
+    const query = object || subject || state.relations;
     if (state.debug) {
-      console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`)
+      console.log('ActionMovieDB'.bold.yellow, `subject: ${subject}`, `object: ${object}`);
     }
 
     fetch(`${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`)
       .then(response => response.json())
       .then(body => {
-        const data = body.results[0]
+        const data = body.results[0];
         if (data) {
-          state.action = extract(data)
-          state.action.ms = (new Date() - ms)
-          state.action.engine = 'themoviedb'
-          state.action.entity = entities.knowledge
+          state.action = extract(data);
+          state.action.ms = (new Date() - ms);
+          state.action.engine = 'themoviedb';
+          state.action.entity = entities.knowledge;
         }
 
-        resolve(state)
-      })
-  })
-}
+        resolve(state);
+      });
+  });
+};

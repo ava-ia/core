@@ -4,7 +4,6 @@ import googleTranslate from 'google-translate-api';
 import { entities } from '../helpers';
 // -- Internal
 const DEMONYM = 'Demonym';
-const PREPOSITION = 'Preposition';
 
 export default (state) => {
 

@@ -4,5 +4,5 @@ export default {
   location: 2,
   object: 3,
   knowledge: 4,
-  number: 5
-}
+  number: 5,
+};
