@@ -1,6 +1,6 @@
-# <a href='https://github.com/ava-ia/core'><img src='https://dl.dropboxusercontent.com/s/pdoawhkvg295ish/ava.png?dl=0' height='128'></a>
+# <a href='https://github.com/ava-ia/core'><img src='https://avatars1.githubusercontent.com/u/19548544?v=4&s=200' height='128'></a>
 
-[![npm version](https://img.shields.io/npm/v/ava-ia.svg?style=flat-square)](https://www.npmjs.com/package/ava-ia) [![Build Status](http://img.shields.io/travis/ava-ia/core/master.svg?style=flat-square)](https://travis-ci.org/ava-ia/core) [![NPM Status](http://img.shields.io/npm/dm/ava-ia.svg?style=flat-square)](https://www.npmjs.org/package/ava-ia) [![devDependency Status](https://img.shields.io/david/ava-ia/core.svg?style=flat-square)](https://david-dm.org/ava-ia/core#info=dependencies) [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/soyjavi)
+[![Backers on Open Collective](https://opencollective.com/ava-ia/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/ava-ia/sponsors/badge.svg)](#sponsors) [![npm version](https://img.shields.io/npm/v/ava-ia.svg?style=flat-square)](https://www.npmjs.com/package/ava-ia) [![Build Status](http://img.shields.io/travis/ava-ia/core/master.svg?style=flat-square)](https://travis-ci.org/ava-ia/core) [![NPM Status](http://img.shields.io/npm/dm/ava-ia.svg?style=flat-square)](https://www.npmjs.org/package/ava-ia) [![devDependency Status](https://img.shields.io/david/ava-ia/core.svg?style=flat-square)](https://david-dm.org/ava-ia/core#info=dependencies) [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/soyjavi)
 [![npm](https://img.shields.io/npm/l/botkit.svg?style=flat-square)](https://spdx.org/licenses/MIT)
 
 The main purpose of AVA (Agnostic Virtual Assistant) is create a clever/fast assistant for any kind of context. This repository concerns the *core* of AVA so feel free for try in your NodeJS projects.
@@ -263,7 +263,37 @@ If you wanna learn more about Ava *internals* please take a look to our [wiki](h
 
 This software is provided to you as open source, free of charge. The time and effort to develop and maintain this project is dedicated by @soyjavi. If you (or your employer) benefit from this project, please consider a financial contribution. Your contribution helps continue the efforts that produce this and other open source software.
 
-Funds are accepted via [PayPal](https://paypal.me/soyjavi), any amount is appreciated.
+Funds are accepted on our [Open Collective](https://opencollective.com/ava-ia) or to my personal [PayPal](https://paypal.me/soyjavi), any amount is appreciated.
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
+<a href="graphs/contributors"><img src="https://opencollective.com/ava-ia/contributors.svg?width=890" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/ava-ia#backer)]
+
+<a href="https://opencollective.com/ava-ia#backers" target="_blank"><img src="https://opencollective.com/ava-ia/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/ava-ia#sponsor)]
+
+<a href="https://opencollective.com/ava-ia/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/ava-ia/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ava-ia/sponsor/9/avatar.svg"></a>
+
+
 
 ## License
 
