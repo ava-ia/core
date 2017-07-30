@@ -265,6 +265,9 @@ This software is provided to you as open source, free of charge. The time and ef
 
 Funds are accepted via [PayPal](https://paypal.me/soyjavi), any amount is appreciated.
 
+### Sponsors
+Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/avaia#sponsor)]
+
 ## License
 
 Copyright (c) 2016 Javier Jimenez Villar
