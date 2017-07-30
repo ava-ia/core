@@ -30,7 +30,8 @@
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
     "lint": "eslint src/**",
     "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
-    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill"
+    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill",
+    "postinstall": "opencollective postinstall"
   },
   "license": "MIT",
   "dependencies": {
@@ -43,6 +44,7 @@
     "moment": "2.18.1",
     "nlp_compromise": "6.5.3",
     "node-fetch": "1.7.1",
+    "opencollective": "^1.0.3",
     "sentiment": "4.0.0",
     "weather-js": "2.0.0",
     "world-countries": "1.8.1",
@@ -63,5 +65,10 @@
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.12.0",
     "mocha": "^3.4.2"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ava-ia",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
