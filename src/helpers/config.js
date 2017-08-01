@@ -4,7 +4,7 @@
 let file;
 
 try {
-  file = require(process.cwd() + '/config.json');
+  file = require(`${process.cwd()}/config.json`);
 } catch (error) {
   file = {};
 }

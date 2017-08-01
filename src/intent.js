@@ -1,6 +1,6 @@
-const isFunction = (value) => (typeof (value) === 'function');
+const isFunction = value => (typeof (value) === 'function');
 
-export default (state) => ({
+export default state => ({
 
   intent(script, actions) {
     if (isFunction(actions)) actions = [actions];

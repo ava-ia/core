@@ -28,7 +28,7 @@
     "test": "npm run mocha",
     "build": "babel src --out-dir lib",
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
-    "lint": "eslint src/**",
+    "lint": "eslint --fix src/**",
     "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
     "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill"
   },

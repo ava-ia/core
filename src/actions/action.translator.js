@@ -36,7 +36,7 @@ export default function(state) {
 
     if (sentence && to) {
       googleTranslate(sentence, { to })
-        .then(response => {
+        .then((response) => {
           state.action = {
             engine: 'google',
             ms: (new Date() - ms),
