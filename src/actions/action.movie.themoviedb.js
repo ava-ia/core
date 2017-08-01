@@ -38,7 +38,7 @@ export default (state) => {
 
     fetch(`${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`)
       .then(response => response.json())
-      .then(body => {
+      .then((body) => {
         const data = body.results[0];
         if (data) {
           state.action = extract(data);

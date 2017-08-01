@@ -7,12 +7,12 @@ export default function(state) {
     if (state.language === LANGUAGE) return resolve(state);
 
     return googleTranslate(state.rawSentence, { from: state.language, to: LANGUAGE })
-      .then(response => {
+      .then((response) => {
         state.language = response.from.language.iso;
         state.sentence = response.text;
         resolve(state);
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error);
       });
   });

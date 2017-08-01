@@ -15,7 +15,7 @@ const determineCondition = function(condition = {}, forecast = [], when) {
   };
 
   if (when) {
-    const day = forecast.find((item) => moment(item.date, 'YYYY-MM-DD').isSame(when, 'day'));
+    const day = forecast.find(item => moment(item.date, 'YYYY-MM-DD').isSame(when, 'day'));
     if (day) {
       value = {
         code: day.skycodeday,

@@ -28,7 +28,7 @@ const NAMES = {
   dollar: 'USD',
   rand: 'ZAR',
 };
-const getCurrency = (value) => (NAMES[value.toLowerCase()] || value.toUpperCase());
+const getCurrency = value => NAMES[value.toLowerCase()] || value.toUpperCase();
 
 export default (state) => {
   const ms = new Date();
@@ -44,7 +44,7 @@ export default (state) => {
     if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
 
     return fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
-      .then((response) => response.json())
+      .then(response => response.json())
       .then((json) => {
         if (json && json.rates && Object.keys(json.rates).length > 0) {
           const conversion = value * json.rates[to];

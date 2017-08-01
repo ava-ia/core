@@ -1,7 +1,7 @@
 import { composeAsync, factoryIntents, timeout } from './helpers';
 import factoryProcessor from './processor';
 
-export default (state) => ({
+export default state => ({
   listen(sentence, ms) {
     return new Promise((resolve, reject) => {
       state.rawSentence = sentence;
@@ -17,7 +17,7 @@ export default (state) => ({
             reject(new Error('Unknown action'));
           }
         })
-        .catch(error => {
+        .catch((error) => {
           if (!error) error = { code: 0, message: "Sorry, I haven't understood you" };
           reject(error);
         });

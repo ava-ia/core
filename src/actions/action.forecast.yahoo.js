@@ -5,6 +5,7 @@ import { entities, relation, request } from '../helpers';
 // -- Internal
 const API = 'http://query.yahooapis.com/v1/public/yql?q=';
 const RELATIONS = ['when', 'location'];
+const QUERY = 'select item from weather.forecast where woeid in (select woeid from geo.places';
 
 const determineCondition = (condition = {}, forecast = [], when) => {
   let value = {
@@ -15,7 +16,7 @@ const determineCondition = (condition = {}, forecast = [], when) => {
   };
 
   if (when) {
-    const day = forecast.find((item) => moment(item.date, 'DD MMM YYYY').isSame(when, 'day'));
+    const day = forecast.find(item => moment(item.date, 'DD MMM YYYY').isSame(when, 'day'));
     if (day) {
       value = {
         code: condition.code,
@@ -32,7 +33,7 @@ const determineCondition = (condition = {}, forecast = [], when) => {
 export default (state) => {
   const { location, when } = relation(RELATIONS, state);
   const ms = new Date();
-  const query = escape(`select item from weather.forecast where woeid in (select woeid from geo.places where text='${location}') and u='c' | truncate(count=1)`);
+  const query = escape(`${QUERY} where text='${location}') and u='c' | truncate(count=1)`);
 
   return new Promise((resolve, reject) => {
     if (state.debug) {
@@ -42,7 +43,7 @@ export default (state) => {
 
     return fetch(`${API}${query}&format=json`)
       .then(response => response.json())
-      .then(body => {
+      .then((body) => {
         const item = body.query.results.channel.item;
         const condition = determineCondition(item.condition, item.forecast, when);
         state.action = {

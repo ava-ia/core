@@ -38,7 +38,7 @@ export default (state) => {
   const ms = new Date();
   const concept = object || location || subject;
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (state.debug) {
       console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
     }

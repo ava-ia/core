@@ -67,7 +67,7 @@ export default (state) => {
   const terms = (compromiseSentences[0]) ? compromiseSentences[0].terms : [];
   const relations = {};
 
-  terms.forEach(term => {
+  terms.forEach((term) => {
     const tag = (term.pos.Verb ? 'verb' : term.tag).toLowerCase();
     let relation = TERMS_RELATIONS[tag];
 

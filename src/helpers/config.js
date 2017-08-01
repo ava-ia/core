@@ -9,4 +9,4 @@ try {
   file = {};
 }
 
-export default (key) => file[key];
+export default key => file[key];
