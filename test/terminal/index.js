@@ -2,6 +2,10 @@
 
 import colors from 'colors';
 import fetch from 'node-fetch';
+import ora from 'ora';
+
+const spinner = ora();
+
 // -- Core
 import Ava from '../../lib';
 import { weather, movie, translate, conversor, any } from '../../lib/intents';
@@ -24,13 +28,15 @@ ava
 
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
+  spinner.start();
   ava
     .listen(sentence, timeout)
     .then(state => {
-      console.log('<AVA>'.bold.green, state);
+      spinner.succeed();
+      console.log(state);
     })
     .catch(error => {
-      console.log('<AVA>'.bold.red, error || `Sorry but I didn't understand you`)
+      spinner.fail(error || `Sorry but I didn't understand you`);
     })
 }
 
