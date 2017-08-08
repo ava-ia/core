@@ -4,6 +4,9 @@
 ## 1. Improvements
   [✓] intent calc
   [✓] use a helper/trace as a console.log
+  [ ] **taxonomy** zero-dependencies (now is with alchemy)
+  [ ] **classifier** is empty
+  [✓] Timestamp for control each process
   [ ] maths action
   [ ] default action for a defined intent
   [ ] action.wtf_wikipedia

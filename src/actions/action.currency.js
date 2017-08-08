@@ -41,11 +41,11 @@ export default (state) => {
     const to = getCurrency(match.currency[1]);
     const value = parseFloat(match.value);
 
-    trace('ActionCurrency', { match }, state);
-
     return fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
       .then(response => response.json())
       .then((json) => {
+        trace('ActionCurrency', { match }, state);
+
         if (json && json.rates && Object.keys(json.rates).length > 0) {
           const conversion = value * json.rates[to];
           state.action = {

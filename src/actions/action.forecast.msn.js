@@ -31,12 +31,13 @@ const determineCondition = function(condition = {}, forecast = [], when) {
 export default (state) => {
   const { location, when } = relation(RELATIONS, state);
   const ms = new Date();
-  trace('ActionForecastMSN', { location, when }, state);
 
   return new Promise((resolve) => {
     if (!location) return resolve(request(state, { relation: ['location'] }));
 
     return weather.find({ search: location, degreeType: 'C' }, (error, response) => {
+      trace('ActionForecastMSN', { location, when }, state);
+
       if (!error) {
         const item = response[0];
         const condition = determineCondition(item.current, item.forecast, when);

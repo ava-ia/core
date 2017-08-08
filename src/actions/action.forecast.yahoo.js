@@ -36,12 +36,13 @@ export default (state) => {
   const query = escape(`${QUERY} where text='${location}') and u='c' | truncate(count=1)`);
 
   return new Promise((resolve, reject) => {
-    trace('ActionForecastYahoo', { location, when }, state);
     if (!location) return resolve(request(state, { relation: ['location'] }));
 
     return fetch(`${API}${query}&format=json`)
       .then(response => response.json())
       .then((body) => {
+        trace('ActionForecastYahoo', { location, when }, state);
+
         const item = body.query.results.channel.item;
         const condition = determineCondition(item.condition, item.forecast, when);
         state.action = {

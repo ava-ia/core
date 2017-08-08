@@ -5,6 +5,7 @@ export default state => ({
   listen(sentence, ms) {
     return new Promise((resolve, reject) => {
       state.rawSentence = sentence;
+      state.timestamp = new Date();
 
       if (ms) timeout(reject, ms);
       const factory = composeAsync(factoryProcessor, factoryIntents);
