@@ -5,6 +5,7 @@ export { default as entities } from './entities';
 export { default as factoryActions } from './factoryActions';
 export { default as factoryIntents } from './factoryIntents';
 export { default as intersect } from './intersect';
+export { default as isFunction } from './isFunction';
 export { default as relation } from './relation';
 export { default as request } from './request';
 export { default as resolve } from './resolve';
