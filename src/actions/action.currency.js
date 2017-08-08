@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { entities, syntax } from '../helpers';
+import { entities, syntax, trace } from '../helpers';
 // -- Internal
 const NAMES = {
   lev: 'BGN',
@@ -41,7 +41,7 @@ export default (state) => {
     const to = getCurrency(match.currency[1]);
     const value = parseFloat(match.value);
 
-    if (state.debug) console.log('ActionCurrency'.bold.yellow, 'match:', match);
+    trace('ActionCurrency', { match }, state);
 
     return fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
       .then(response => response.json())

@@ -11,3 +11,4 @@ export { default as resolve } from './resolve';
 export { default as store } from './store';
 export { default as syntax } from './syntax';
 export { default as timeout } from './timeout';
+export { default as trace } from './trace';

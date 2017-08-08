@@ -1,6 +1,6 @@
 import moment from 'moment';
 import weather from 'weather-js';
-import { entities, relation, request } from '../helpers';
+import { entities, relation, request, trace } from '../helpers';
 // -- Internal
 const RELATIONS = ['when', 'location'];
 
@@ -31,12 +31,9 @@ const determineCondition = function(condition = {}, forecast = [], when) {
 export default (state) => {
   const { location, when } = relation(RELATIONS, state);
   const ms = new Date();
+  trace('ActionForecastMSN', { location, when }, state);
 
   return new Promise((resolve) => {
-    if (state.debug) {
-      console.log('ActionForecastMSN'.bold.yellow, `location: ${location}, when: ${when}`);
-    }
-
     if (!location) return resolve(request(state, { relation: ['location'] }));
 
     return weather.find({ search: location, degreeType: 'C' }, (error, response) => {

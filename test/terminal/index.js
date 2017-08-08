@@ -4,39 +4,43 @@ import colors from 'colors';
 import fetch from 'node-fetch';
 import ora from 'ora';
 
-const spinner = ora();
+const trace = ora();
 
 // -- Core
-import Ava from '../../lib';
-import { weather, movie, translate, conversor, any } from '../../lib/intents';
-import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia, math } from '../../lib/actions';
+import Ava from '../../src';
+import { weather, movie, translate, conversor, any } from '../../src/intents';
+import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia, math } from '../../src/actions';
 // -- Internal
 const timeout = 10000;
+const keys = ['rawSentence', 'sentence', 'language', 'classifier', 'type', 'topics', 'tags', 'tokens', 'relations', 'sentiment']
 
 // -- New instance of Ava (with custom config);
-let ava = new Ava({
-  debug: true,
+const ava = new Ava({
+  debug: trace,
 })
 
 // -- Prepare intents
 ava
-  .intent(weather, [forecastYahoo, forecastMSN])
+  .intent(weather, [forecastYahoo])
   .intent(movie, movieDB)
   .intent(translate, translator)
   .intent(conversor, currency)
   .intent(any, math, wikipedia)
 
+const traceKeys = (state) => keys.map(key => trace.stopAndPersist(`${key.grey} ${state[key]}`));
+
 const answer = (sentence) => {
   process.stdout.write('\x1Bc');
-  spinner.start();
+  trace.start();
   ava
     .listen(sentence, timeout)
     .then(state => {
-      spinner.succeed();
-      console.log(state);
+      traceKeys(state);
+      trace.succeed(JSON.stringify(state.action));
     })
     .catch(error => {
-      spinner.fail(error || `Sorry but I didn't understand you`);
+      traceKeys(state);
+      trace.fail(error || `Sorry but I didn't understand you`);
     })
 }
 

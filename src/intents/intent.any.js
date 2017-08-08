@@ -1,7 +1,7 @@
-import { factoryActions } from '../helpers';
+import { factoryActions, trace } from '../helpers';
 
 export default (state, actions) => {
-  if (state.debug) console.log('IntentAny'.bold.green);
+  trace('IntentAny', {}, state);
 
   return factoryActions(state, actions);
 };

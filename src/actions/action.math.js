@@ -1,4 +1,4 @@
-import { entities, resolve, syntax } from '../helpers';
+import { entities, resolve, syntax, trace} from '../helpers';
 
 const SYNTAXES = [
   '. [Value] [Preposition] [Value]',
@@ -22,9 +22,7 @@ export default (state) => {
   const a = parseFloat(match.value[0]);
   const b = parseFloat(match.value[1]);
 
-  if (state.debug) {
-    console.log('ActionMath'.bold.yellow, 'operation:'.bold, operation, 'a:'.bold, a, 'b:'.bold, b);
-  }
+  trace('ActionMath', { operation, a, b }, state);
 
   if (operation && a && b) {
     for (const type of OPERATIONS) {

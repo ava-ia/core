@@ -1,5 +1,5 @@
 import wikipedia from 'wtf_wikipedia';
-import { entities, relation } from '../helpers';
+import { entities, relation, trace } from '../helpers';
 // -- Internal
 const RELATIONS = ['object', 'subject', 'location'];
 const DOCUMENT_TERMS = [
@@ -39,9 +39,7 @@ export default (state) => {
   const concept = object || location || subject;
 
   return new Promise((resolve) => {
-    if (state.debug) {
-      console.log('ActionWikipedia'.bold.yellow, `concept: ${concept}`);
-    }
+    trace('ActionWikipedia', { concept }, state);
 
     if (!concept) resolve(state);
 

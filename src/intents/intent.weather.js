@@ -1,4 +1,4 @@
-import { factoryActions, intersect, resolve } from '../helpers';
+import { factoryActions, intersect, resolve, trace } from '../helpers';
 // -- Internal
 const TERMS = [
   'weather',
@@ -15,9 +15,7 @@ const TERMS = [
 export default (state, actions) => {
   const tokens = intersect(TERMS, state.tokens);
   const classifiers = intersect(TERMS, state.classifier);
-  if (state.debug) {
-    console.log('IntentWeather'.bold.green, `tokens: ${tokens.toString().green}, classifiers: ${classifiers.toString().green}`);
-  }
+  trace('IntentWeather', { tokens, classifiers }, state);
 
   return (tokens || classifiers) ? factoryActions(state, actions) : resolve(state);
 };

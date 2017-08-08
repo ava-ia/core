@@ -1,7 +1,7 @@
 import countries from 'world-countries';
 import Compromise from 'nlp_compromise';
 import googleTranslate from 'google-translate-api';
-import { entities } from '../helpers';
+import { entities, trace } from '../helpers';
 // -- Internal
 const DEMONYM = 'Demonym';
 
@@ -30,9 +30,7 @@ export default function(state) {
       }
     });
 
-    if (state.debug) {
-      console.log('ActionTranslator'.bold.yellow, 'sentence:'.bold, sentence, 'to:'.bold, to);
-    }
+    trace('ActionTranslator', { sentence, to }, state);
 
     if (sentence && to) {
       googleTranslate(sentence, { to })
