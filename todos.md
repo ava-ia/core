@@ -1,18 +1,26 @@
 ## 0. NOTES
   [ ] Intents should dispatch a `reject()` but is better don't do it, because maybe we have more intents to execute.
 
+## Algorythm
+  [✓] Execute all intents (as a sync process)
+  [✓] collect all actions
+  [ ] execute all actions async until one of them is resolved
+  [ ] if any action is resolved dispatch an error
+  [ ] if the timeout runs dispatch an error and close the current running action
+
 ## 1. Improvements
-  [✓] intent calc
-  [✓] use a helper/trace as a console.log
   [ ] **taxonomy** zero-dependencies (now is with alchemy)
   [ ] **classifier** is empty
-  [✓] Timestamp for control each process
-  [ ] maths action
+  [ ] **actionTranslator**
+  [ ] **actionMaths**
   [ ] default action for a defined intent
   [ ] action.wtf_wikipedia
   [ ] translate the action.title to origin language (if it's not english)
   [ ] Improve relations.spec
   [ ] create a super-method for execute always all the intersections
+  [✓] intent calc
+  [✓] Timestamp for control each process
+  [✓] use a helper/trace as a console.log
 
 ## 2. INTENTS
   [ ] Places

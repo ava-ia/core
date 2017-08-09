@@ -1,6 +1,6 @@
 // -- More info: https://github.com/ttezel/bayes
 import bayes from 'bayes';
-import { store } from '../helpers';
+import { store } from '../../helpers';
 
 // -- Internal
 const db = store('classifier.json');

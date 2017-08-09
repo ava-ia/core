@@ -3,7 +3,7 @@ import moment from 'moment';
 import { entities, relation, request, trace } from '../helpers';
 
 // -- Internal
-const API = 'http://query.yahooapis.com/v1/public/yql?q=';
+const URL = 'http://query.yahooapis.com/v1/public/yql?q=';
 const RELATIONS = ['when', 'location'];
 const QUERY = 'select item from weather.forecast where woeid in (select woeid from geo.places';
 
@@ -30,33 +30,24 @@ const determineCondition = (condition = {}, forecast = [], when) => {
   return value;
 };
 
-export default (state) => {
+export default async(state) => {
   const { location, when } = relation(RELATIONS, state);
-  const ms = new Date();
   const query = escape(`${QUERY} where text='${location}') and u='c' | truncate(count=1)`);
 
-  return new Promise((resolve, reject) => {
-    if (!location) return resolve(request(state, { relation: ['location'] }));
+  if (!location) return request(state, { relation: ['location'] });
 
-    return fetch(`${API}${query}&format=json`)
-      .then(response => response.json())
-      .then((body) => {
-        trace('ActionForecastYahoo', { location, when }, state);
+  trace('ActionForecastYahoo', { location, when }, state);
+  const response = await fetch(`${URL}${query}&format=json`).catch(() => state);
+  const json = await response.json();
 
-        const item = body.query.results.channel.item;
-        const condition = determineCondition(item.condition, item.forecast, when);
-        state.action = {
-          ms: (new Date() - ms),
-          engine: 'yahoo',
-          entity: entities.knowledge,
-          title: item.title,
-          url: item.link.split('*')[1],
-          value: condition,
-        };
-        if (!when) state.action.related = item.forecast;
-
-        resolve(state);
-      })
-      .catch(reject);
-  });
+  const item = json.query.results.channel.item;
+  const condition = determineCondition(item.condition, item.forecast, when);
+  return {
+    engine: 'yahoo',
+    entity: entities.knowledge,
+    title: item.title,
+    url: item.link.split('*')[1],
+    value: condition,
+    related: !when ? item.forecast : undefined,
+  };
 };

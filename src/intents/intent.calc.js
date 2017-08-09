@@ -1,4 +1,4 @@
-import { factoryActions, intersect, resolve, trace } from '../helpers';
+import { intersect, trace } from '../helpers';
 // -- Internal
 const TERMS = [
   '+', 'plus', 'add',
@@ -7,10 +7,9 @@ const TERMS = [
   '/', 'divided', 'divides',
 ];
 
-export default (state, actions) => {
+export default (state) => {
   const tokens = intersect(TERMS, state.tokens);
-
   trace('IntentMaths', { tokens }, state);
 
-  return (tokens) ? factoryActions(state, actions) : resolve(state);
+  return (tokens);
 };

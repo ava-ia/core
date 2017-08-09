@@ -1,4 +1,4 @@
-import { isFunction } from './helpers';
+import { isFunction } from './modules';
 
 export default state => ({
 

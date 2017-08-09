@@ -33,9 +33,8 @@ const extract = (properties = {}) => {
   return related;
 };
 
-export default (state) => {
+export default async(state) => {
   const { object, subject, location } = relation(RELATIONS, state);
-  const ms = new Date();
   const concept = object || location || subject;
 
   return new Promise((resolve) => {
@@ -44,21 +43,20 @@ export default (state) => {
     if (!concept) resolve(state);
 
     wikipedia.from_api(concept, 'en', (response) => {
-      const document = wikipedia.parse(response);
-      if (document.type === 'page' && document.categories.length > 0) {
-        const summary = document.text.Intro.map(sentence => sentence.text).join(' ');
+      const { categories = [], sections = [], type, infobox = {}, images = [] } = wikipedia.parse(response);
 
-        state.action = {
-          ms: (new Date() - ms),
+      if (type === 'page' && categories.length > 0) {
+        const { sentences = [] } = sections[0] || {};
+        const summary = sentences.map(sentence => sentence.text).join(' ');
+
+        resolve({
           engine: 'wikipedia',
           entity: entities.knowledge,
-          image: `http://en.wikipedia.org/wiki/${document.images[0]}`,
-          title: document.infobox.name ? document.infobox.name.text : concept,
+          image: images[0] && images[0].url,
+          title: infobox.name ? infobox.name.text : concept,
           value: summary,
-          related: extract(document.infobox),
-        };
-
-        resolve(state);
+          related: extract(infobox),
+        });
       }
     });
   });

@@ -1,4 +1,4 @@
-import { entities, resolve, syntax, trace} from '../helpers';
+import { entities, syntax, trace } from '../helpers';
 
 const SYNTAXES = [
   '. [Value] [Preposition] [Value]',
@@ -15,31 +15,29 @@ const OPERATIONS = [
 ];
 
 export default (state) => {
-  const ms = new Date();
+  let action;
   const match = syntax(state.sentence, SYNTAXES);
-  if (!match) return resolve(state);
-  const operation = match.noun || match.conjunction || match.infinitive || match.symbol;
+  if (!match) return state;
+
+  const operator = match.noun || match.conjunction || match.infinitive || match.symbol;
   const a = parseFloat(match.value[0]);
   const b = parseFloat(match.value[1]);
 
-  trace('ActionMath', { operation, a, b }, state);
+  trace('ActionMath', { operator, a, b }, state);
 
-  if (operation && a && b) {
-    for (const type of OPERATIONS) {
-      if (type.terms.indexOf(operation) > -1) {
-        const value = type.calc(a, b);
-        state.action = {
-          ms: (new Date() - ms),
+  if (operator && a && b) {
+    Object.values(OPERATIONS).forEach((operation) => {
+      if (operation.terms.indexOf(operator) >= 0) {
+        const value = operation.calc(a, b);
+        action = {
           engine: 'ava',
           title: `It's ${value}`,
           value,
           entity: entities.number,
         };
-
-        break;
       }
-    }
+    });
   }
 
-  return resolve(state);
+  return action;
 };

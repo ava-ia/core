@@ -1,27 +1,17 @@
-import { composeAsync, factoryIntents, timeout } from './helpers';
-import factoryProcessor from './processor';
+import { actions, intents as availableIntents, processor, timeout } from './modules';
 
 export default state => ({
-  listen(sentence, ms) {
-    return new Promise((resolve, reject) => {
-      state.rawSentence = sentence;
-      state.timestamp = new Date();
+  async listen(sentence, ms = 60000) {
+    let action;
+    Object.assign(state, { action, rawSentence: sentence, timestamp: new Date() });
 
-      if (ms) timeout(reject, ms);
-      const factory = composeAsync(factoryProcessor, factoryIntents);
+    timeout(state, ms);
+    await processor(state);
+    availableIntents(state);
+    action = await actions(state);
+    clearTimeout(state.timeout);
+    if (!action) throw new Error('Not action');
 
-      factory(state)
-        .then(() => {
-          if (state.action) {
-            resolve(state);
-          } else {
-            reject(new Error('Unknown action'));
-          }
-        })
-        .catch((error) => {
-          if (!error) error = { code: 0, message: "Sorry, I haven't understood you" };
-          reject(error);
-        });
-    });
+    return Object.assign(state, { action });
   },
 });

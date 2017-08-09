@@ -1,7 +1,7 @@
-import { factoryActions, trace } from '../helpers';
+import { trace } from '../helpers';
 
-export default (state, actions) => {
+export default (state) => {
   trace('IntentAny', {}, state);
 
-  return factoryActions(state, actions);
+  return true;
 };

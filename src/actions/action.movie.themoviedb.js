@@ -25,28 +25,25 @@ const extract = (data) => {
   return item;
 };
 
-export default (state) => {
-  if (!credentials) return (state);
+export default async(state) => {
+  if (!credentials) return state;
 
-  return new Promise((resolve) => {
-    const ms = new Date();
-    const { object, subject } = relation(RELATIONS, state);
-    const query = object || subject || state.relations;
+  let action;
+  const { object, subject } = relation(RELATIONS, state);
+  const query = object || subject || state.relations;
 
-    trace('ActionMovieDB', { subject, object }, state);
+  trace('ActionMovieDB', { subject, object }, state);
+  const url = `${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`;
+  const response = await fetch(url).catch(() => state);
+  const json = await response.json();
 
-    fetch(`${credentials.url}/3/search/multi?api_key=${credentials.apikey}&query=${query}`)
-      .then(response => response.json())
-      .then((body) => {
-        const data = body.results[0];
-        if (data) {
-          state.action = extract(data);
-          state.action.ms = (new Date() - ms);
-          state.action.engine = 'themoviedb';
-          state.action.entity = entities.knowledge;
-        }
+  const data = json.results[0];
+  if (data) {
+    action = Object.assign(extract(data), {
+      engine: 'themoviedb',
+      entity: entities.knowledge,
+    });
+  }
 
-        resolve(state);
-      });
-  });
+  return action;
 };

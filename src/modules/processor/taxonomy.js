@@ -1,5 +1,5 @@
 import AlchemyAPI from 'alchemy-api';
-import { config } from '../helpers';
+import { config } from '../../helpers';
 // -- Internal
 const credentials = config('alchemy');
 let processor;

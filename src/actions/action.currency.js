@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { entities, syntax, trace } from '../helpers';
-// -- Internal
+
 const NAMES = {
   lev: 'BGN',
   real: 'BRL',
@@ -28,36 +28,32 @@ const NAMES = {
   dollar: 'USD',
   rand: 'ZAR',
 };
+const SYNTAXES = ['[value] [currency] [preposition]? [currency]'];
+const URL = 'http://api.fixer.io/latest';
 const getCurrency = value => NAMES[value.toLowerCase()] || value.toUpperCase();
 
-export default (state) => {
-  const ms = new Date();
+export default async(state) => {
+  const match = syntax(state.sentence, SYNTAXES);
+  if (!match) return undefined;
 
-  return new Promise((resolve, reject) => {
-    const match = syntax(state.sentence, '[value] [currency] [preposition]? [currency]');
-    if (!match) return reject();
+  let action;
+  const base = getCurrency(match.currency[0]);
+  const symbol = getCurrency(match.currency[1]);
+  const value = parseFloat(match.value);
 
-    const from = getCurrency(match.currency[0]);
-    const to = getCurrency(match.currency[1]);
-    const value = parseFloat(match.value);
+  const response = await fetch(`${URL}?base=${base}&symbols=${symbol}`).catch(() => state);
+  const json = await response.json();
 
-    return fetch(`http://api.fixer.io/latest?base=${from}&symbols=${to}`)
-      .then(response => response.json())
-      .then((json) => {
-        trace('ActionCurrency', { match }, state);
+  if (json && json.rates && Object.keys(json.rates).length > 0) {
+    trace('ActionCurrency', { match }, state);
+    const conversion = value * json.rates[symbol];
+    action = {
+      engine: 'fixer.io',
+      title: `${value} ${base} are ${conversion.toFixed(3)} ${symbol}`,
+      value: conversion,
+      entity: entities.number,
+    };
+  }
 
-        if (json && json.rates && Object.keys(json.rates).length > 0) {
-          const conversion = value * json.rates[to];
-          state.action = {
-            ms: (new Date() - ms),
-            engine: 'fixer.io',
-            title: `${value} ${from} are ${conversion.toFixed(3)} ${to}`,
-            value: conversion,
-            entity: entities.object,
-          };
-        }
-        resolve(state);
-      })
-      .catch(reject);
-  });
+  return action;
 };

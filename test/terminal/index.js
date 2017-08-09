@@ -8,7 +8,7 @@ const trace = ora();
 
 // -- Core
 import Ava from '../../src';
-import { weather, movie, translate, conversor, any } from '../../src/intents';
+import { calc, weather, movie, translate, conversor, any } from '../../src/intents';
 import { forecastYahoo, forecastMSN, movieDB, translator, currency, wikipedia, math } from '../../src/actions';
 // -- Internal
 const timeout = 10000;
@@ -21,17 +21,23 @@ const ava = new Ava({
 
 // -- Prepare intents
 ava
-  .intent(weather, [forecastYahoo])
+  .intent(weather, [forecastMSN])
   .intent(movie, movieDB)
   .intent(translate, translator)
   .intent(conversor, currency)
-  .intent(any, math, wikipedia)
+  .intent(calc, math)
+  // .intent(any, [wikipedia])
 
 const traceKeys = (state) => keys.map(key => trace.stopAndPersist(`${key.grey} ${state[key]}`));
 
-const answer = (sentence) => {
+const answer = async (sentence) => {
   process.stdout.write('\x1Bc');
   trace.start();
+
+  // const answer = await ava.listen(sentence, timeout).catch(error => console.log('error'));
+  // traceKeys(answer);
+  // trace.succeed(JSON.stringify(answer.action));
+
   ava
     .listen(sentence, timeout)
     .then(state => {

@@ -30,7 +30,6 @@ const determineCondition = function(condition = {}, forecast = [], when) {
 
 export default (state) => {
   const { location, when } = relation(RELATIONS, state);
-  const ms = new Date();
 
   return new Promise((resolve) => {
     if (!location) return resolve(request(state, { relation: ['location'] }));
@@ -41,16 +40,14 @@ export default (state) => {
       if (!error) {
         const item = response[0];
         const condition = determineCondition(item.current, item.forecast, when);
-        state.action = {
-          ms: (new Date() - ms),
+
+        resolve({
           engine: 'msn',
           entity: entities.knowledge,
           title: `Conditions for ${item.location.name} at ${item.current.observationtime}`,
           value: condition,
-        };
-        if (!when) state.action.related = item.forecast;
-
-        resolve(state);
+          related: !when ? item.forecast : undefined,
+        });
       }
     });
   });
