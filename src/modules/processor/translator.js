@@ -1,19 +1,17 @@
-import googleTranslate from 'google-translate-api';
+import gTranslate from 'google-translate-api';
 // -- Internal
-const LANGUAGE = 'en';
+const ENGLISH = 'en';
 
-export default function(state) {
-  return new Promise((resolve, reject) => {
-    if (state.language === LANGUAGE) return resolve(state);
+export default async(state) => {
+  if (state.language === ENGLISH) return state;
 
-    return googleTranslate(state.rawSentence, { from: state.language, to: LANGUAGE })
-      .then((response) => {
-        state.language = response.from.language.iso;
-        state.sentence = response.text;
-        resolve(state);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
+  const response = await gTranslate(state.rawSentence, { from: state.language, to: ENGLISH });
+  if (response.from && response.text) {
+    Object.assign(state, {
+      language: response.from.language.iso,
+      sentence: response.text,
+    });
+  }
+
+  return state;
+};

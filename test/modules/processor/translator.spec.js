@@ -16,7 +16,7 @@ describe('Processor: translator', () => {
   it('Detected an english sentence', async () => {
     state.rawSentence = 'hello world';
     state.language = 'en';
-    await translator(state);
+    state = await translator(state);
 
     expect(state.language).equal('en');
     expect(state.sentence).equal(undefined);
@@ -24,7 +24,7 @@ describe('Processor: translator', () => {
 
   it('Detected a non-english sentence, translate it and identify the language', async () => {
     state.rawSentence = 'Hola Mundo!';
-    await translator(state);
+    state = await translator(state);
 
     expect(state.language).equal('es');
     expect(state.sentence).equal('Hello World!');

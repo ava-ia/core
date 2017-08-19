@@ -4,6 +4,7 @@ const SYNTAXES = [
   '. [Value] [Preposition] [Value]',
   '[Value] . [Preposition] [Value]',
   '[Value][Symbol][Value]',
+  '[Value] [Symbol] [Value]',
   '[Value] . [Value]',
 ];
 

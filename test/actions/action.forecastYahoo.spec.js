@@ -24,22 +24,23 @@ describe('Action: forecastYahoo', () => {
   });
 
   it('Detected using relations location & when', async () => {
-    await forecastYahoo(state);
+    const action = await forecastYahoo(state);
 
-    expect(state.action).to.be.ok;
-    expect(state.action).to.have.all.keys('ms', 'engine', 'entity', 'title', 'url', 'value');
-    expect(state.action.value).to.have.all.keys('code', 'condition', 'temperature', 'date');
+    expect(action).to.be.ok;
+    expect(action).to.have.all.keys('engine', 'entity', 'related', 'title', 'url', 'value');
+    expect(action.value).to.have.all.keys('code', 'condition', 'temperature', 'date');
   });
 
   it('Detected using relation location (forecast mode)', async () => {
     state.relations.when = undefined;
-    await forecastYahoo(state);
+    const action = await forecastYahoo(state);
 
-    expect(state.action.related).to.be.ok;
+    expect(action.related).to.be.ok;
   });
 
   it('Not detected', async () => {
     state.relations = undefined;
-    expect( forecastYahoo(state) ).to.be.rejected;
+    const action = await forecastYahoo(state);
+    expect(action).to.have.all.keys('entity', 'request');
   });
 });

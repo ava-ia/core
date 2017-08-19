@@ -17,9 +17,7 @@ describe('IntentAny', () => {
   });
 
   it('Detected with any condition', async () => {
-    await any(state, [ActionMock]);
-
-    expect(state.action).to.be.ok;
+    expect(await any(state, [ActionMock])).to.be.ok;
   });
 
 });

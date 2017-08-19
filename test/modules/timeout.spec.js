@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import { timeout } from '../../src/helpers';
+import { timeout } from '../../src/modules';
 
 describe('Helper: timeout', () => {
 

@@ -18,28 +18,24 @@ describe('IntentWeather', () => {
     state.tokens = ['will', 'rain', 'tomorrow', 'in', 'london']
   });
 
-  it('Up & Running', async () => {
+  it('Up & Running', () => {
     expect(weather).to.be.ok;
   });
 
-  it('Detected with {tokens}', async () => {
-    await weather(state, [ActionMock]);
-
-    expect(state.action).to.be.ok;
+  it('Detected with {tokens}', () => {
+    expect(weather(state, [ActionMock])).to.be.ok;
   });
 
-  it('Detected with {classifier}', async () => {
+  it('Detected with {classifier}', () => {
     state.tokens = [];
     state.classifier = ['rain']
-    await weather(state, [ActionMock]);
-
-    expect(state.action).to.be.ok;
+    expect(weather(state, [ActionMock])).to.be.ok;
   });
 
-  it('Not detected', async () => {
+  it('Not detected', () => {
     state.tokens = [];
     state.classifier = [];
-    expect( weather(state, [ActionMock]) ).to.be.rejected;
+    expect(weather(state, [ActionMock])).not.to.be.ok;
   });
 
 });

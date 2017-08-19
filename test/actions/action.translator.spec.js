@@ -23,22 +23,23 @@ describe('Action: translator', () => {
 
   it("Detected using 'translate into...'", async () => {
     state.sentence = 'How can I translate into italian i have hungry';
-    await translator(state);
+    const action = await translator(state);
 
-    expect(state.action).to.be.ok;
-    expect(state.action.value.toLowerCase()).to.be.equal('ho fame');
+    expect(action).to.be.ok;
+    expect(action.value.toLowerCase()).to.be.equal('ho fame');
   });
 
   it("Detected using 'how can i translate in...'", async () => {
     state.sentence = "How can I translate in spanish i'm hungry";
-    await translator(state);
+    const action = await translator(state);
 
-    expect(state.action).to.be.ok;
-    expect(state.action.value.toLowerCase()).to.be.equal('tengo hambre');
+    expect(action).to.be.ok;
+    expect(action.value.toLowerCase()).to.be.equal('tengo hambre');
   });
 
   it('Not detected', async () => {
     state.sentence = 'Hello world';
-    expect( translator(state) ).to.equal(undefined);
+    const action = await translator(state)
+    expect( action ).to.equal(undefined);
   });
 });

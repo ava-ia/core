@@ -17,24 +17,22 @@ describe('IntentConversor', () => {
     state.sentence = 'how much is 20 euros in dollars?';
   });
 
-  it('Up & Running', async () => {
+  it('Up & Running', () => {
     expect(conversor).to.be.ok;
   });
 
-  it("Detected with rule 'how much is...'", async () => {
-    await conversor(state, [ActionMock]);
-    expect(state.action).to.be.ok;
+  it("Detected with rule 'how much is...'", () => {
+    expect(conversor(state, [ActionMock])).to.be.ok;
   });
 
-  it("Detected with rule 'convert...'", async () => {
+  it("Detected with rule 'convert...'", () => {
     // -- @TODO: 👻 'Ava I need convert 20 dollars into euros' is not detected.
     state.sentence = 'Ava, can you convert 20 dollars into euros'
-    await conversor(state, [ActionMock]);
-    expect(state.action).to.be.ok;
+    expect(conversor(state, [ActionMock])).to.be.ok;
   });
 
-  it('Not detected', async () => {
+  it('Not detected', () => {
     state.sentence = 'Hello World!';
-    expect( conversor(state, [ActionMock]) ).to.be.rejected;
+    expect(conversor(state, [ActionMock])).not.to.be.ok;
   });
 });

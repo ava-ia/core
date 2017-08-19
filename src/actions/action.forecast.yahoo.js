@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import moment from 'moment';
-import { entities, relation, request, trace } from '../helpers';
+import { entities, relation, trace } from '../helpers';
 
 // -- Internal
 const URL = 'http://query.yahooapis.com/v1/public/yql?q=';
@@ -34,7 +34,7 @@ export default async(state) => {
   const { location, when } = relation(RELATIONS, state);
   const query = escape(`${QUERY} where text='${location}') and u='c' | truncate(count=1)`);
 
-  if (!location) return request(state, { relation: ['location'] });
+  if (!location) return { entity: entities.request, request: { relation: ['location'] } };
 
   trace('ActionForecastYahoo', { location, when }, state);
   const response = await fetch(`${URL}${query}&format=json`).catch(() => state);

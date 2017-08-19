@@ -18,27 +18,23 @@ describe('IntentMovie', () => {
     state.tokens = ['i', 'want', 'go', 'to', 'cinema']
   });
 
-  it('Up & Running', async () => {
+  it('Up & Running', () => {
     expect(movie).to.be.ok;
   });
 
-  it('Detected with {tokens}', async () => {
-    await movie(state, [ActionMock]);
-
-    expect(state.action).to.be.ok;
+  it('Detected with {tokens}', () => {
+    expect(movie(state, [ActionMock])).to.be.ok;
   });
 
-  it('Detected with {classifier}', async () => {
+  it('Detected with {classifier}', () => {
     state.tokens = [];
     state.classifier = ['cinema']
-    await movie(state, [ActionMock]);
-
-    expect(state.action).to.be.ok;
+    expect(movie(state, [ActionMock])).to.be.ok;
   });
 
-  it('Not detected', async () => {
+  it('Not detected', () => {
     state.tokens = [];
     state.classifier = [];
-    expect( movie(state, [ActionMock]) ).to.be.rejected;
+    expect( movie(state, [ActionMock]) ).not.to.be.ok;
   });
 });

@@ -18,17 +18,17 @@ describe('IntentCalc', () => {
     state.tokens = ['i', 'want', 'multiply', '3', 'and', '5']
   });
 
-  it('Up & Running', async () => {
+  it('Up & Running', () => {
     expect(calc).to.be.ok;
   });
 
-  it('Detected with {tokens}', async () => {
+  it('Detected with {tokens}', () => {
     expect(calc(state, [ActionMock])).to.be.ok;
   });
 
-  it('Not detected', async () => {
+  it('Not detected', () => {
     state.tokens = [];
     state.classifier = [];
-    expect( calc(state, [ActionMock]) ).to.be.rejected;
+    expect(calc(state, [ActionMock])).not.to.be.ok;
   });
 });

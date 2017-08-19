@@ -24,22 +24,24 @@ describe('Action: forecastMSN', () => {
   });
 
   it('Detected using relations location & when', async () => {
-    await forecastMSN(state);
+    const action = await forecastMSN(state);
 
-    expect(state.action).to.be.ok;
-    expect(state.action).to.have.all.keys('ms', 'engine', 'entity', 'title', 'value');
-    expect(state.action.value).to.have.all.keys('code', 'condition', 'temperature', 'date');
+    expect(action).to.be.ok;
+    expect(action).to.have.all.keys('engine', 'entity', 'related', 'title', 'value');
+    expect(action.value).to.have.all.keys('code', 'condition', 'temperature', 'date');
   });
 
   it('Detected using relation location (forecast mode)', async () => {
     state.relations.when = undefined;
-    await forecastMSN(state);
+    const action = await forecastMSN(state);
 
-    expect(state.action.related).to.be.ok;
+    expect(action.related).to.be.ok;
   });
 
   it('Not detected', async () => {
     state.relations = undefined;
-    expect( forecastMSN(state) ).to.be.rejected;
+
+    const action = await forecastMSN(state);
+    expect(action).to.have.all.keys('entity', 'request');
   });
 });
