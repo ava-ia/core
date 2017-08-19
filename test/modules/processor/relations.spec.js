@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import relations from '../../src/processor/relations';
+import relations from '../../../src/modules/processor/relations';
 
 // -- Mock
 

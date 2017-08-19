@@ -39,6 +39,6 @@ describe('Action: translator', () => {
 
   it('Not detected', async () => {
     state.sentence = 'Hello world';
-    expect( translator(state) ).to.be.rejected;
+    expect( translator(state) ).to.equal(undefined);
   });
 });

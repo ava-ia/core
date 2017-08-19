@@ -33,10 +33,11 @@ const URL = 'http://api.fixer.io/latest';
 const getCurrency = value => NAMES[value.toLowerCase()] || value.toUpperCase();
 
 export default async(state) => {
-  const match = syntax(state.sentence, SYNTAXES);
-  if (!match) return undefined;
-
   let action;
+  const match = syntax(state.sentence, SYNTAXES);
+  if (!match) return action;
+  // if (!match) throw new Error('Action error');
+
   const base = getCurrency(match.currency[0]);
   const symbol = getCurrency(match.currency[1]);
   const value = parseFloat(match.value);

@@ -76,6 +76,6 @@ describe('Action: math', () => {
 
   it('Not detected', async () => {
     state.sentence = 'Hello world';
-    expect( math(state) ).to.be.rejected;
+    expect( math(state) ).to.equal(undefined);
   });
 });

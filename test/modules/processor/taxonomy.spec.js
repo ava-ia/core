@@ -1,7 +1,7 @@
 'use strict';
 
 import { assert, expect, should, eventually } from 'chai';
-import taxonomy from '../../src/processor/taxonomy';
+import taxonomy from '../../../src/modules/processor/taxonomy';
 
 describe('Processor: Taxonomy', () => {
 

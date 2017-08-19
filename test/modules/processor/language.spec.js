@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import language from '../../src/processor/language';
+import language from '../../../src/modules/processor/language';
 
 describe('Processor: language', () => {
 

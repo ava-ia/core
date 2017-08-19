@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import compromise from '../../src/processor/compromise';
+import compromise from '../../../src/modules/processor/compromise';
 
 describe('Processor: compromise', () => {
 

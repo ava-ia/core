@@ -26,9 +26,9 @@ const extract = (data) => {
 };
 
 export default async(state) => {
-  if (!credentials) return state;
-
   let action;
+  if (!credentials) return action;
+
   const { object, subject } = relation(RELATIONS, state);
   const query = object || subject || state.relations;
 

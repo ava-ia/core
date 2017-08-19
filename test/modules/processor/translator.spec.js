@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 
-import translator from '../../src/processor/translator';
+import translator from '../../../src/modules/processor/translator';
 
 describe('Processor: translator', () => {
 

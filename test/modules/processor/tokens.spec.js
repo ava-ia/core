@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 
-import tokens from '../../src/processor/tokens';
+import tokens from '../../../src/modules/processor/tokens';
 
 describe('Processor: tokens', () => {
 

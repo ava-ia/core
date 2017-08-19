@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 
-import sentiment from '../../src/processor/sentiment';
+import sentiment from '../../../src/modules/processor/sentiment';
 
 describe('Processor: sentiment', () => {
 

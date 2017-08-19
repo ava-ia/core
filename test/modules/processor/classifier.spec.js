@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import classifier from '../../src/processor/classifier';
+import classifier from '../../../src/modules/processor/classifier';
 
 describe('Processor: classifier', () => {
 

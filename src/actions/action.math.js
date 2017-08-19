@@ -17,7 +17,7 @@ const OPERATIONS = [
 export default (state) => {
   let action;
   const match = syntax(state.sentence, SYNTAXES);
-  if (!match) return state;
+  if (!match) return action;
 
   const operator = match.noun || match.conjunction || match.infinitive || match.symbol;
   const a = parseFloat(match.value[0]);
