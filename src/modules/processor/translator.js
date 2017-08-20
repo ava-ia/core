@@ -5,11 +5,11 @@ const ENGLISH = 'en';
 export default async(state) => {
   if (state.language === ENGLISH) return state;
 
-  const response = await gTranslate(state.rawSentence, { from: state.language, to: ENGLISH });
-  if (response.from && response.text) {
+  const { from = {}, text } = await gTranslate(state.rawSentence, { from: state.language, to: ENGLISH });
+  if (from.language && text) {
     Object.assign(state, {
-      language: response.from.language.iso,
-      sentence: response.text,
+      language: from.language.iso,
+      sentence: text,
     });
   }
 
