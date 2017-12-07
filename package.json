@@ -40,7 +40,7 @@
     "cld": "2.4.5",
     "google-translate-api": "2.3.0",
     "lowdb": "0.16.2",
-    "moment": "2.18.1",
+    "moment": "2.19.3",
     "nlp_compromise": "6.5.3",
     "node-fetch": "1.7.1",
     "sentiment": "4.0.0",
