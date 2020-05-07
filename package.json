@@ -30,7 +30,9 @@
     "terminal": "node index.js Ava, Do you know if tomorrow will rain in Chiang Mai?",
     "lint": "eslint src/**",
     "mocha": "mocha --recursive --compilers js:babel-register --require babel-polyfill",
-    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill"
+    "singletest": "mocha test/actions/*currency*.js --compilers js:babel-register --require babel-polyfill",
+    "snyk-protect": "snyk protect",
+    "prepare": "yarn run snyk-protect"
   },
   "license": "MIT",
   "dependencies": {
@@ -46,7 +48,8 @@
     "sentiment": "4.0.0",
     "weather-js": "2.0.0",
     "world-countries": "1.8.1",
-    "wtf_wikipedia": "1.0.1"
+    "wtf_wikipedia": "1.0.1",
+    "snyk": "^1.319.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -63,5 +66,6 @@
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.12.0",
     "mocha": "^3.4.2"
-  }
+  },
+  "snyk": true
 }
